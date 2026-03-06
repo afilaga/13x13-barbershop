@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-oswald: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
+
+  --color-base-black: #000000;
+  --color-base-white: #ffffff;
+  --color-base-gray: #1a1a1a;
+  --color-base-accent: #e5e5e5;
+}
+
+:root {
+  --background: var(--color-base-black);
+  --foreground: var(--color-base-white);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-base-white);
+  color: var(--color-base-black);
+}
+
+/* Brutalism Utility Classes */
+@layer utilities {
+  .brutal-border {
+    border: 3px solid var(--color-base-white);
+  }
+
+  .brutal-border-b {
+    border-bottom: 3px solid var(--color-base-white);
+  }
+
+  .brutal-border-t {
+    border-top: 3px solid var(--color-base-white);
+  }
+
+  .brutal-border-l {
+    border-left: 3px solid var(--color-base-white);
+  }
+
+  .brutal-border-r {
+    border-right: 3px solid var(--color-base-white);
+  }
+
+  .brutal-shadow {
+    box-shadow: 6px 6px 0px 0px var(--color-base-white);
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .brutal-shadow:hover {
+    box-shadow: 10px 10px 0px 0px var(--color-base-white);
+    transform: translate(-4px, -4px);
+  }
+
+  .brutal-shadow:active {
+    box-shadow: 0px 0px 0px 0px var(--color-base-white);
+    transform: translate(6px, 6px);
+  }
+
+  .brutal-shadow-inverse {
+    box-shadow: 6px 6px 0px 0px var(--color-base-black);
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .brutal-shadow-inverse:hover {
+    box-shadow: 10px 10px 0px 0px var(--color-base-black);
+    transform: translate(-4px, -4px);
+  }
+
+  .brutal-shadow-inverse:active {
+    box-shadow: 0px 0px 0px 0px var(--color-base-black);
+    transform: translate(6px, 6px);
+  }
+
+  /* Marquee animation */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 15s linear infinite;
+  }
+
+  /* Text utility for extreme contrast */
+  .text-outline-white {
+    -webkit-text-stroke: 2px var(--color-base-white);
+    color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+
+  .brutal-shadow,
+  .brutal-shadow-inverse {
+    transition: none;
+  }
+
+  .brutal-shadow:hover,
+  .brutal-shadow:active,
+  .brutal-shadow-inverse:hover,
+  .brutal-shadow-inverse:active {
+    transform: none;
+  }
+}
+
+/* ----------------------------------
+   DIKIDI WIDGET OVERRIDES 
+   Fixes the non-responsive iframe
+-------------------------------------*/
+div[class*="dikidi-"][class$="-modal"] div[class*="dikidi-"][class$="-dialog"] {
+  max-width: 100vw !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+}
+
+/* Brutalize the modal for desktop */
+@media (min-width: 768px) {
+  div[class*="dikidi-"][class$="-modal"] div[class*="dikidi-"][class$="-dialog"] {
+    max-width: 740px !important;
+    border: 3px solid var(--color-base-white) !important;
+    box-shadow: 10px 10px 0px 0px var(--color-base-white) !important;
+    margin: 5vh auto !important;
+  }
+}
+
+/* Fix mobile modal height and margins */
+@media (max-width: 767px) {
+  div[class*="dikidi-"][class$="-modal"] div[class*="dikidi-"][class$="-dialog"] {
+    margin: 0 !important;
+    height: 100vh !important;
+  }
+
+  @supports (height: 100dvh) {
+    div[class*="dikidi-"][class$="-modal"] div[class*="dikidi-"][class$="-dialog"] {
+      height: 100dvh !important;
+    }
+  }
+
+  /* Move close button inside so it doesn't get cut off on mobile */
+  div[class*="dikidi-"][class$="-modal"] div[class*="dikidi-"][class$="-close"] {
+    right: 15px !important;
+    top: 15px !important;
+    color: var(--color-base-black) !important;
+    text-shadow: none !important;
+    background: var(--color-base-white) !important;
+    border: 2px solid var(--color-base-black) !important;
+    border-radius: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 36px !important;
+    font-size: 30px !important;
+    z-index: 10000 !important;
+  }
+}
