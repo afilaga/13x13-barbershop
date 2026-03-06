@@ -16,8 +16,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://13x13.ru"),
-  title: "13x13 | Мужская стрижка и бритье в Сочи",
-  description: "Барбершоп 13x13 в Сочи, ул. Северная, 6. Делаем уверенно, быстро и без сюрпризов.",
+  title: "13x13 | Лоукост барбершоп в Сочи",
+  description: "Новый барбершоп в Сочи с честными ценами. Стрижём и бреем от 400 рублей! Находимся на Горького 81а, напротив клуба DDX.",
   alternates: {
     canonical: "/",
   },
@@ -25,21 +25,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ru_RU",
     url: "https://13x13.ru",
-    title: "13x13 | Мужская стрижка и бритье в Сочи",
-    description: "Барбершоп 13x13 в Сочи, ул. Северная, 6. Делаем уверенно, быстро и без сюрпризов.",
+    title: "13x13 | Лоукост барбершоп в Сочи",
+    description: "Новый барбершоп в Сочи с честными ценами. Стрижём и бреем от 400 рублей! Находимся на Горького 81а, напротив клуба DDX.",
     siteName: "13x13",
     images: [
       {
-        url: "/logo.png",
-        alt: "Логотип барбершопа 13x13",
+        url: "/og-image.png",
+        width: 1024,
+        height: 1024,
+        alt: "Интерьер барбершопа 13x13",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "13x13 | Мужская стрижка и бритье в Сочи",
-    description: "Барбершоп 13x13 в Сочи, ул. Северная, 6. Делаем уверенно, быстро и без сюрпризов.",
-    images: ["/logo.png"],
+    title: "13x13 | Лоукост барбершоп в Сочи",
+    description: "Новый барбершоп в Сочи с честными ценами. Стрижём и бреем от 400 рублей! Находимся на Горького 81а, напротив клуба DDX.",
+    images: ["/og-image.png"],
   },
   keywords: [
     "барбершоп сочи",
@@ -64,7 +66,7 @@ const localBusinessJsonLd = {
   address: {
     "@type": "PostalAddress",
     addressLocality: "Сочи",
-    streetAddress: "ул. Северная, 6",
+    streetAddress: "ул. Горького, 81а",
     addressCountry: "RU",
   },
   areaServed: "Сочи",
