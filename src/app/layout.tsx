@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "13x13 | Лоукост барбершоп в Сочи",
   description: "Новый барбершоп в Сочи с честными ценами. Стрижём и бреем от 400 рублей! Находимся на Горького 81а, напротив клуба DDX.",
   verification: {
-    yandex: "d0fa2dac97ce894b",
+    yandex: "cfba217245b8e29c",
   },
   alternates: {
     canonical: "/",
