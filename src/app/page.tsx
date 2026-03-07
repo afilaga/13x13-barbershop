@@ -539,7 +539,7 @@ export default function Home() {
           <div className="p-8 md:p-16 brutal-border-b border-white lg:border-b-0 lg:brutal-border-r flex justify-center items-center h-full bg-black">
             <Image
               src="/logo.png"
-              alt="13x13 Logo"
+              alt="Барбершоп 13x13 рядом с DDX в Сочи на Горького 81а"
               width={300}
               height={300}
               className="w-full max-w-[200px] md:max-w-[280px] h-auto mix-blend-lighten"
@@ -547,14 +547,22 @@ export default function Home() {
           </div>
 
           <div className="p-8 md:p-16 brutal-border-b border-white lg:border-b-0 lg:brutal-border-r flex flex-col justify-center text-center lg:text-left">
-            <h4 className="font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black mb-4 md:mb-8 text-neutral-500 uppercase tracking-widest">ЛОКАЦИЯ</h4>
-            <address className="not-italic font-[family-name:var(--font-oswald)] text-3xl sm:text-4xl md:text-5xl font-black leading-[1.1] uppercase mb-4 text-white">
-              г. Сочи<br />
+            <h4 className="font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black mb-4 md:mb-8 text-neutral-500 uppercase tracking-widest flex flex-col gap-2">
+              <span>ЛОКАЦИЯ</span>
+              <span className="text-white text-sm md:text-base tracking-normal normal-case font-bold bg-neutral-900 px-3 py-1 border border-neutral-700 w-fit mx-auto lg:mx-0">
+                Напротив DDX Fitness
+              </span>
+            </h4>
+            <h2 className="not-italic font-[family-name:var(--font-oswald)] text-3xl sm:text-4xl md:text-5xl font-black leading-[1.1] uppercase mb-4 text-white">
+              Находимся напротив DDX:<br />
               ул. Горького, 81а
-            </address>
-            <p className="font-[family-name:var(--font-inter)] text-lg md:text-xl font-bold text-neutral-400">
-              Район ЖД Вокзала
-            </p>
+            </h2>
+            <div className="font-[family-name:var(--font-inter)] text-lg md:text-xl font-bold text-neutral-400 space-y-4">
+              <p>Район ЖД Вокзала</p>
+              <p className="text-sm md:text-base font-medium leading-relaxed max-w-md">
+                Ищете барбершоп рядом с DDX в Сочи? Мы находимся на ул. Горького, 81а, напротив клуба DDX и рядом с ТЦ Сан Сити. Удобно зайти до тренировки или сразу после — стрижка и оформление бороды без лишнего ожидания.
+              </p>
+            </div>
           </div>
 
           <div className="p-8 md:p-16 flex flex-col justify-center text-center lg:text-left">
