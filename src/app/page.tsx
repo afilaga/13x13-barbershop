@@ -322,7 +322,7 @@ export default function Home() {
               ИЩЕМ<br /><span className="text-outline-white" style={{ WebkitTextStroke: '2px black' }}>МАСТЕРОВ</span>
             </h2>
             <p className="font-[family-name:var(--font-inter)] text-lg sm:text-2xl md:text-3xl font-medium mb-10 md:mb-16 max-w-xl text-neutral-700 leading-snug">
-              Мастер? Хочешь работать в коллективе и зарабатывать стабильно, в комфорте в новом зале? Свяжись с нами!
+              Барбер? Хочешь работать в сильном коллективе и зарабатывать стабильно в новом зале? Пиши нам!
             </p>
             <Link href="/rabota-v-13x13" className="inline-flex items-center justify-between gap-4 bg-black text-white font-[family-name:var(--font-oswald)] text-xl sm:text-2xl md:text-4xl font-black py-4 px-6 md:py-6 md:px-12 brutal-border border-black brutal-shadow-inverse w-full sm:w-auto cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black/50 hover:bg-neutral-900 transition-colors group">
               <span>ПОДРОБНЕЕ О ВАКАНСИИ</span> <ArrowUpRight className="w-6 h-6 md:w-10 md:h-10 shrink-0 group-hover:rotate-45 transition-transform" />
