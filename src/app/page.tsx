@@ -274,6 +274,9 @@ export default function Home() {
               </span>
               <span className="p-2 border-b-2 border-dotted border-white/50 w-fit">Находимся на Горького 81а, напротив клуба DDX.</span>
               <span className="text-neutral-400">Мы ценим ваше время и бережём бюджет.</span>
+              <div className="mt-4 bg-white text-black px-6 py-2 font-[family-name:var(--font-oswald)] font-black text-2xl md:text-4xl uppercase tracking-tighter transform rotate-1 brutal-border border-black shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+                Получи скидку на первую стрижку!
+              </div>
             </div>
           </motion.div>
 
