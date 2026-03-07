@@ -61,7 +61,7 @@ export default function CareerLanding() {
             <section className="relative pt-32 pb-16 md:pt-48 md:pb-32 px-4 md:px-8 brutal-border-b bg-white text-black">
                 <div className="max-w-[1400px] mx-auto">
                     <div className="inline-block bg-black text-white px-4 py-1 font-[family-name:var(--font-oswald)] font-black text-sm md:text-xl mb-6 tracking-widest transform -rotate-1">
-                        WE ARE HIRING / МЫ В ПОИСКЕ
+                        МЫ В ПОИСКЕ
                     </div>
 
                     <h1 className="font-[family-name:var(--font-oswald)] text-[12vw] md:text-9xl lg:text-[12rem] font-black leading-[0.8] tracking-tighter mb-12 italic">
