@@ -1,4 +1,4 @@
-import { ArrowUpRight, Scissors, Star, Users, Zap, Briefcase, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, Scissors, Star, Users, Zap, Briefcase, CheckCircle2, BarChart3 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
@@ -31,6 +31,11 @@ export default function CareerLanding() {
             title: "ПРОЗРАЧНОСТЬ",
             desc: "Честная оплата без скрытых вычетов. Мы лоукост, но ценим труд мастера и платим вовремя.",
             icon: <CheckCircle2 className="w-10 h-10" />
+        },
+        {
+            title: "ДИДЖИТАЛ И МАРКЕТИНГ",
+            desc: "Работаем на Dikidi: удобная запись и аналитика. Мы активно качаем маркетинг и внедряем современные инструменты развития для роста твоего дохода.",
+            icon: <BarChart3 className="w-10 h-10" />
         }
     ];
 
@@ -72,8 +77,8 @@ export default function CareerLanding() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end">
                         <p className="font-[family-name:var(--font-inter)] text-xl md:text-4xl font-bold leading-none max-w-2xl">
                             ТЫ БАРБЕР? ХОЧЕШЬ РАБОТАТЬ В КОМАНДЕ, ГДЕ ТЕБЯ ЦЕНЯТ? <br />
-                            <span className="text-neutral-500 mt-4 block text-lg md:text-2xl font-medium normal-case">
-                                Мы открыли новый брутальный лоукост барбершоп 13x13 в самом центре Сочи. Нам нужны люди с руками и стилем.
+                            <span className="text-neutral-500 mt-4 block text-lg md:text-2xl font-medium normal-case leading-relaxed">
+                                Мы открыли новый брутальный лоукост барбершоп 13x13 в самом центре Сочи. Активно качаем маркетинг и внедряем современные инструменты для стабильного потока клиентов. Нам нужны люди с руками и стилем.
                             </span>
                         </p>
 
@@ -101,13 +106,13 @@ export default function CareerLanding() {
                         ЧТО ТЫ ПОЛУЧИШЬ
                     </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-0 brutal-border border-white">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 brutal-border border-white">
                         {benefits.map((b, i) => (
-                            <div key={i} className={`p-10 md:p-16 flex flex-col gap-8 ${i !== benefits.length - 1 ? 'md:brutal-border-r border-white' : ''} ${i !== 0 ? 'border-t-2 md:border-t-0 border-white' : ''} hover:bg-neutral-900 transition-colors`}>
+                            <div key={i} className={`p-10 md:p-16 flex flex-col gap-8 ${i !== benefits.length - 1 ? 'lg:brutal-border-r border-white' : ''} ${i >= 1 ? 'border-t-2 lg:border-t-0 border-white' : ''} ${i === 1 ? 'md:brutal-border-r lg:border-r-0' : ''} hover:bg-neutral-900 transition-colors`}>
                                 <div className="bg-white text-black p-4 w-fit brutal-border border-black">
                                     {b.icon}
                                 </div>
-                                <h3 className="font-[family-name:var(--font-oswald)] text-3xl md:text-4xl font-black">{b.title}</h3>
+                                <h3 className="font-[family-name:var(--font-oswald)] text-3xl md:text-4xl font-black uppercase">{b.title}</h3>
                                 <p className="font-medium text-neutral-400 normal-case text-lg leading-relaxed">{b.desc}</p>
                             </div>
                         ))}
@@ -148,8 +153,8 @@ export default function CareerLanding() {
                         </ul>
 
                         <div className="pt-8">
-                            <p className="font-medium text-neutral-500 normal-case text-lg mb-8 italic">
-                                Если ты узнал себя — не жди, пока вакансию займет кто-то другой. Нам нужны лучшие.
+                            <p className="font-medium text-neutral-400 normal-case text-lg mb-8 leading-snug">
+                                Хочешь зарабатывать на понятных и приятных условиях в проекте, который реально вкладывается в развитие? Не тяни, свяжись напрямую.
                             </p>
                         </div>
                     </div>
