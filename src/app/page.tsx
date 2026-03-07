@@ -385,7 +385,7 @@ export default function Home() {
             </div>
 
             {/* Recommended Services */}
-            <div className="bg-black p-8 md:p-12 border-[6px] border-white brutal-shadow-inverse mb-12 flex flex-col min-h-[450px] md:min-h-[600px]" style={{ boxShadow: '10px 10px 0px 0px white' }}>
+            <div className="bg-black p-8 md:p-12 border-[6px] border-white brutal-shadow-inverse mb-12 flex flex-col min-h-[500px] md:min-h-[600px]" style={{ boxShadow: '10px 10px 0px 0px white' }}>
               <div className="space-y-6 mb-auto">
                 {result.recommendations.map((item, index) => (
                   <div key={item.id} className="flex flex-col md:flex-row justify-between md:items-center group gap-2 md:gap-8 border-b-2 border-white/10 pb-6 last:border-0 last:pb-0">
@@ -407,16 +407,18 @@ export default function Home() {
                 )}
               </div>
 
-              {result.recommendations.length > 0 && (
-                <div className="flex flex-col md:flex-row justify-between md:items-end border-t-[8px] border-white pt-8 gap-6 mt-12">
-                  <span className="text-4xl md:text-6xl font-black font-[family-name:var(--font-oswald)] text-neutral-400 uppercase tracking-tighter">
-                    СУММА:
-                  </span>
-                  <span className="text-[4rem] md:text-[8rem] font-black font-[family-name:var(--font-oswald)] text-white bg-black px-6 leading-[0.8] inline-block transform -rotate-1 border-[4px] border-white brutal-shadow-inverse pt-8 pb-4">
-                    {result.comboTotal} ₽
-                  </span>
-                </div>
-              )}
+              <div className="h-32 md:h-40 flex items-end">
+                {result.recommendations.length > 0 && (
+                  <div className="flex flex-col md:flex-row justify-between md:items-end border-t-[8px] border-white pt-8 gap-6 w-full">
+                    <span className="text-4xl md:text-6xl font-black font-[family-name:var(--font-oswald)] text-neutral-400 uppercase tracking-tighter">
+                      СУММА:
+                    </span>
+                    <span className="text-[4rem] md:text-[8rem] font-black font-[family-name:var(--font-oswald)] text-white bg-black px-6 leading-[0.8] inline-block transform -rotate-1 border-[4px] border-white brutal-shadow-inverse pt-8 pb-4">
+                      {result.comboTotal} ₽
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* BIG SLIDER AT BOTTOM */}
@@ -428,7 +430,7 @@ export default function Home() {
                 step="100"
                 value={budget}
                 onChange={(e) => setBudget(parseInt(e.target.value))}
-                className="brutal-slider w-full outline-none focus:outline-none focus:ring-0 appearance-none h-8 md:h-12 bg-white brutal-border border-white"
+                className="brutal-slider w-full outline-none focus:outline-none focus:ring-0 appearance-none h-5 md:h-12 bg-white brutal-border border-white"
                 style={{
                   backgroundImage: `linear-gradient(to right, #000000 ${((budget - 100) / 2900) * 100}%, transparent ${((budget - 100) / 2900) * 100}%)`,
                 }}
