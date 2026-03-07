@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Scissors, ShieldAlert, Clock, MapPin, Search, Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Helper component for the brutalist accordion price categories
 const PriceCategory = ({ title, items }: { title: string, items: { id: string, name: string, price: number, desc: string }[] }) => {
