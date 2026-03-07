@@ -167,52 +167,58 @@ div[class*="dikidi-"][class$="-modal"] div[class*="dikidi-"][class$="-dialog"] {
     font-size: 30px !important;
     z-index: 10000 !important;
   }
+}
 
-  .brutal-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    cursor: pointer;
-    outline: none !important;
-  }
+/* ----------------------------------
+   BRUTAL SLIDER STYLES
+   Global styles for the budget slider
+-------------------------------------*/
+.brutal-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
+  outline: none !important;
+}
 
-  .brutal-slider:focus {
-    outline: none !important;
-  }
+.brutal-slider:focus {
+  outline: none !important;
+}
 
+.brutal-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 48px;
+  background: #000;
+  border: 4px solid #fff;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+  margin-top: 0;
+  /* Clear any default margin */
+}
+
+@media (min-width: 768px) {
   .brutal-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 32px;
-    height: 48px;
-    background: #000;
-    border: 4px solid #fff;
-    cursor: pointer;
-    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
-    border-radius: 0;
+    height: 64px;
+    width: 40px;
   }
+}
 
-  @media (min-width: 768px) {
-    .brutal-slider::-webkit-slider-thumb {
-      height: 64px;
-      width: 40px;
-    }
-  }
+.brutal-slider::-moz-range-thumb {
+  width: 32px;
+  height: 48px;
+  background: #000;
+  border: 4px solid #fff;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+}
 
+@media (min-width: 768px) {
   .brutal-slider::-moz-range-thumb {
-    width: 32px;
-    height: 48px;
-    background: #000;
-    border: 4px solid #fff;
-    cursor: pointer;
-    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.5);
-    border-radius: 0;
-  }
-
-  @media (min-width: 768px) {
-    .brutal-slider::-moz-range-thumb {
-      height: 64px;
-      width: 40px;
-    }
+    height: 64px;
+    width: 40px;
   }
 }

@@ -385,13 +385,13 @@ export default function Home() {
             </div>
 
             {/* Recommended Services */}
-            <div className="bg-black p-8 md:p-12 border-[6px] border-white brutal-shadow-inverse mb-12" style={{ boxShadow: '10px 10px 0px 0px white' }}>
-              <div className="space-y-6 mb-12">
+            <div className="bg-black p-8 md:p-12 border-[6px] border-white brutal-shadow-inverse mb-12 flex flex-col min-h-[450px] md:min-h-[600px]" style={{ boxShadow: '10px 10px 0px 0px white' }}>
+              <div className="space-y-6 mb-auto">
                 {result.recommendations.map((item, index) => (
                   <div key={item.id} className="flex flex-col md:flex-row justify-between md:items-center group gap-2 md:gap-8 border-b-2 border-white/10 pb-6 last:border-0 last:pb-0">
                     <div className="flex items-center gap-6">
                       <span className="text-3xl font-black font-[family-name:var(--font-oswald)] text-white/50 opacity-50 hidden md:block">0{index + 1}</span>
-                      <span className="text-2xl md:text-4xl font-bold font-[family-name:var(--font-oswald)] uppercase text-white group-hover:pl-4 transition-all duration-300">
+                      <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-oswald)] uppercase text-white group-hover:pl-4 transition-all duration-300">
                         {item.name}
                       </span>
                     </div>
@@ -408,7 +408,7 @@ export default function Home() {
               </div>
 
               {result.recommendations.length > 0 && (
-                <div className="flex flex-col md:flex-row justify-between md:items-end border-t-[8px] border-white pt-8 gap-6 mt-8">
+                <div className="flex flex-col md:flex-row justify-between md:items-end border-t-[8px] border-white pt-8 gap-6 mt-12">
                   <span className="text-4xl md:text-6xl font-black font-[family-name:var(--font-oswald)] text-neutral-400 uppercase tracking-tighter">
                     СУММА:
                   </span>
@@ -420,7 +420,7 @@ export default function Home() {
             </div>
 
             {/* BIG SLIDER AT BOTTOM */}
-            <div className="mt-8 mb-4 relative z-10 w-full">
+            <div className="mt-8 mb-4 relative z-10 w-full h-[64px] md:h-[80px] flex items-center">
               <input
                 type="range"
                 min="100"
@@ -428,7 +428,7 @@ export default function Home() {
                 step="100"
                 value={budget}
                 onChange={(e) => setBudget(parseInt(e.target.value))}
-                className="brutal-slider outline-none focus:outline-none focus:ring-0 appearance-none h-8 md:h-12 bg-white brutal-border border-white"
+                className="brutal-slider w-full outline-none focus:outline-none focus:ring-0 appearance-none h-8 md:h-12 bg-white brutal-border border-white"
                 style={{
                   backgroundImage: `linear-gradient(to right, #000000 ${((budget - 100) / 2900) * 100}%, transparent ${((budget - 100) / 2900) * 100}%)`,
                 }}
