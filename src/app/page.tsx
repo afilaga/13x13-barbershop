@@ -571,8 +571,22 @@ export default function Home() {
             <span>ИП МАЛХАСЯН ГЕОРГИЙ ГЕОРГИЕВИЧ</span>
             <span>ИНН: 232003837758 / ОГРН: 1027700067328</span>
           </div>
-          <div className="text-center md:text-right uppercase font-bold tracking-widest text-neutral-400">
-            © {new Date().getFullYear()} 13x13.
+          <div className="flex flex-col items-center md:items-end gap-4">
+            <div className="text-center md:text-right uppercase font-bold tracking-widest text-neutral-400">
+              © {new Date().getFullYear()} 13x13.
+            </div>
+            <a
+              href="https://it.filatiev.pro"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center md:items-end transition-all duration-300"
+            >
+              <div className="flex flex-col items-center md:items-end">
+                <span className="text-[10px] uppercase tracking-widest text-neutral-600 group-hover:text-neutral-400 transition-colors leading-none mb-1">Разработано</span>
+                <span className="text-sm md:text-lg font-black font-[family-name:var(--font-oswald)] text-neutral-400 group-hover:text-white transition-colors leading-none uppercase">Андрей Филатьев</span>
+                <span className="text-[10px] md:text-xs text-neutral-600 group-hover:text-neutral-500 transition-colors mt-1 font-bold">Помогаю бизнесу работать удобно</span>
+              </div>
+            </a>
           </div>
         </div>
       </footer>
