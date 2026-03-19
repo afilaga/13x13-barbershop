@@ -235,7 +235,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-8 flex flex-col items-center lg:items-start"
           >
-            <div className="w-fit bg-white text-black px-4 py-2 font-[family-name:var(--font-oswald)] font-black text-lg md:text-3xl mb-8 tracking-wider transform -rotate-2 brutal-border border-black shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
+            <div className="w-fit bg-white text-black px-4 py-2 font-[family-name:var(--font-oswald)] font-black text-sm md:text-3xl mb-8 tracking-wider transform -rotate-2 brutal-border border-black shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
               ОТКРЫТИЕ — АПРЕЛЬ 2026
             </div>
 
@@ -253,13 +253,13 @@ export default function Home() {
               </h1>
 
               <div className="flex flex-col gap-2 shrink-0 items-center lg:items-start">
-                <h2 className="font-[family-name:var(--font-oswald)] text-[9.5vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-1 brutal-border border-black brutal-shadow-inverse z-30">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[8vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-1 brutal-border border-black brutal-shadow-inverse z-30">
                   ЛОУКОСТ
                 </h2>
-                <h2 className="font-[family-name:var(--font-oswald)] text-[9.5vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-black text-white px-4 py-2 md:px-6 md:py-3 transform -rotate-1 brutal-border border-white brutal-shadow z-20 -mt-2 lg:-mt-4">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[8vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-black text-white px-4 py-2 md:px-6 md:py-3 transform -rotate-1 brutal-border border-white brutal-shadow z-20 -mt-2 lg:-mt-4">
                   БАРБЕРШОП
                 </h2>
-                <h2 className="font-[family-name:var(--font-oswald)] text-[9.5vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-2 brutal-border border-black brutal-shadow-inverse z-10 -mt-2 lg:-mt-4 lg:ml-4 text-center lg:text-left">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[8vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-2 brutal-border border-black brutal-shadow-inverse z-10 -mt-2 lg:-mt-4 lg:ml-4 text-center lg:text-left">
                   В СОЧИ
                 </h2>
               </div>
@@ -275,7 +275,7 @@ export default function Home() {
               </span>
               <span className="p-2 border-b-2 border-dotted border-white/50 w-fit">Находимся на Горького 81а, напротив клуба DDX.</span>
               <span className="text-neutral-400">Мы ценим ваше время и бережём бюджет.</span>
-              <div className="mt-4 bg-white text-black px-6 py-2 font-[family-name:var(--font-oswald)] font-black text-2xl md:text-4xl uppercase tracking-tighter transform rotate-1 brutal-border border-black shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+              <div className="mt-4 bg-white text-black px-6 py-2 font-[family-name:var(--font-oswald)] font-black text-xl md:text-4xl uppercase tracking-tighter transform rotate-1 brutal-border border-black shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
                 Получи скидку на первую стрижку!
               </div>
             </div>
@@ -318,10 +318,10 @@ export default function Home() {
               <Search className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12" strokeWidth={3} />
               <span className="font-[family-name:var(--font-oswald)] text-xl sm:text-2xl md:text-4xl font-bold uppercase tracking-wide">ВАКАНСИЯ</span>
             </div>
-            <h2 className="font-[family-name:var(--font-oswald)] text-[15vw] sm:text-7xl md:text-[9rem] font-black tracking-tighter leading-[0.85] mb-8 md:mb-12 uppercase">
+            <h2 className="font-[family-name:var(--font-oswald)] text-[12vw] sm:text-7xl md:text-[9rem] font-black tracking-tighter leading-[0.85] mb-8 md:mb-12 uppercase">
               ИЩЕМ<br /><span className="text-outline-white" style={{ WebkitTextStroke: '2px black' }}>МАСТЕРОВ</span>
             </h2>
-            <p className="font-[family-name:var(--font-inter)] text-lg sm:text-2xl md:text-3xl font-medium mb-10 md:mb-16 max-w-xl text-neutral-700 leading-snug">
+            <p className="font-[family-name:var(--font-inter)] text-base sm:text-2xl md:text-3xl font-medium mb-10 md:mb-16 max-w-xl text-neutral-700 leading-snug">
               Барбер? Хочешь работать в сильном коллективе и зарабатывать стабильно в новом зале? Пиши нам!
             </p>
             <Link href="/rabota-v-13x13" className="inline-flex items-center justify-between gap-4 bg-black text-white font-[family-name:var(--font-oswald)] text-xl sm:text-2xl md:text-4xl font-black py-4 px-6 md:py-6 md:px-12 brutal-border border-black brutal-shadow-inverse w-full sm:w-auto cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black/50 hover:bg-neutral-900 transition-colors group">
@@ -344,7 +344,7 @@ export default function Home() {
       {/* PRICE LIST */}
       <section id="price" className="py-16 md:py-40 px-4 md:px-8 max-w-[1600px] mx-auto w-full border-b-[3px] border-white">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 md:mb-24 gap-4 md:gap-8">
-          <h2 className="font-[family-name:var(--font-oswald)] text-[18vw] md:text-[12vw] lg:text-[10rem] font-black tracking-tighter leading-none uppercase m-0 p-0">
+          <h2 className="font-[family-name:var(--font-oswald)] text-[14vw] md:text-[12vw] lg:text-[10rem] font-black tracking-tighter leading-none uppercase m-0 p-0">
             ПРАЙС
           </h2>
           <p className="font-[family-name:var(--font-inter)] text-base md:text-xl lg:text-2xl text-neutral-400 max-w-md text-left lg:text-right mb-2 md:mb-4">
@@ -371,7 +371,7 @@ export default function Home() {
         <div className="w-full mt-10 md:mt-20 flex justify-center">
           <div className="bg-black border-[6px] border-white p-6 md:p-16 relative brutal-shadow-inverse w-full" style={{ boxShadow: '-15px 15px 0px 0px white' }}>
             <div className="mb-8 md:mb-12 relative z-10 w-full">
-              <label className="text-4xl md:text-6xl lg:text-7xl font-black font-[family-name:var(--font-oswald)] text-white uppercase tracking-tighter leading-[0.9] block">
+              <label className="text-3xl md:text-6xl lg:text-7xl font-black font-[family-name:var(--font-oswald)] text-white uppercase tracking-tighter leading-[0.9] block">
                 УЗНАЙ, ЧТО ТЫ МОЖЕШЬ СДЕЛАТЬ НА СВОЙ БЮДЖЕТ:
               </label>
             </div>
@@ -568,7 +568,7 @@ export default function Home() {
 
           <div className="p-8 md:p-16 flex flex-col justify-center text-center lg:text-left">
             <h4 className="font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black mb-4 md:mb-8 text-neutral-500 uppercase tracking-widest">СВЯЗЬ</h4>
-            <a href="tel:+79002871313" className="font-[family-name:var(--font-oswald)] text-4xl sm:text-5xl md:text-6xl font-black leading-none hover:underline underline-offset-8 mb-6 md:mb-8 inline-block focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/20 p-2 -ml-2 text-white">
+            <a href="tel:+79002871313" className="font-[family-name:var(--font-oswald)] text-3xl sm:text-5xl md:text-6xl font-black leading-none hover:underline underline-offset-8 mb-6 md:mb-8 inline-block focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/20 p-2 -ml-2 text-white">
               +7 900 287-13-13
             </a>
             <div className="font-[family-name:var(--font-inter)] text-base md:text-lg font-medium text-neutral-400 space-y-2">
