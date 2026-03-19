@@ -164,7 +164,8 @@ export default function Home() {
           <div className="hidden lg:flex gap-8 items-center font-[family-name:var(--font-oswald)] font-bold text-xl uppercase tracking-widest">
             <a href="#price" className="hover:line-through transition-all hover:text-neutral-300">Услуги</a>
             <a href="#about" className="hover:line-through transition-all hover:text-neutral-300">Философия</a>
-            <a href="tel:+79002871313" className="hover:line-through transition-all hover:text-neutral-300">
+            <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" className="hover:line-through transition-all hover:text-neutral-300">TG</a>
+            <a href="tel:+79002871313" className="hover:line-through transition-all hover:text-neutral-300 text-neutral-400">
               +7 900 287-13-13
             </a>
             <a href="https://dikidi.net/#widget=205276" className="bg-white text-black px-4 py-2 hover:-translate-y-0.5 hover:-translate-x-0.5 brutal-border border-white shadow-[4px_4px_0px_0px_#fff] transition-transform ml-2">
@@ -194,7 +195,8 @@ export default function Home() {
               <div className="flex flex-col gap-6 font-[family-name:var(--font-oswald)] font-bold text-3xl uppercase tracking-widest p-6 pb-10">
                 <a href="#price" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit">Услуги</a>
                 <a href="#about" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit">Философия</a>
-                <a href="tel:+79002871313" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit text-neutral-300">
+                <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit">TELEGRAM</a>
+                <a href="tel:+79002871313" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit text-neutral-400">
                   +7 900 287-13-13
                 </a>
                 <div className="mt-4">
@@ -572,6 +574,7 @@ export default function Home() {
               +7 900 287-13-13
             </a>
             <div className="font-[family-name:var(--font-inter)] text-base md:text-lg font-medium text-neutral-400 space-y-2">
+              <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" className="block text-xl md:text-2xl text-white font-bold hover:underline underline-offset-4 mb-4">@BARBER_13X13</a>
               <div>Резюме и сотрудничество:</div>
               <a href="mailto:tsehthirteen@ya.ru" className="text-xl md:text-2xl text-white font-bold hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/20">tsehthirteen@ya.ru</a><br />
               <span className="mt-4 inline-block">Управляющий: <a href="tel:+79529787788" className="text-white font-bold hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/20">+7 952 978-77-88</a></span>

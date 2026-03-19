@@ -61,6 +61,7 @@ export default function CareerLanding() {
                     </Link>
                     <div className="flex gap-4 md:gap-8 items-center font-[family-name:var(--font-oswald)] font-bold text-base md:text-xl uppercase">
                         <Link href="/" className="hover:line-through opacity-80 decoration-2">На главную</Link>
+                        <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" className="hover:line-through opacity-80 decoration-2">TG</a>
                         <a href="tel:+79996551313" className="bg-white text-black px-3 py-1.5 md:px-5 md:py-2.5 brutal-border border-white shadow-[3px_3px_0px_0px_#fff] active:shadow-none active:translate-x-0.5 active:translate-y-0.5 transition-all text-sm md:text-base">
                             ПОЗВОНИТЬ
                         </a>
@@ -435,7 +436,8 @@ export default function CareerLanding() {
                     />
 
                     <div className="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
-                        <p className="font-[family-name:var(--font-inter)] text-neutral-600 font-bold text-xs md:text-sm">
+                        <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" className="text-white font-black text-lg md:text-xl hover:underline underline-offset-4 mb-2 uppercase">@BARBER_13X13</a>
+                        <p className="font-[family-name:var(--font-inter)] text-neutral-600 font-bold text-[10px] md:text-xs">
                             © 2026. БАРБЕРШОП 13x13 СОЧИ. <br />
                             ДЕНЬГИ КАЖДЫЙ ДЕНЬ.
                         </p>
