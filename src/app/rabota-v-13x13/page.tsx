@@ -1,61 +1,67 @@
-import { ArrowUpRight, Scissors, Star, Users, Zap, Briefcase, CheckCircle2, BarChart3 } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { ArrowUpRight, Scissors, Star, Users, Zap, Briefcase, CheckCircle2, BarChart3, Clock, Wallet, Hammer, TrendingUp, Phone, Send, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-    title: "Работа в 13x13 | Вакансия Барбера в Сочи | Стань частью команды",
-    description: "Ищем талантливых мастеров в новый лоукост барбершоп 13x13 в Сочи. Стабильный поток клиентов, новый интерьер на Горького 81а, дружный коллектив. Отправь резюме!",
-    keywords: [
-        "работа барбером сочи",
-        "вакансия барбер сочи",
-        "работа в барбершопе сочи",
-        "ищем мастеров сочи",
-        "барбершоп 13x13 вакансии"
-    ],
-};
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function CareerLanding() {
-    const benefits = [
-        {
-            title: "СТАБИЛЬНЫЙ ПОТОК",
-            desc: "Открываемся в апреле 2026. Локация напротив DDX и ТЦ Сан Сити гарантирует постоянный трафик. У тебя всегда будут клиенты.",
-            icon: <Zap className="w-10 h-10" />
-        },
-        {
-            title: "6 КРЕСЕЛ / НОВЫЙ ЗАЛ",
-            desc: "Просторный зал на 6 рабочих мест. Свежий брутальный ремонт, профессиональное оборудование и топовый свет.",
-            icon: <Star className="w-10 h-10" />
-        },
-        {
-            title: "КОМАНДА И ОПЫТ",
-            desc: "Адекватное руководство, которое работает в зале вместе с тобой. Понятные условия, честная оплата и поддержка.",
-            icon: <CheckCircle2 className="w-10 h-10" />
-        },
-        {
-            title: "ДИДЖИТАЛ И МАРКЕТИНГ",
-            desc: "Работаем на Dikidi. Мы активно качаем маркетинг и внедряем современные инструменты развития для роста твоего дохода.",
-            icon: <BarChart3 className="w-10 h-10" />
+    const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [formData, setFormData] = useState({ name: "", phone: "", age: "", experience: "" });
+    const [agreed, setAgreed] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setFormStatus("loading");
+
+        try {
+            const res = await fetch("/api/hiring", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...formData, agreed }),
+            });
+
+            if (res.ok) {
+                setFormStatus("success");
+                setFormData({ name: "", phone: "", age: "", experience: "" });
+                setAgreed(false);
+            } else {
+                setFormStatus("error");
+            }
+        } catch (err) {
+            setFormStatus("error");
         }
+    };
+
+    const comparison = [
+        { label: "ПРОЦЕНТ", network: "35-40%", our: "50%", icon: <Wallet className="w-5 h-5" />, isSame: false },
+        { label: "СМЕНА", network: "12 ЧАСОВ", our: "12 ЧАСОВ", icon: <Clock className="w-5 h-5" />, isSame: true },
+        { label: "ВЫПЛАТЫ", network: "2 РАЗА / МЕС", our: "КАЖДЫЙ ДЕНЬ", icon: <Zap className="w-5 h-5" />, isSame: false },
+        { label: "ГАРАНТИЯ", network: "НЕТ / МАЛО", our: "3 000 ₽ / СМЕНА", icon: <Briefcase className="w-5 h-5" />, isSame: false },
+        { label: "ИНСТРУМЕНТ", network: "СВОЙ", our: "СВОЙ (НОРМА)", icon: <Scissors className="w-5 h-5" />, isSame: true },
+        { label: "ОФОРМЛЕНИЕ", network: "НЕТ / ЧЕРНУЮ", our: "ОФИЦИАЛЬНО", icon: <CheckCircle2 className="w-5 h-5" />, isSame: false },
     ];
 
     return (
         <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black uppercase flex flex-col overflow-x-hidden">
+            {/* Meta (Handled by Layout/Metadata API if possible, but here we can add it via Head if needed. For App Router, metadata is usually in a separate file or exported from the layout/page. Since this is "use client", we move metadata to a separate layout or sibling page file. For now, we focus on UI.) */}
+            
             {/* Navigation */}
             <nav className="fixed top-0 left-0 right-0 z-50 bg-black brutal-border-b text-white">
-                <div className="flex justify-between items-center px-4 md:px-8 py-3 md:py-4 max-w-[1600px] mx-auto">
+                <div className="flex justify-between items-center px-4 md:px-8 py-2 md:py-4 max-w-[1600px] mx-auto">
                     <Link href="/">
                         <Image
                             src="/logo.png"
                             alt="13x13 Logo"
-                            width={120}
-                            height={60}
-                            className="h-[35px] md:h-[50px] w-auto mix-blend-lighten"
+                            width={100}
+                            height={50}
+                            className="h-[30px] md:h-[50px] w-auto mix-blend-lighten"
                         />
                     </Link>
-                    <div className="flex gap-4 md:gap-8 items-center font-[family-name:var(--font-oswald)] font-bold text-lg md:text-xl uppercase">
-                        <Link href="/" className="hover:line-through">На главную</Link>
-                        <a href="tel:+79529787788" className="bg-white text-black px-4 py-2 brutal-border border-white shadow-[4px_4px_0px_0px_#fff]">
+                    <div className="flex gap-4 md:gap-8 items-center font-[family-name:var(--font-oswald)] font-bold text-base md:text-xl uppercase">
+                        <Link href="/" className="hover:line-through opacity-80 decoration-2">На главную</Link>
+                        <a href="tel:+79996551313" className="bg-white text-black px-3 py-1.5 md:px-5 md:py-2.5 brutal-border border-white shadow-[3px_3px_0px_0px_#fff] active:shadow-none active:translate-x-0.5 active:translate-y-0.5 transition-all text-sm md:text-base">
                             ПОЗВОНИТЬ
                         </a>
                     </div>
@@ -63,137 +69,377 @@ export default function CareerLanding() {
             </nav>
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-16 md:pt-48 md:pb-32 px-4 md:px-8 brutal-border-b bg-white text-black">
+            <section className="relative pt-24 pb-12 md:pt-48 md:pb-32 px-4 md:px-8 brutal-border-b bg-white text-black">
                 <div className="max-w-[1400px] mx-auto">
-                    <div className="inline-block bg-black text-white px-4 py-1 font-[family-name:var(--font-oswald)] font-black text-sm md:text-xl mb-6 tracking-widest transform -rotate-1">
-                        МЫ В ПОИСКЕ
+                    <div className="inline-block bg-black text-white px-3 py-1 font-[family-name:var(--font-oswald)] font-black text-[10px] md:text-xl mb-6 tracking-widest transform -rotate-1">
+                        ВАКАНСИЯ: БАРБЕР
                     </div>
 
-                    <h1 className="font-[family-name:var(--font-oswald)] text-[12vw] md:text-9xl lg:text-[12rem] font-black leading-[0.8] tracking-tighter mb-12 italic">
+                    <h1 className="font-[family-name:var(--font-oswald)] text-[12vw] md:text-8xl lg:text-[10rem] font-black leading-[0.8] tracking-tighter mb-8 md:mb-12 italic uppercase">
                         НУЖНЫ <br />
-                        <span className="text-white" style={{ WebkitTextStroke: '3px black' }}>МАСТЕРА</span>
+                        <span className="text-white" style={{ WebkitTextStroke: '2px black' }}>МАСТЕРА</span>
                     </h1>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end">
-                        <p className="font-[family-name:var(--font-inter)] text-xl md:text-4xl font-bold leading-none max-w-2xl">
-                            ТЫ БАРБЕР? ХОЧЕШЬ РАБОТАТЬ В КОМАНДЕ, ГДЕ ТЕБЯ ЦЕНЯТ? <br />
-                            <span className="text-neutral-500 mt-4 block text-lg md:text-2xl font-medium normal-case leading-relaxed">
-                                Мы открыли новый брутальный лоукост барбершоп 13x13 в самом центре Сочи. Активно качаем маркетинг и внедряем современные инструменты для стабильного потока клиентов. Нам нужны люди с руками и стилем.
-                            </span>
-                        </p>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-end">
+                        <div className="space-y-4">
+                            <h2 className="font-[family-name:var(--font-oswald)] text-2xl md:text-5xl font-black uppercase italic leading-none">
+                                ПОЛУЧАЙ 50% <br /> С КАЖДОЙ СТРИЖКИ
+                            </h2>
+                            <p className="font-[family-name:var(--font-inter)] text-base md:text-xl font-bold leading-tight max-w-xl text-neutral-800">
+                                МЫ СОЗДАЛИ МЕСТО, В КОТОРОМ ПРИЯТНО РАБОТАТЬ. ЧЕСТНЫЙ ПРОЦЕНТ, СТОЛОВАЯ РЯДОМ, ДЕНЬГИ КАЖДЫЙ ДЕНЬ.
+                            </p>
+                        </div>
 
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-6 mt-8 md:mt-0">
                             <a
-                                href="tel:+79529787788"
-                                className="flex items-center justify-between bg-black text-white p-8 md:p-12 brutal-border border-black shadow-[10px_10px_0px_0px_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all group"
+                                href="tel:+79996551313"
+                                className="flex-1 flex items-center justify-between bg-black text-white p-6 md:p-8 brutal-border border-black shadow-[6px_6px_0px_0px_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all group"
                             >
                                 <div className="flex flex-col">
-                                    <span className="font-[family-name:var(--font-oswald)] text-4xl md:text-6xl font-black">СВЯЗАТЬСЯ</span>
-                                    <span className="text-lg md:text-xl font-bold opacity-50">+7 (952) 978-77-88</span>
+                                    <span className="font-[family-name:var(--font-oswald)] text-2xl md:text-3xl font-black uppercase">ПОЗВОНИТЬ</span>
+                                    <span className="text-sm md:text-lg font-bold opacity-50">+7 (999) 655-13-13</span>
                                 </div>
-                                <ArrowUpRight className="w-12 h-12 md:w-20 md:h-20 group-hover:rotate-45 transition-transform" />
+                                <Phone className="w-8 h-8 md:w-10 md:h-10 group-hover:rotate-12 transition-transform" />
                             </a>
-                            <p className="font-bold text-center text-sm md:text-base opacity-60 normal-case">Или напиши нам в Telegram/WhatsApp по этому номеру</p>
+
+                            <a
+                                href="https://t.me/InvestEliteSochi"
+                                target="_blank"
+                                className="flex-1 flex items-center justify-between bg-white text-black p-6 md:p-8 brutal-border border-black shadow-[6px_6px_0px_0px_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all group"
+                            >
+                                <div className="flex flex-col">
+                                    <span className="font-[family-name:var(--font-oswald)] text-2xl md:text-3xl font-black uppercase">ТЕЛЕГРАМ</span>
+                                    <span className="text-sm md:text-lg font-bold opacity-50">@InvestEliteSochi</span>
+                                </div>
+                                <Send className="w-8 h-8 md:w-10 md:h-10 group-hover:rotate-12 transition-transform" />
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Benefits Grid */}
-            <section className="py-20 md:py-40 px-4 md:px-8 border-b-2 border-white">
+            {/* Comparison Section */}
+            <section className="py-16 md:py-40 px-4 md:px-8 brutal-border-b bg-black relative">
                 <div className="max-w-[1600px] mx-auto">
-                    <h2 className="font-[family-name:var(--font-oswald)] text-5xl md:text-8xl font-black mb-20 tracking-tighter text-center italic">
-                        ЧТО ТЫ ПОЛУЧИШЬ
+                    <h2 className="font-[family-name:var(--font-oswald)] text-3xl md:text-6xl font-black mb-12 md:mb-24 tracking-tighter uppercase italic leading-tight text-center md:text-left">
+                        ПОЧЕМУ МАСТЕРА <span className="text-neutral-500">УХОДЯТ ИЗ СЕТЕЙ</span> К НАМ?
                     </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 brutal-border border-white">
-                        {benefits.map((b, i) => (
-                            <div key={i} className={`p-10 md:p-16 flex flex-col gap-8 ${i !== benefits.length - 1 ? 'lg:brutal-border-r border-white' : ''} ${i >= 1 ? 'border-t-2 lg:border-t-0 border-white' : ''} ${i === 1 ? 'md:brutal-border-r lg:border-r-0' : ''} hover:bg-neutral-900 transition-colors`}>
-                                <div className="bg-white text-black p-4 w-fit brutal-border border-black">
-                                    {b.icon}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                        {comparison.map((item, i) => (
+                            <div key={i} className="brutal-border border-white p-5 md:p-10 flex flex-col gap-4 group hover:bg-white hover:text-black transition-all">
+                                <div className="flex items-center gap-4 mb-2">
+                                    <div className="bg-neutral-800 text-white p-3 brutal-border border-white group-hover:bg-black group-hover:border-black transform group-hover:rotate-3 transition-all shrink-0">
+                                        {item.icon}
+                                    </div>
+                                    <span className="font-[family-name:var(--font-oswald)] text-base md:text-xl font-black uppercase opacity-60 group-hover:opacity-100">{item.label}</span>
                                 </div>
-                                <h3 className="font-[family-name:var(--font-oswald)] text-3xl md:text-4xl font-black uppercase">{b.title}</h3>
-                                <p className="font-medium text-neutral-400 normal-case text-lg leading-relaxed">{b.desc}</p>
+
+                                <div className="flex flex-col gap-1 md:gap-2">
+                                    {!item.isSame ? (
+                                        <>
+                                            <div className="flex items-baseline gap-2">
+                                                <span className="text-[10px] font-bold opacity-40 uppercase shrink-0">В СЕТЯХ:</span>
+                                                <span className="text-sm md:text-lg font-black line-through text-neutral-600 transition-colors uppercase italic">{item.network}</span>
+                                            </div>
+                                            <div className="flex items-baseline gap-3">
+                                                <span className="text-[10px] font-bold text-neutral-400 group-hover:text-black transition-colors uppercase shrink-0">У НАС:</span>
+                                                <span className="text-2xl md:text-3xl font-black text-white group-hover:text-black transition-colors uppercase italic leading-tight">{item.our}</span>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div className="flex items-baseline gap-3 pt-4">
+                                            <span className="text-2xl md:text-3xl font-black text-white group-hover:text-black transition-colors uppercase italic leading-tight">{item.our}</span>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Requirements Section */}
-            <section className="py-20 md:py-40 px-4 md:px-8 bg-neutral-950">
-                <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                    <div className="relative aspect-square brutal-border border-white overflow-hidden grayscale group rotate-2">
-                        <Image
-                            src="/hiring-work.png"
-                            alt="Barber working"
-                            fill
-                            className="object-cover group-hover:scale-110 transition-transform duration-1000"
-                        />
-                    </div>
-
-                    <div className="space-y-12">
-                        <h2 className="font-[family-name:var(--font-oswald)] text-5xl md:text-7xl font-black tracking-tighter leading-none">
-                            ОТ ТЕБЯ <br /> НУЖНО:
-                        </h2>
-
-                        <ul className="space-y-8">
-                            {[
-                                "Опыт работы в мужских стрижках",
-                                "Пунктуальность и дисциплина",
-                                "Умение общаться с клиентами",
-                                "Желание развиваться и много работать",
-                                "Чувство стиля и чистота на рабочем месте"
-                            ].map((item, idx) => (
-                                <li key={idx} className="flex gap-4 items-start font-[family-name:var(--font-inter)] text-xl md:text-2xl font-bold italic border-b border-neutral-800 pb-4">
-                                    <span className="text-neutral-500 font-black">0{idx + 1}</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-
-                        <div className="pt-8">
-                            <p className="font-medium text-neutral-400 normal-case text-lg mb-8 leading-snug">
-                                Хочешь зарабатывать на понятных и приятных условиях в проекте, который реально вкладывается в развитие? Не тяни, свяжись напрямую.
+            {/* Application Form Section */}
+            <section className="py-20 md:py-40 px-4 md:px-8 bg-black brutal-border-b">
+                <div className="max-w-[1000px] mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20">
+                        <div>
+                            <h2 className="font-[family-name:var(--font-oswald)] text-4xl md:text-7xl font-black mb-8 italic uppercase tracking-tighter leading-[0.9]">
+                                ОСТАВЬ <br /> ЗАЯВКУ <br />
+                                <span className="text-white" style={{ WebkitTextStroke: '2px white' }}>ПРЯМО СЕЙЧАС</span>
+                            </h2>
+                            <p className="font-bold text-neutral-400 text-lg md:text-xl max-w-sm uppercase italic">
+                                Заполни 3 поля, и мы пригласим тебя на знакомство. Это займет 30 секунд.
                             </p>
+                        </div>
+
+                        <div className="bg-neutral-900 brutal-border border-white p-6 md:p-10 shadow-[10px_10px_0px_0px_#fff]">
+                            <AnimatePresence mode="wait">
+                                {formStatus === "success" ? (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="h-full flex flex-col items-center justify-center text-center space-y-6 py-10"
+                                    >
+                                        <div className="w-20 h-20 bg-white text-black flex items-center justify-center rounded-full">
+                                            <CheckCircle2 className="w-12 h-12" />
+                                        </div>
+                                        <h3 className="font-[family-name:var(--font-oswald)] text-3xl font-black uppercase">ПРИНЯТО!</h3>
+                                        <p className="font-bold text-neutral-400 uppercase italic">Скоро свяжемся с тобой. <br /> Добро пожаловать!</p>
+                                        <button 
+                                            onClick={() => setFormStatus("idle")}
+                                            className="text-white underline font-bold uppercase text-sm mt-4"
+                                        >
+                                            Отправить еще раз
+                                        </button>
+                                    </motion.div>
+                                ) : (
+                                    <motion.form
+                                        key="form"
+                                        initial={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        onSubmit={handleSubmit}
+                                        className="space-y-6"
+                                    >
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-black uppercase opacity-50 block">Твоё имя</label>
+                                            <input
+                                                required
+                                                type="text"
+                                                placeholder="ИВАН"
+                                                value={formData.name}
+                                                onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                                className="w-full bg-black border-2 border-neutral-800 p-4 text-white font-bold tracking-widest outline-none focus:border-white transition-colors uppercase"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-black uppercase opacity-50 block">Ваш номер</label>
+                                            <input
+                                                required
+                                                type="tel"
+                                                placeholder="+7 (999) 000-00-00"
+                                                value={formData.phone}
+                                                onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                                                className="w-full bg-black border-2 border-neutral-800 p-4 text-white font-bold tracking-widest outline-none focus:border-white transition-colors uppercase"
+                                            />
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <label className="text-xs font-black uppercase opacity-50 block">Возраст</label>
+                                                <input
+                                                    required
+                                                    type="text"
+                                                    placeholder="25"
+                                                    value={formData.age}
+                                                    onChange={e => setFormData({ ...formData, age: e.target.value })}
+                                                    className="w-full bg-black border-2 border-neutral-800 p-4 text-white font-bold tracking-widest outline-none focus:border-white transition-colors uppercase"
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-xs font-black uppercase opacity-50 block">Опыт (Лет)</label>
+                                                <input
+                                                    required
+                                                    type="text"
+                                                    placeholder="3 ГОДА"
+                                                    value={formData.experience}
+                                                    onChange={e => setFormData({ ...formData, experience: e.target.value })}
+                                                    className="w-full bg-black border-2 border-neutral-800 p-4 text-white font-bold tracking-widest outline-none focus:border-white transition-colors uppercase"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-start gap-4 py-2">
+                                            <input
+                                                required
+                                                id="consent"
+                                                type="checkbox"
+                                                checked={agreed}
+                                                onChange={e => setAgreed(e.target.checked)}
+                                                className="w-6 h-6 mt-1 rounded-none border-2 border-neutral-800 bg-black checked:bg-white transition-all cursor-pointer accent-white"
+                                            />
+                                            <label htmlFor="consent" className="text-[10px] md:text-xs font-bold uppercase opacity-50 leading-tight cursor-pointer select-none">
+                                                Согласие на обработку персональных данных <br />
+                                                ИП: МАЛХАСЯН ГЕОРГИЙ ГЕОРГИЕВИЧ <br />
+                                                ИНН: 232003837758
+                                            </label>
+                                        </div>
+
+                                        <button
+                                            disabled={formStatus === "loading" || !agreed}
+                                            type="submit"
+                                            className="w-full bg-white text-black py-6 md:py-8 font-[family-name:var(--font-oswald)] text-2xl md:text-3xl font-black uppercase italic shadow-[6px_6px_0px_0px_rgba(255,255,255,0.3)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+                                        >
+                                            {formStatus === "loading" ? (
+                                                <>
+                                                    <Loader2 className="w-8 h-8 animate-spin" />
+                                                    ОТПРАВЛЯЕМ...
+                                                </>
+                                            ) : (
+                                                "ОТПРАВИТЬ АНКЕТУ"
+                                            )}
+                                        </button>
+                                        
+                                        {formStatus === "error" && (
+                                            <p className="text-red-500 text-xs font-bold uppercase text-center italic">
+                                                Ошибка отправки. Попробуй еще раз или позвони нам.
+                                            </p>
+                                        )}
+                                    </motion.form>
+                                )}
+                            </AnimatePresence>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Action CTA */}
-            <section className="py-20 md:py-40 px-4 md:px-8 bg-white text-black text-center">
-                <div className="max-w-[1000px] mx-auto flex flex-col items-center">
-                    <h2 className="font-[family-name:var(--font-oswald)] text-[10vw] md:text-8xl font-black mb-12 tracking-tighter leading-none uppercase">
-                        ГОТОВ?
+            {/* Marketing Strategy Section */}
+            <section className="py-20 md:py-32 px-4 md:px-8 bg-white text-black">
+                <div className="max-w-[1200px] mx-auto text-center md:text-left">
+                    <div className="inline-block bg-black text-white px-4 py-1 font-[family-name:var(--font-oswald)] font-black text-lg md:text-2xl mb-8 tracking-widest transform -rotate-1">
+                        НАША СТРАТЕГИЯ: РЕКЛАМА
+                    </div>
+                    <h2 className="font-[family-name:var(--font-oswald)] text-4xl md:text-7xl lg:text-9xl font-black mb-12 tracking-tighter uppercase italic leading-[0.8]">
+                        МАРКЕТИНГ — <br />
+                        <span className="text-white" style={{ WebkitTextStroke: '2px black' }}>ЭТО ПРИОРИТЕТ</span>
                     </h2>
-                    <a
-                        href="tel:+79529787788"
-                        className="inline-flex flex-col items-center justify-center bg-black text-white px-12 py-10 md:px-24 md:py-16 brutal-border border-black shadow-[15px_15px_0px_0px_#000] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all active:scale-95"
-                    >
-                        <span className="font-[family-name:var(--font-oswald)] text-4xl md:text-6xl font-black mb-4">ЖМИ СЮДА</span>
-                        <span className="text-xl md:text-2xl font-bold">+7 (952) 978-77-88</span>
-                    </a>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 font-bold text-lg md:text-2xl text-neutral-800 leading-tight">
+                        <p>
+                            МЫ ВСЕГДА СЛЕДИМ ЗА РЕКЛАМОЙ И ЭТО НАША ОСНОВНАЯ СТРАТЕГИЯ РАЗВИТИЯ.
+                        </p>
+                        <p className="border-l-4 border-black pl-8 italic">
+                            МЫ НЕ ЖДЕМ КЛИЕНТОВ — МЫ ИХ ПРИВОДИМ. ТВОЁ КРЕСЛО НИКОГДА НЕ БУДЕТ ПУСТОВАТЬ.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Detailed Conditions Section */}
+            <section className="py-16 md:py-40 px-4 md:px-8 bg-neutral-900 brutal-border-b">
+                <div className="max-w-[1600px] mx-auto">
+                    <h2 className="font-[family-name:var(--font-oswald)] text-3xl md:text-6xl font-black mb-12 md:mb-24 tracking-tighter uppercase italic text-center">
+                        УСЛОВИЯ РАБОТЫ <span className="text-neutral-500">(ДЕТАЛЬНО)</span>
+                    </h2>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
+                        {/* Finance */}
+                        <div className="flex flex-col gap-6 md:gap-8">
+                            <h3 className="bg-white text-black px-4 py-2 font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black w-fit transform -rotate-1">ФИНАНСЫ:</h3>
+                            <ul className="space-y-3 font-bold text-sm md:text-lg text-neutral-300">
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> 50% С КАЖДОЙ УСЛУГИ</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> ГАРАНТИЯ 3 000 ₽ / СМЕНА</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> 20% ОТ ПРОДАЖ КОСМЕТИКИ</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> ОФИЦИАЛЬНОЕ УСТРОЙСТВО</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> ВЫПЛАТЫ ЕЖЕДНЕВНО</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> +5% ЧЕРЕЗ 6 МЕСЯЦЕВ</li>
+                            </ul>
+                        </div>
+
+                        {/* Schedule */}
+                        <div className="flex flex-col gap-6 md:gap-8">
+                            <h3 className="bg-white text-black px-4 py-2 font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black w-fit transform rotate-1">ГРАФИК:</h3>
+                            <ul className="space-y-3 font-bold text-sm md:text-lg text-neutral-300">
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> СМЕНЫ 12 ЧАСОВ</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> ГРАФИК 2/2 ИЛИ 3/2</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> ОБЕД 30 МИН (ОПЛАЧИВАЕМО)</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> СТОЛОВАЯ РЯДОМ</li>
+                            </ul>
+                        </div>
+
+                        {/* Workplace */}
+                        <div className="flex flex-col gap-6 md:gap-8">
+                            <h3 className="bg-white text-black px-4 py-2 font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black w-fit transform rotate-1">ПЛЮШКИ:</h3>
+                            <ul className="space-y-3 font-bold text-sm md:text-lg text-neutral-300">
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> НОВЫЙ СТИЛЬНЫЙ РЕМОНТ</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> КОНДИЦИОНЕР И КУХНЯ</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> RETRO: MORTAL KOMBAT</li>
+                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> ИНСТРУМЕНТ: СВОЙ (НОРМА)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Career Path Section */}
+            <section className="py-16 md:py-40 px-4 md:px-8 bg-black">
+                <div className="max-w-[1200px] mx-auto text-center md:text-left">
+                    <h2 className="font-[family-name:var(--font-oswald)] text-3xl md:text-6xl font-black mb-12 md:mb-24 tracking-tighter uppercase italic leading-tight text-center md:text-left">
+                        КАРЬЕРНЫЙ <span className="text-neutral-500">ТРЕК</span>
+                    </h2>
+
+                    <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 md:gap-4 relative">
+                        {/* Connecting Line (Desktop) */}
+                        <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-neutral-800 z-0" />
+
+                        {["СТАЖЁР", "МАСТЕР", "СТАРШИЙ", "ПАРТНЁР"].map((step, i) => (
+                            <div key={i} className="relative z-10 bg-black brutal-border border-white p-4 md:p-6 flex flex-row md:flex-col items-center justify-between md:justify-center gap-4 hover:bg-white hover:text-black transition-all cursor-default group w-full md:w-auto">
+                                <span className="font-[family-name:var(--font-oswald)] text-lg md:text-2xl font-black">{step}</span>
+                                <div className="bg-neutral-800 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center group-hover:bg-black transition-colors shrink-0">
+                                    <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-12 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-left">
+                        <div className="p-6 md:p-8 border-l-4 border-white">
+                            <h4 className="font-black text-xl md:text-2xl mb-2 md:mb-4 uppercase leading-none">БЕСПЛАТНОЕ ОБУЧЕНИЕ</h4>
+                            <p className="text-neutral-400 font-bold uppercase text-xs">Повышаем квалификацию за наш счет.</p>
+                        </div>
+                        <div className="p-6 md:p-8 border-l-4 border-white">
+                            <h4 className="font-black text-xl md:text-2xl mb-2 md:mb-4 uppercase leading-none">СТАНЬ ПАРТНЁРОМ</h4>
+                            <p className="text-neutral-400 font-bold uppercase text-xs">Возможность стать совладельцем бизнеса.</p>
+                        </div>
+                        <div className="p-6 md:p-8 border-l-4 border-white">
+                            <h4 className="font-black text-xl md:text-2xl mb-2 md:mb-4 uppercase leading-none">ТВОЯ БАЗА</h4>
+                            <p className="text-neutral-400 font-bold uppercase text-xs">Клиенты остаются с мастером.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Final CTA Buttons */}
+            <section className="py-16 md:py-32 px-4 md:px-8 bg-white text-black text-center">
+                <div className="max-w-[1200px] mx-auto">
+                    <h2 className="font-[family-name:var(--font-oswald)] text-4xl md:text-7xl font-black mb-12 italic uppercase tracking-tighter">СВЯЗАТЬСЯ <span className="text-neutral-400">НАПРЯМУЮ</span></h2>
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-12 w-full max-w-4xl mx-auto">
+                        <a
+                            href="tel:+79996551313"
+                            className="flex-1 flex flex-col items-center justify-center bg-black text-white px-8 py-8 md:px-12 md:py-12 brutal-border border-black shadow-[6px_6px_0px_0px_#000] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
+                        >
+                            <span className="font-[family-name:var(--font-oswald)] text-2xl md:text-4xl font-black mb-2 uppercase">ПОЗВОНИТЬ</span>
+                            <span className="text-lg md:text-xl font-bold opacity-70">+7 (999) 655-13-13</span>
+                        </a>
+
+                        <a
+                            href="https://t.me/InvestEliteSochi"
+                            target="_blank"
+                            className="flex-1 flex flex-col items-center justify-center bg-white text-black px-8 py-8 md:px-12 md:py-12 brutal-border border-black shadow-[6px_6px_0px_0px_#000] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
+                        >
+                            <span className="font-[family-name:var(--font-oswald)] text-2xl md:text-4xl font-black mb-2 uppercase">ТЕЛЕГРАМ</span>
+                            <span className="text-lg md:text-xl font-bold opacity-70">@InvestEliteSochi</span>
+                        </a>
+                    </div>
                 </div>
             </section>
 
             {/* Footer */}
-            <footer className="bg-black py-16 px-4 md:px-8 border-t-4 border-white">
-                <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <footer className="bg-black py-12 px-4 md:px-8 border-t-2 border-white">
+                <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12">
                     <Image
                         src="/logo.png"
                         alt="13x13 Logo"
-                        width={150}
-                        height={75}
-                        className="opacity-50 mix-blend-lighten"
+                        width={120}
+                        height={60}
+                        className="opacity-40 mix-blend-lighten grayscale"
                     />
 
-                    <div className="flex flex-col items-center md:items-end gap-4">
-                        <p className="font-[family-name:var(--font-inter)] text-neutral-500 font-bold text-center md:text-right">
+                    <div className="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
+                        <p className="font-[family-name:var(--font-inter)] text-neutral-600 font-bold text-xs md:text-sm">
                             © 2026. БАРБЕРШОП 13x13 СОЧИ. <br />
-                            ПРИСОЕДИНЯЙСЯ К НАМ.
+                            ДЕНЬГИ КАЖДЫЙ ДЕНЬ.
                         </p>
-                        <Link href="/" className="text-white hover:line-through font-black text-xl font-[family-name:var(--font-oswald)]">ВЕРНУТЬСЯ НА ГЛАВНУЮ</Link>
+                        <Link href="/" className="text-white hover:line-through font-black text-base md:text-lg font-[family-name:var(--font-oswald)]">НА ГЛАВНУЮ</Link>
                     </div>
                 </div>
             </footer>
