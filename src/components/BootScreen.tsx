@@ -1,5 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const GradientBlinds = dynamic(() => import('@/components/GradientBlinds'), { ssr: false });
 
 const PHRASES = [
   "Затачиваем ножницы",
@@ -30,8 +33,8 @@ const PHRASES = [
 
 export default function BootScreen({ onComplete }: { onComplete: () => void }) {
   const [currentPhrase, setCurrentPhrase] = useState("");
-  const durationMs = 4500; // 4.5 seconds
-  const iterations = 3;
+  const durationMs = 7500; // 7.5 seconds
+  const iterations = 5;
   const intervalMs = durationMs / iterations;
 
   useEffect(() => {
@@ -67,27 +70,39 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
-      {/* Barber Pole Background Element */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <motion.div 
-          className="w-[200%] h-[200%] absolute top-[-50%] left-[-50%]"
-          style={{
-            backgroundImage: "repeating-linear-gradient(45deg, #FF0000 0, #FF0000 40px, #FFFFFF 40px, #FFFFFF 80px, #0011FF 80px, #0011FF 120px, #FFFFFF 120px, #FFFFFF 160px)"
-          }}
-          animate={{ x: ["0%", "-5.5%"], y: ["0%", "5.5%"] }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+      {/* Realistic React Component Barber Pole */}
+      <div className="relative mb-12 w-20 h-64 md:w-24 md:h-80 rounded-full overflow-hidden brutal-border border-4 border-neutral-800 shadow-[0_0_50px_rgba(255,255,255,0.1)]">
+        <GradientBlinds
+          className=""
+          dpr={1}
+          gradientColors={['#FF0000', '#FFFFFF', '#0011FF', '#FFFFFF']}
+          angle={30}
+          noise={0.1}
+          blindCount={4}
+          blindMinWidth={30}
+          mouseDampening={0}
+          mirrorGradient={false}
+          spotlightRadius={0.8}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="normal"
         />
+        {/* Gloss reflection overlay for 3D pill effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60 z-10 pointer-events-none mix-blend-overlay" />
+        <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white/30 to-transparent z-20 pointer-events-none mix-blend-screen" />
       </div>
 
-      <div className="relative z-10 w-full max-w-2xl px-6 text-center">
+      <div className="relative z-10 w-full max-w-3xl px-6 text-center h-24 md:h-32 flex items-center justify-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPhrase}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="font-[family-name:var(--font-jetbrains-mono)] text-xl md:text-3xl font-medium text-white shadow-black drop-shadow-2xl uppercase tracking-tighter"
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.4 }}
+            className="font-[family-name:var(--font-jetbrains-mono)] text-2xl md:text-4xl font-black text-white drop-shadow-2xl uppercase tracking-tighter leading-tight"
           >
             {currentPhrase}
           </motion.div>
@@ -95,14 +110,24 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
       </div>
 
       {/* Progress Bar */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-64 h-1 bg-neutral-900 rounded-full overflow-hidden">
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-[80vw] max-w-xl h-3 md:h-4 bg-neutral-900 rounded-full overflow-hidden border border-neutral-800">
         <motion.div 
           initial={{ width: "0%" }}
           animate={{ width: "100%" }}
-          transition={{ duration: 4.5, ease: "linear" }}
-          className="h-full bg-white"
-        />
+          transition={{ duration: 7.5, ease: "linear" }}
+          className="h-full bg-white relative"
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.8)_50%,transparent_100%)] w-24 blur-sm"
+               style={{ animation: 'shimmer 2s infinite' }} />
+        </motion.div>
       </div>
+      
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(500px); }
+        }
+      `}} />
     </motion.div>
   );
 }

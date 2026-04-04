@@ -58,18 +58,8 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBooting, setIsBooting] = useState(true);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const hasBooted = sessionStorage.getItem("boot_shown");
-      if (hasBooted) {
-        setIsBooting(false);
-      }
-    }
-  }, []);
-
   const handleBootComplete = () => {
     setIsBooting(false);
-    sessionStorage.setItem("boot_shown", "true");
   };
 
   // Полная база услуг с разбивкой по категориям
@@ -201,17 +191,17 @@ export default function Home() {
               <GradientBlinds
                 className=""
                 dpr={1}
-                gradientColors={['#FF0000', '#FFFFFF', '#0011FF']}
-                angle={251}
+                gradientColors={["#1100ff","#ff0000"]}
+                angle={-75}
                 noise={0.58}
-                blindCount={29}
-                blindMinWidth={60}
-                mouseDampening={0.53}
+                blindCount={50}
+                blindMinWidth={50}
+                mouseDampening={0.45}
                 mirrorGradient={false}
-                spotlightRadius={0.5}
-                spotlightSoftness={1}
-                spotlightOpacity={1}
-                distortAmount={26}
+                spotlightRadius={0.7}
+                spotlightSoftness={0.7}
+                spotlightOpacity={0.95}
+                distortAmount={1}
                 shineDirection="left"
               />
             </motion.div>
