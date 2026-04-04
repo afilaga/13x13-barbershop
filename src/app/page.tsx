@@ -236,14 +236,11 @@ export default function Home() {
               <span className="text-neutral-400 mb-2 mt-1">Мы ценим ваше время и бережём бюджет.</span>
               
               <div className="mt-4 bg-black text-white p-5 md:p-8 brutal-border border-white shadow-[8px_8px_0px_0px_#fff] flex flex-col items-center lg:items-start gap-3 transform rotate-1 w-full lg:w-fit">
-                <span className="font-[family-name:var(--font-oswald)] font-black text-3xl md:text-5xl uppercase tracking-tighter text-white">
-                  СТРИЖКА <span className="line-through text-neutral-500 mx-2 decoration-red-500">600 ₽</span> 300 РУБЛЕЙ
+                <span className="font-[family-name:var(--font-oswald)] font-black text-4xl md:text-6xl uppercase tracking-tighter text-white">
+                  СТРИЖКА ОТ 400 РУБЛЕЙ
                 </span>
-                <span className="font-[family-name:var(--font-oswald)] font-black text-3xl md:text-5xl uppercase tracking-tighter text-white">
-                  БОРОДА <span className="line-through text-neutral-500 mx-2 decoration-red-500">600 ₽</span> 300 РУБЛЕЙ
-                </span>
-                <span className="text-red-500 font-[family-name:var(--font-oswald)] font-black text-xl md:text-3xl leading-none uppercase mt-3 text-center lg:text-left">
-                  ДА, мы стрижем до 13 апреля со скидкой 50%!
+                <span className="font-[family-name:var(--font-oswald)] font-black text-4xl md:text-6xl uppercase tracking-tighter text-white">
+                  БОРОДА ОТ 400 РУБЛЕЙ
                 </span>
               </div>
             </div>
