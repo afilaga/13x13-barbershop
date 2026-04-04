@@ -172,6 +172,7 @@ export default function Home() {
         {/* Background Animation */}
         <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen">
           <GradientBlinds
+            dpr={1}
             gradientColors={['#FF0000', '#FFFFFF']}
             angle={0}
             noise={0.3}

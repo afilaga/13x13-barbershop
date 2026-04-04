@@ -21,8 +21,8 @@ const prepStops = stops => {
 };
 
 const GradientBlinds = ({
-  className = '',
-  dpr = 1,
+  className,
+  dpr,
   paused = false,
   gradientColors,
   angle = 0,
@@ -266,6 +266,20 @@ void main() {
       }
     };
     canvas.addEventListener('pointermove', onPointerMove);
+    // Optional mobile support for touch to move spotlight
+    canvas.addEventListener('touchmove', e => {
+      if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        const scale = renderer.dpr || 1;
+        const x = (touch.clientX - rect.left) * scale;
+        const y = (rect.height - (touch.clientY - rect.top)) * scale;
+        mouseTargetRef.current = [x, y];
+        if (mouseDampening <= 0) {
+          uniforms.iMouse.value = [x, y];
+        }
+      }
+    }, { passive: true });
 
     const loop = t => {
       rafRef.current = requestAnimationFrame(loop);
