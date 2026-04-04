@@ -89,34 +89,26 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
       </motion.div>
 
       {/* Realistic React Component Barber Pole */}
-      <div
-        className="relative mb-6 md:mb-12 w-16 h-48 md:w-24 md:h-80 rounded-full overflow-hidden brutal-border border-4 border-neutral-800 shadow-[0_0_50px_rgba(255,255,255,0.1)] shrink-0"
-        style={{ perspective: 800 }}
-      >
-        <motion.div
-          className="absolute inset-0"
-          animate={{ rotateY: 360 }}
-          transition={{ duration: 2.8, ease: "linear", repeat: Infinity }}
-          style={{ transformStyle: "preserve-3d" }}
-        >
-          <GradientBlinds
-            className=""
-            dpr={1}
-            gradientColors={['#FFFFFF', '#0A3DFF', '#E10600', '#FFFFFF']}
-            angle={30}
-            noise={0.1}
-            blindCount={4}
-            blindMinWidth={30}
-            mouseDampening={0}
-            mirrorGradient={false}
-            spotlightRadius={0.8}
-            spotlightSoftness={1}
-            spotlightOpacity={1}
-            distortAmount={0}
-            shineDirection="left"
-            mixBlendMode="normal"
-          />
-        </motion.div>
+      <div className="relative mb-6 md:mb-12 w-16 h-48 md:w-24 md:h-80 rounded-full overflow-hidden brutal-border border-4 border-neutral-800 shadow-[0_0_50px_rgba(255,255,255,0.1)] shrink-0">
+        {/* CSS fallback for slow/delayed webgl init (e.g. in-app browsers) */}
+        <div className="absolute inset-0 boot-pole-fallback z-0 pointer-events-none" />
+        <GradientBlinds
+          className=""
+          dpr={1}
+          gradientColors={['#FFFFFF', '#0A3DFF', '#E10600', '#FFFFFF']}
+          angle={30}
+          noise={0.1}
+          blindCount={4}
+          blindMinWidth={30}
+          mouseDampening={0}
+          mirrorGradient={false}
+          spotlightRadius={0.8}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="normal"
+        />
         {/* Gloss reflection overlay for 3D pill effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60 z-10 pointer-events-none mix-blend-overlay" />
         <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white/30 to-transparent z-20 pointer-events-none mix-blend-screen" />
@@ -154,6 +146,26 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(500px); }
+        }
+
+        @keyframes barberFallbackFlow {
+          0% { background-position: 0 0; }
+          100% { background-position: 120px 0; }
+        }
+
+        .boot-pole-fallback {
+          background:
+            repeating-linear-gradient(
+              45deg,
+              #ffffff 0px,
+              #ffffff 14px,
+              #0A3DFF 14px,
+              #0A3DFF 28px,
+              #E10600 28px,
+              #E10600 42px
+            );
+          animation: barberFallbackFlow 1.2s linear infinite;
+          transform: scale(1.05);
         }
       `}} />
     </motion.div>
