@@ -41,7 +41,7 @@ const PriceCategory = ({ title, items }: { title: string, items: { id: string, n
                       {item.price} ₽
                     </span>
                   </div>
-                  <span className="text-sm md:text-lg text-neutral-400 mt-3 font-[family-name:var(--font-inter)] font-semibold">{item.desc}</span>
+                  <span className="text-sm md:text-lg text-neutral-400 mt-3 font-[family-name:var(--font-jetbrains-mono)] font-semibold">{item.desc}</span>
                 </div>
               ))}
             </div>
@@ -54,7 +54,6 @@ const PriceCategory = ({ title, items }: { title: string, items: { id: string, n
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [budget, setBudget] = useState(1000);
 
   // Полная база услуг с разбивкой по категориям
   const menu = useMemo(() => ({
@@ -96,54 +95,6 @@ export default function Home() {
     ]
   }), []);
 
-  const result = useMemo(() => {
-    let status = { title: "ЧИСТО СПРОСИТЬ", desc: "Братан, на стрижку не хватит, но брови сделаем ровными." };
-    let comboName = "СЕТ «НА МИНИМАЛКАХ»";
-    let recommendations: { id: string; name: string; price: number; desc: string }[] = [];
-
-    const getById = (cat: keyof typeof menu, id: string) => menu[cat].find(i => i.id === id);
-
-    if (budget >= 100 && budget < 400) {
-      status = { title: "ЛАЙТОВЫЙ ТЮНИНГ", desc: "Освежим детали. Будешь выглядеть опрятнее за копейки." };
-      comboName = "СЕТ «ДЕТАЛИ»";
-      recommendations = [getById('details', 'd9'), getById('details', 'd7'), getById('details', 'd10')].filter((s): s is any => !!s && s.price <= budget);
-    }
-    else if (budget >= 400 && budget < 900) {
-      status = { title: "БАЗА НА РАЙОНЕ", desc: "Быстро, четко, без лишних слов. То, что нужно для суеты." };
-      comboName = "СЕТ «РОВНЫЙ ТИП»";
-      if (budget >= 800) recommendations = [getById('hair', 'h2')].filter((s): s is any => !!s);
-      else if (budget >= 600) recommendations = [getById('hair', 'h3')].filter((s): s is any => !!s);
-      else recommendations = [getById('hair', 'h4')].filter((s): s is any => !!s);
-    }
-    else if (budget >= 900 && budget < 1600) {
-      status = { title: "МЕСТНЫЙ АВТОРИТЕТ", desc: "Стрижем красиво, оформляем бороду. Девчонки уже оборачиваются." };
-      comboName = "СЕТ «ПОЛНЫЙ ПОРЯДОК»";
-      const h1 = getById('hair', 'h1');
-      if (h1) recommendations.push(h1);
-    }
-    else if (budget >= 1600 && budget < 3100) {
-      status = { title: "КОРОЛЬ ВЕЧЕРИНКИ", desc: "Заряжаем по полной. Отличная стрижка, спа-бритье и воск. Кайф обеспечен." };
-      comboName = "СЕТ «КОРОЛЕВСКИЙ»";
-      recommendations = [
-        getById('hair', 'h1'),
-        getById('beard', 'b1'),
-        getById('details', 'd3')
-      ].filter((s): s is any => !!s);
-    }
-    else if (budget >= 3100) {
-      status = { title: "БАБКИ НЕ ПРОБЛЕМА", desc: "Тотальная трансформация. Химия или цвет, топовая стрижка. Заведение работает на тебя." };
-      comboName = "СЕТ «ПЕРЕЗАГРУЗКА»";
-      recommendations = [
-        getById('tuning', 't2'),
-        getById('hair', 'h1'),
-        getById('beard', 'b2'),
-      ].filter((s): s is any => !!s);
-    }
-
-    const comboTotal = recommendations.reduce((sum, item) => sum + item.price, 0);
-
-    return { status, comboName, recommendations, comboTotal };
-  }, [budget, menu]);
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black uppercase flex flex-col overflow-x-hidden">
@@ -219,20 +170,20 @@ export default function Home() {
       <section className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-end px-4 md:px-8 pb-10 md:pb-24 pt-32 brutal-border-b bg-[#0a0a0a] overflow-hidden">
 
         {/* Background Animation */}
-        <div className="absolute inset-0 z-0 opacity-50 mix-blend-screen">
+        <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen">
           <GradientBlinds
-            gradientColors={['#FF9FFC', '#5227FF']}
+            gradientColors={['#FF0000', '#FFFFFF']}
             angle={0}
             noise={0.3}
             blindCount={12}
             blindMinWidth={50}
-            spotlightRadius={0.5}
-            spotlightSoftness={1}
+            spotlightRadius={0.4}
+            spotlightSoftness={0.9}
             spotlightOpacity={1}
             mouseDampening={0.15}
             distortAmount={0}
             shineDirection="left"
-            mixBlendMode="normal"
+            mixBlendMode="lighten"
           />
         </div>
 
@@ -249,8 +200,8 @@ export default function Home() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-8 flex flex-col items-center lg:items-start"
           >
-            <div className="w-fit bg-white text-black px-4 py-2 font-[family-name:var(--font-oswald)] font-black text-sm md:text-3xl mb-8 tracking-wider transform -rotate-2 brutal-border border-black shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
-              ОФИЦИАЛЬНОЕ ОТКРЫТИЕ 13 АПРЕЛЯ
+            <div className="w-fit bg-red-600 text-white px-5 py-2 md:px-10 md:py-4 font-[family-name:var(--font-oswald)] font-black text-3xl md:text-5xl mb-6 md:mb-10 tracking-[0.1em] md:tracking-[0.2em] transform -rotate-1 brutal-border border-white shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] md:shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
+              МЫ РАБОТАЕМ!
             </div>
 
             <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 mb-8 lg:mb-16 w-full">
@@ -261,25 +212,25 @@ export default function Home() {
                   alt="13x13"
                   width={600}
                   height={600}
-                  className="w-[85vw] sm:w-[65vw] lg:w-[350px] xl:w-[450px] h-auto object-contain object-left lg:object-center mix-blend-lighten relative z-10"
+                  className="w-[70vw] sm:w-[60vw] lg:w-[350px] xl:w-[450px] h-auto object-contain object-center mix-blend-lighten relative z-10"
                   priority
                 />
               </h1>
 
               <div className="flex flex-col gap-2 shrink-0 items-center lg:items-start">
-                <h2 className="font-[family-name:var(--font-oswald)] text-[8vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-1 brutal-border border-black brutal-shadow-inverse z-30">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[10vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-1 brutal-border border-black brutal-shadow-inverse z-30">
                   ЛОУКОСТ
                 </h2>
-                <h2 className="font-[family-name:var(--font-oswald)] text-[8vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-black text-white px-4 py-2 md:px-6 md:py-3 transform -rotate-1 brutal-border border-white brutal-shadow z-20 -mt-2 lg:-mt-4">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[10vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-black text-white px-4 py-2 md:px-6 md:py-3 transform -rotate-1 brutal-border border-white brutal-shadow z-20 -mt-2 lg:-mt-4">
                   БАРБЕРШОП
                 </h2>
-                <h2 className="font-[family-name:var(--font-oswald)] text-[8vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-2 brutal-border border-black brutal-shadow-inverse z-10 -mt-2 lg:-mt-4 lg:ml-4 text-center lg:text-left">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[10vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-2 brutal-border border-black brutal-shadow-inverse z-10 -mt-2 lg:-mt-4 lg:ml-4 text-center lg:text-left">
                   В СОЧИ
                 </h2>
               </div>
             </div>
 
-            <div className="font-[family-name:var(--font-inter)] text-base sm:text-lg md:text-2xl lg:text-3xl max-w-4xl text-white font-medium leading-relaxed flex flex-col gap-3 md:gap-4 items-center text-center lg:items-start lg:text-left">
+            <div className="font-[family-name:var(--font-jetbrains-mono)] text-base sm:text-lg md:text-2xl lg:text-3xl max-w-4xl text-white font-medium leading-relaxed flex flex-col gap-3 md:gap-4 items-center text-center lg:items-start lg:text-left">
               <span className="font-bold p-2 bg-black border-l-0 border-b-4 lg:border-l-4 lg:border-b-0 border-white inline-block">Новый барбершоп в Сочи с честными ценами.</span>
               <span className="p-2 border-b-2 border-dotted border-white/50 w-fit">Находимся на Горького 81а, напротив клуба DDX.</span>
               <span className="text-neutral-400 mb-2 mt-1">Мы ценим ваше время и бережём бюджет.</span>
@@ -291,7 +242,7 @@ export default function Home() {
                 <span className="font-[family-name:var(--font-oswald)] font-black text-3xl md:text-5xl uppercase tracking-tighter text-white">
                   БОРОДА <span className="line-through text-neutral-500 mx-2 decoration-red-500">600 ₽</span> 300 РУБЛЕЙ
                 </span>
-                <span className="text-[#FF9FFC] font-[family-name:var(--font-oswald)] font-black text-xl md:text-3xl leading-none uppercase mt-3 text-center lg:text-left">
+                <span className="text-red-500 font-[family-name:var(--font-oswald)] font-black text-xl md:text-3xl leading-none uppercase mt-3 text-center lg:text-left">
                   ДА, мы стрижем до 13 апреля со скидкой 50%!
                 </span>
               </div>
@@ -316,7 +267,7 @@ export default function Home() {
             </a>
 
             <div className="bg-black text-white brutal-border border-white shadow-[6px_6px_0px_0px_#fff] p-4 md:p-6 flex flex-col gap-2 transform rotate-1">
-              <a href="https://yandex.ru/maps/-/CPuyYX37" target="_blank" rel="noopener noreferrer" className="flex items-start md:items-center gap-3 text-neutral-300 font-[family-name:var(--font-inter)] text-sm md:text-base font-bold hover:text-white transition-colors group focus-visible:outline-none">
+              <a href="https://yandex.ru/maps/-/CPuyYX37" target="_blank" rel="noopener noreferrer" className="flex items-start md:items-center gap-3 text-neutral-300 font-[family-name:var(--font-jetbrains-mono)] text-sm md:text-base font-bold hover:text-white transition-colors group focus-visible:outline-none">
                 <div className="bg-white text-black p-1.5 shrink-0 transition-transform group-hover:-translate-y-1">
                   <MapPin className="w-5 h-5 flex-shrink-0" strokeWidth={2.5} />
                 </div>
@@ -333,7 +284,7 @@ export default function Home() {
           <h2 className="font-[family-name:var(--font-oswald)] text-[14vw] md:text-[12vw] lg:text-[10rem] font-black tracking-tighter leading-none uppercase m-0 p-0">
             ПРАЙС
           </h2>
-          <p className="font-[family-name:var(--font-inter)] text-base md:text-xl lg:text-2xl text-neutral-400 max-w-md text-left lg:text-right mb-2 md:mb-4">
+          <p className="font-[family-name:var(--font-jetbrains-mono)] text-base md:text-xl lg:text-2xl text-neutral-400 max-w-md text-left lg:text-right mb-2 md:mb-4">
             Точный расчет стоимости перед началом. Вы платите ровно ту сумму, что указана здесь.
           </p>
         </div>
@@ -354,86 +305,7 @@ export default function Home() {
           <PriceCategory title="Мелкие (Дети)" items={menu.kids} />
         </div>
 
-        <div className="w-full mt-10 md:mt-20 flex justify-center">
-          <div className="bg-black border-[6px] border-white p-6 md:p-16 relative brutal-shadow-inverse w-full" style={{ boxShadow: '-15px 15px 0px 0px white' }}>
-            <div className="mb-8 md:mb-12 relative z-10 w-full">
-              <label className="text-3xl md:text-6xl lg:text-7xl font-black font-[family-name:var(--font-oswald)] text-white uppercase tracking-tighter leading-[0.9] block">
-                УЗНАЙ, ЧТО ТЫ МОЖЕШЬ СДЕЛАТЬ НА СВОЙ БЮДЖЕТ:
-              </label>
-            </div>
 
-            {/* Status Section */}
-            <div className={`mb-12 p-8 md:p-12 border-l-[12px] bg-white text-black border-black brutal-shadow`}>
-              <div className="flex items-center mb-4">
-                <h3 className="text-4xl md:text-7xl font-black font-[family-name:var(--font-oswald)] uppercase tracking-tighter leading-none">
-                  {result.status.title}
-                </h3>
-              </div>
-              <p className="text-xl md:text-3xl font-[family-name:var(--font-inter)] font-bold text-neutral-800 max-w-4xl">
-                {result.status.desc}
-              </p>
-            </div>
-
-            {/* Recommended Services */}
-            <div className="bg-black p-8 md:p-12 border-[6px] border-white brutal-shadow-inverse mb-12 flex flex-col min-h-[500px] md:min-h-[600px]" style={{ boxShadow: '10px 10px 0px 0px white' }}>
-              <div className="space-y-6 mb-auto">
-                {result.recommendations.map((item, index) => (
-                  <div key={item.id} className="flex flex-col md:flex-row justify-between md:items-center group gap-2 md:gap-8 border-b-2 border-white/10 pb-6 last:border-0 last:pb-0">
-                    <div className="flex items-center gap-6">
-                      <span className="text-3xl font-black font-[family-name:var(--font-oswald)] text-white/50 opacity-50 hidden md:block">0{index + 1}</span>
-                      <span className="text-2xl md:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-oswald)] uppercase text-white group-hover:pl-4 transition-all duration-300">
-                        {item.name}
-                      </span>
-                    </div>
-                    <span className="text-3xl md:text-5xl font-black font-[family-name:var(--font-oswald)] text-white whitespace-nowrap bg-neutral-900 px-4 py-2 border-2 border-neutral-700 brutal-shadow-inverse group-hover:border-white group-hover:bg-black">
-                      {item.price} ₽
-                    </span>
-                  </div>
-                ))}
-                {result.recommendations.length === 0 && (
-                  <div className="text-neutral-500 font-bold text-3xl py-8 font-[family-name:var(--font-oswald)] uppercase">
-                    Слишком мало... Двигай ползунок.
-                  </div>
-                )}
-              </div>
-
-              <div className="h-32 md:h-40 flex items-end">
-                {result.recommendations.length > 0 && (
-                  <div className="flex flex-col md:flex-row justify-between md:items-end border-t-[8px] border-white pt-8 gap-6 w-full">
-                    <span className="text-4xl md:text-6xl font-black font-[family-name:var(--font-oswald)] text-neutral-400 uppercase tracking-tighter">
-                      СУММА:
-                    </span>
-                    <span className="text-[4rem] md:text-[8rem] font-black font-[family-name:var(--font-oswald)] text-white bg-black px-6 leading-[0.8] inline-block transform -rotate-1 border-[4px] border-white brutal-shadow-inverse pt-8 pb-4">
-                      {result.comboTotal} ₽
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* BIG SLIDER AT BOTTOM */}
-            <div className="mt-8 mb-4 relative z-10 w-full h-[64px] md:h-[80px] flex items-center">
-              <input
-                type="range"
-                min="100"
-                max="4000"
-                step="100"
-                value={budget}
-                onChange={(e) => setBudget(parseInt(e.target.value))}
-                className="brutal-slider w-full outline-none focus:outline-none focus:ring-0 appearance-none h-5 md:h-12 bg-white brutal-border border-white"
-                style={{
-                  backgroundImage: `linear-gradient(to right, #000000 ${((budget - 100) / 3900) * 100}%, transparent ${((budget - 100) / 3900) * 100}%)`,
-                }}
-              />
-            </div>
-
-            {/* Small Text / Rules */}
-            <div className="text-center font-[family-name:var(--font-inter)] text-lg md:text-2xl font-black text-neutral-400 flex flex-col gap-4 mt-10 pt-10 border-t-2 border-neutral-800">
-              <span className="uppercase tracking-[0.2em]">Честные цены. Без скрытых доплат.</span>
-              <span className="text-xl md:text-3xl text-white">* Скидка 50% действует до 13 апреля</span>
-            </div>
-          </div>
-        </div>
 
         <div className="mt-16 md:mt-32 w-full">
           <a
@@ -461,7 +333,7 @@ export default function Home() {
             <h2 className="font-[family-name:var(--font-oswald)] text-[12vw] sm:text-7xl md:text-[9rem] font-black tracking-tighter leading-[0.85] mb-8 md:mb-12 uppercase">
               ИЩЕМ<br /><span className="text-outline-white" style={{ WebkitTextStroke: '2px black' }}>МАСТЕРОВ</span>
             </h2>
-            <p className="font-[family-name:var(--font-inter)] text-base sm:text-2xl md:text-3xl font-medium mb-10 md:mb-16 max-w-xl text-neutral-700 leading-snug">
+            <p className="font-[family-name:var(--font-jetbrains-mono)] text-base sm:text-2xl md:text-3xl font-medium mb-10 md:mb-16 max-w-xl text-neutral-700 leading-snug">
               Барбер? Хочешь работать в сильном коллективе и зарабатывать стабильно в новом зале? Пиши нам!
             </p>
             <Link href="/rabota-v-13x13" className="inline-flex items-center justify-between gap-4 bg-black text-white font-[family-name:var(--font-oswald)] text-xl sm:text-2xl md:text-4xl font-black py-4 px-6 md:py-6 md:px-12 brutal-border border-black brutal-shadow-inverse w-full sm:w-auto cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black/50 hover:bg-neutral-900 transition-colors group">
@@ -529,7 +401,7 @@ export default function Home() {
                   {item.icon}
                 </div>
                 <h3 className="font-[family-name:var(--font-oswald)] text-2xl md:text-3xl lg:text-4xl font-black mb-4 md:mb-6 uppercase">{item.title}</h3>
-                <p className="font-[family-name:var(--font-inter)] text-neutral-400 group-hover:text-neutral-600 leading-relaxed text-base md:text-lg lg:text-xl mt-auto font-medium transition-colors">
+                <p className="font-[family-name:var(--font-jetbrains-mono)] text-neutral-400 group-hover:text-neutral-600 leading-relaxed text-base md:text-lg lg:text-xl mt-auto font-medium transition-colors">
                   {item.desc}
                 </p>
               </div>
@@ -575,7 +447,7 @@ export default function Home() {
               Находимся напротив DDX:<br />
               ул. Горького, 81а
             </h2>
-            <div className="font-[family-name:var(--font-inter)] text-lg md:text-xl font-bold text-neutral-400 space-y-4">
+            <div className="font-[family-name:var(--font-jetbrains-mono)] text-lg md:text-xl font-bold text-neutral-400 space-y-4">
               <p>Район ЖД Вокзала</p>
               <p className="text-sm md:text-base font-medium leading-relaxed max-w-md">
                 Ищете барбершоп рядом с DDX в Сочи? Мы находимся на ул. Горького, 81а, напротив клуба DDX и рядом с ТЦ Сан Сити. Удобно зайти до тренировки или сразу после — стрижка и оформление бороды без лишнего ожидания.
@@ -588,7 +460,7 @@ export default function Home() {
             <a href="tel:+79002871313" className="font-[family-name:var(--font-oswald)] text-3xl sm:text-5xl md:text-6xl font-black leading-none hover:underline underline-offset-8 mb-6 md:mb-8 inline-block focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/20 p-2 -ml-2 text-white">
               +7 900 287-13-13
             </a>
-            <div className="font-[family-name:var(--font-inter)] text-base md:text-lg font-medium text-neutral-400 space-y-2">
+            <div className="font-[family-name:var(--font-jetbrains-mono)] text-base md:text-lg font-medium text-neutral-400 space-y-2">
               <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" className="block text-xl md:text-2xl text-white font-bold hover:underline underline-offset-4 mb-4">@BARBER_13X13</a>
               <div>Резюме и сотрудничество:</div>
               <a href="mailto:tsehthirteen@ya.ru" className="text-xl md:text-2xl text-white font-bold hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/20">tsehthirteen@ya.ru</a><br />
@@ -598,7 +470,7 @@ export default function Home() {
 
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center px-4 md:px-16 py-6 md:py-8 text-xs sm:text-sm md:text-base font-[family-name:var(--font-inter)] font-medium bg-[#111] text-neutral-500 gap-4">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center px-4 md:px-16 py-6 md:py-8 text-xs sm:text-sm md:text-base font-[family-name:var(--font-jetbrains-mono)] font-medium bg-[#111] text-neutral-500 gap-4">
           <div className="text-center md:text-left flex flex-col gap-1">
             <span>ИП МАЛХАСЯН ГЕОРГИЙ ГЕОРГИЕВИЧ</span>
             <span>ИНН: 232003837758 / ОГРН: 1027700067328</span>

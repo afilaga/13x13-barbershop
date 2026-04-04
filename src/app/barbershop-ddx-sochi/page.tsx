@@ -73,7 +73,7 @@ export default function DDXLanding() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mt-16">
                         <div className="space-y-8">
-                            <p className="font-[family-name:var(--font-inter)] text-xl md:text-3xl font-bold leading-tight">
+                            <p className="font-[family-name:var(--font-jetbrains-mono)] text-xl md:text-3xl font-bold leading-tight">
                                 Ищете барбершоп <span className="bg-white text-black px-1">РЯДОМ С DDX В СОЧИ</span>? <br />
                                 Мы на Горького 81а. <br />
                                 Через дорогу от входа в зал.
@@ -159,7 +159,7 @@ export default function DDXLanding() {
                         height={50}
                         className="opacity-50 mix-blend-lighten"
                     />
-                    <p className="font-[family-name:var(--font-inter)] text-neutral-500 font-bold">
+                    <p className="font-[family-name:var(--font-jetbrains-mono)] text-neutral-500 font-bold">
                         © 2026. 13x13 БАРБЕРШОП НА ГОРЬКОГО. ЛОКАЦИЯ ПРЯМО У DDX FITNESS.
                     </p>
                     <Link href="/" className="text-white hover:underline font-bold">Вернуться на главную</Link>

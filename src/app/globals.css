@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jetbrains-mono), ui-sans-serif, system-ui, sans-serif;
   --font-oswald: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
 
   --color-base-black: #000000;

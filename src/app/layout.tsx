@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Oswald, Inter } from "next/font/google";
+import { Oswald, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -13,8 +13,8 @@ const oswald = Oswald({
   weight: ["700"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["cyrillic", "latin"],
 });
 
@@ -240,7 +240,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className="scroll-smooth">
       <body
-        className={`${oswald.variable} ${inter.variable} antialiased bg-black text-white font-sans selection:bg-white selection:text-black`}
+        className={`${oswald.variable} ${jetbrainsMono.variable} antialiased bg-black text-white font-sans selection:bg-white selection:text-black`}
       >
         <Script id="local-business-jsonld" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify(localBusinessJsonLd)}

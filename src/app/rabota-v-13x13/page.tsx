@@ -86,7 +86,7 @@ export default function CareerLanding() {
                             <h2 className="font-[family-name:var(--font-oswald)] text-2xl md:text-5xl font-black uppercase italic leading-none">
                                 ПОЛУЧАЙ 50% <br /> С КАЖДОЙ СТРИЖКИ
                             </h2>
-                            <p className="font-[family-name:var(--font-inter)] text-base md:text-xl font-bold leading-tight max-w-xl text-neutral-800">
+                            <p className="font-[family-name:var(--font-jetbrains-mono)] text-base md:text-xl font-bold leading-tight max-w-xl text-neutral-800">
                                 МЫ СОЗДАЛИ МЕСТО, В КОТОРОМ ПРИЯТНО РАБОТАТЬ. ЧЕСТНЫЙ ПРОЦЕНТ, СТОЛОВАЯ РЯДОМ, ДЕНЬГИ КАЖДЫЙ ДЕНЬ.
                             </p>
                         </div>
@@ -437,7 +437,7 @@ export default function CareerLanding() {
 
                     <div className="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
                         <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" className="text-white font-black text-lg md:text-xl hover:underline underline-offset-4 mb-2 uppercase">@BARBER_13X13</a>
-                        <p className="font-[family-name:var(--font-inter)] text-neutral-600 font-bold text-[10px] md:text-xs">
+                        <p className="font-[family-name:var(--font-jetbrains-mono)] text-neutral-600 font-bold text-[10px] md:text-xs">
                             © 2026. БАРБЕРШОП 13x13 СОЧИ. <br />
                             ДЕНЬГИ КАЖДЫЙ ДЕНЬ.
                         </p>
