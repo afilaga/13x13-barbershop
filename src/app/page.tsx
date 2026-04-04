@@ -327,37 +327,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HIRING / RECRUITMENT BLOCK */}
-      <section className="bg-white text-black py-16 md:py-40 px-4 md:px-8 brutal-border-b relative overflow-hidden">
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          <div className="flex flex-col items-start z-10">
-            <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-              <Search className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12" strokeWidth={3} />
-              <span className="font-[family-name:var(--font-oswald)] text-xl sm:text-2xl md:text-4xl font-bold uppercase tracking-wide">ВАКАНСИЯ</span>
-            </div>
-            <h2 className="font-[family-name:var(--font-oswald)] text-[12vw] sm:text-7xl md:text-[9rem] font-black tracking-tighter leading-[0.85] mb-8 md:mb-12 uppercase">
-              ИЩЕМ<br /><span className="text-outline-white" style={{ WebkitTextStroke: '2px black' }}>МАСТЕРОВ</span>
-            </h2>
-            <p className="font-[family-name:var(--font-inter)] text-base sm:text-2xl md:text-3xl font-medium mb-10 md:mb-16 max-w-xl text-neutral-700 leading-snug">
-              Барбер? Хочешь работать в сильном коллективе и зарабатывать стабильно в новом зале? Пиши нам!
-            </p>
-            <Link href="/rabota-v-13x13" className="inline-flex items-center justify-between gap-4 bg-black text-white font-[family-name:var(--font-oswald)] text-xl sm:text-2xl md:text-4xl font-black py-4 px-6 md:py-6 md:px-12 brutal-border border-black brutal-shadow-inverse w-full sm:w-auto cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black/50 hover:bg-neutral-900 transition-colors group">
-              <span>ПОДРОБНЕЕ О ВАКАНСИИ</span> <ArrowUpRight className="w-6 h-6 md:w-10 md:h-10 shrink-0 group-hover:rotate-45 transition-transform" />
-            </Link>
-          </div>
-
-          <div className="relative h-[300px] sm:h-[400px] md:h-[500px] w-full mt-8 lg:mt-0 flex items-center justify-center">
-            {/* Added Images */}
-            <div className="absolute right-0 md:right-[10%] w-[60%] aspect-[3/4] border-[3px] md:border-4 border-black brutal-shadow-inverse z-20 rotate-3 transform origin-bottom-right overflow-hidden bg-neutral-200">
-              <Image src="/hiring-interior.png" alt="Интерьер барбершопа" fill sizes="(max-width: 768px) 60vw, 30vw" className="object-cover mix-blend-multiply" />
-            </div>
-            <div className="absolute left-0 md:left-[5%] bottom-0 md:bottom-[-10%] w-[55%] aspect-[4/5] border-[3px] md:border-4 border-black brutal-shadow-inverse z-10 -rotate-6 overflow-hidden bg-neutral-300">
-              <Image src="/hiring-work.png" alt="Барбер в работе" fill sizes="(max-width: 768px) 55vw, 25vw" className="object-cover mix-blend-multiply" />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* PRICE LIST */}
       <section id="price" className="py-16 md:py-40 px-4 md:px-8 max-w-[1600px] mx-auto w-full border-b-[3px] border-white">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 md:mb-24 gap-4 md:gap-8">
@@ -478,6 +447,37 @@ export default function Home() {
               <ArrowUpRight className="w-8 h-8 sm:w-16 sm:h-16 md:w-24 md:h-24" strokeWidth={2} />
             </div>
           </a>
+        </div>
+      </section>
+
+      {/* HIRING / RECRUITMENT BLOCK */}
+      <section className="bg-white text-black py-16 md:py-40 px-4 md:px-8 brutal-border-b relative overflow-hidden">
+        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          <div className="flex flex-col items-start z-10">
+            <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
+              <Search className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12" strokeWidth={3} />
+              <span className="font-[family-name:var(--font-oswald)] text-xl sm:text-2xl md:text-4xl font-bold uppercase tracking-wide">ВАКАНСИЯ</span>
+            </div>
+            <h2 className="font-[family-name:var(--font-oswald)] text-[12vw] sm:text-7xl md:text-[9rem] font-black tracking-tighter leading-[0.85] mb-8 md:mb-12 uppercase">
+              ИЩЕМ<br /><span className="text-outline-white" style={{ WebkitTextStroke: '2px black' }}>МАСТЕРОВ</span>
+            </h2>
+            <p className="font-[family-name:var(--font-inter)] text-base sm:text-2xl md:text-3xl font-medium mb-10 md:mb-16 max-w-xl text-neutral-700 leading-snug">
+              Барбер? Хочешь работать в сильном коллективе и зарабатывать стабильно в новом зале? Пиши нам!
+            </p>
+            <Link href="/rabota-v-13x13" className="inline-flex items-center justify-between gap-4 bg-black text-white font-[family-name:var(--font-oswald)] text-xl sm:text-2xl md:text-4xl font-black py-4 px-6 md:py-6 md:px-12 brutal-border border-black brutal-shadow-inverse w-full sm:w-auto cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black/50 hover:bg-neutral-900 transition-colors group">
+              <span>ПОДРОБНЕЕ О ВАКАНСИИ</span> <ArrowUpRight className="w-6 h-6 md:w-10 md:h-10 shrink-0 group-hover:rotate-45 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="relative h-[300px] sm:h-[400px] md:h-[500px] w-full mt-8 lg:mt-0 flex items-center justify-center">
+            {/* Added Images */}
+            <div className="absolute right-0 md:right-[10%] w-[60%] aspect-[3/4] border-[3px] md:border-4 border-black brutal-shadow-inverse z-20 rotate-3 transform origin-bottom-right overflow-hidden bg-neutral-200">
+              <Image src="/hiring-interior.png" alt="Интерьер барбершопа" fill sizes="(max-width: 768px) 60vw, 30vw" className="object-cover mix-blend-multiply" />
+            </div>
+            <div className="absolute left-0 md:left-[5%] bottom-0 md:bottom-[-10%] w-[55%] aspect-[4/5] border-[3px] md:border-4 border-black brutal-shadow-inverse z-10 -rotate-6 overflow-hidden bg-neutral-300">
+              <Image src="/hiring-work.png" alt="Барбер в работе" fill sizes="(max-width: 768px) 55vw, 25vw" className="object-cover mix-blend-multiply" />
+            </div>
+          </div>
         </div>
       </section>
 
