@@ -194,9 +194,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-8 flex flex-col items-center lg:items-start"
+            className="lg:col-span-8 flex flex-col items-center lg:items-start relative"
           >
-            <div className="w-fit bg-red-600 text-white px-5 py-2 md:px-10 md:py-4 font-[family-name:var(--font-oswald)] font-black text-3xl md:text-5xl mb-6 md:mb-10 tracking-[0.1em] md:tracking-[0.2em] transform -rotate-1 brutal-border border-white shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] md:shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
+            <div className="w-fit bg-red-600 text-white px-3 py-1 md:px-10 md:py-4 font-[family-name:var(--font-oswald)] font-black text-xl md:text-5xl mb-3 md:mb-10 tracking-[0.1em] md:tracking-[0.2em] transform -rotate-1 brutal-border border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] md:shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
               МЫ РАБОТАЕМ!
             </div>
 
@@ -214,16 +214,30 @@ export default function Home() {
               </h1>
 
               <div className="flex flex-col gap-2 shrink-0 items-center lg:items-start">
-                <h2 className="font-[family-name:var(--font-oswald)] text-[10vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-1 brutal-border border-black brutal-shadow-inverse z-30">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[9vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-1 brutal-border border-black brutal-shadow-inverse z-30">
                   ЛОУКОСТ
                 </h2>
-                <h2 className="font-[family-name:var(--font-oswald)] text-[10vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-black text-white px-4 py-2 md:px-6 md:py-3 transform -rotate-1 brutal-border border-white brutal-shadow z-20 -mt-2 lg:-mt-4">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[9vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-black text-white px-4 py-2 md:px-6 md:py-3 transform -rotate-1 brutal-border border-white brutal-shadow z-20 -mt-2 lg:-mt-4">
                   БАРБЕРШОП
                 </h2>
-                <h2 className="font-[family-name:var(--font-oswald)] text-[10vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-2 brutal-border border-black brutal-shadow-inverse z-10 -mt-2 lg:-mt-4 lg:ml-4 text-center lg:text-left">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[9vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-2 brutal-border border-black brutal-shadow-inverse z-10 -mt-2 lg:-mt-4 lg:ml-4 text-center lg:text-left">
                   В СОЧИ
                 </h2>
               </div>
+            </div>
+
+            {/* Mobile Action Buttons (visible only on md and below) */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50 md:hidden pointer-events-auto">
+              <a href="#price" className="relative group w-[56px] h-[56px] rounded-full bg-red-600 border-[3px] border-white brutal-shadow flex items-center justify-center font-[family-name:var(--font-oswald)] font-black text-sm uppercase text-white active:scale-95 transition-transform overflow-hidden">
+                <span className="relative z-10 drop-shadow-md">ЦЕНЫ</span>
+                <div className="absolute inset-0 bg-red-500 opacity-0 group-active:opacity-100 transition-opacity z-0" />
+                <div className="absolute -inset-2 bg-red-600 opacity-40 blur-md rounded-full pointer-events-none z-[-1]" />
+              </a>
+              <a href="https://dikidi.net/#widget=205276" className="relative group w-[56px] h-[56px] rounded-full bg-blue-600 border-[3px] border-white brutal-shadow flex items-center justify-center font-[family-name:var(--font-oswald)] font-black text-xs uppercase text-white active:scale-95 transition-transform overflow-hidden">
+                <span className="relative z-10 drop-shadow-md">ЗАПИСЬ</span>
+                <div className="absolute inset-0 bg-blue-500 opacity-0 group-active:opacity-100 transition-opacity z-0" />
+                <div className="absolute -inset-2 bg-blue-600 opacity-40 blur-md rounded-full pointer-events-none z-[-1]" />
+              </a>
             </div>
 
             <div className="font-[family-name:var(--font-jetbrains-mono)] text-base sm:text-lg md:text-2xl lg:text-3xl max-w-4xl text-white font-medium leading-relaxed flex flex-col gap-3 md:gap-4 items-center text-center lg:items-start lg:text-left">
