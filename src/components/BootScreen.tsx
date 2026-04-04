@@ -76,20 +76,20 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="mb-8"
+        className="mb-4 md:mb-8 mt-4 md:mt-0"
       >
         <Image
           src="/logo_white.webp"
           alt="13x13 Logo"
           width={200}
           height={100}
-          className="w-[150px] md:w-[200px] h-auto mix-blend-lighten opacity-80"
+          className="w-[120px] md:w-[200px] h-auto mix-blend-lighten opacity-80"
           priority
         />
       </motion.div>
 
       {/* Realistic React Component Barber Pole */}
-      <div className="relative mb-12 w-20 h-64 md:w-24 md:h-80 rounded-full overflow-hidden brutal-border border-4 border-neutral-800 shadow-[0_0_50px_rgba(255,255,255,0.1)]">
+      <div className="relative mb-6 md:mb-12 w-16 h-48 md:w-24 md:h-80 rounded-full overflow-hidden brutal-border border-4 border-neutral-800 shadow-[0_0_50px_rgba(255,255,255,0.1)] shrink-0">
         <GradientBlinds
           className=""
           dpr={1}
@@ -112,15 +112,15 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
         <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white/30 to-transparent z-20 pointer-events-none mix-blend-screen" />
       </div>
 
-      <div className="relative z-10 w-full max-w-3xl px-6 text-center h-24 md:h-32 flex items-center justify-center">
+      <div className="relative z-10 w-full max-w-3xl px-4 md:px-6 text-center h-20 md:h-32 flex items-center justify-center shrink-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPhrase}
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.4 }}
-            className="font-[family-name:var(--font-jetbrains-mono)] text-2xl md:text-4xl font-black text-white drop-shadow-2xl uppercase tracking-tighter leading-tight"
+            className="font-[family-name:var(--font-jetbrains-mono)] text-xl sm:text-2xl md:text-4xl font-black text-white drop-shadow-2xl uppercase tracking-tighter leading-tight"
           >
             {currentPhrase}
           </motion.div>
@@ -128,7 +128,7 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
       </div>
 
       {/* Progress Bar */}
-      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-[80vw] max-w-xl h-3 md:h-4 bg-neutral-900 rounded-full overflow-hidden border border-neutral-800">
+      <div className="absolute bottom-8 md:bottom-16 left-1/2 -translate-x-1/2 w-[85vw] max-w-xl h-2 md:h-4 bg-neutral-900 rounded-full overflow-hidden border border-neutral-800">
         <motion.div 
           initial={{ width: "0%" }}
           animate={{ width: "100%" }}
