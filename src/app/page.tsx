@@ -174,7 +174,7 @@ export default function Home() {
           <GradientBlinds
             className=""
             dpr={1}
-            gradientColors={["#1100ff","#ff0000"]}
+            gradientColors={['#FF0000', '#FFFFFF']}
             angle={251}
             noise={0.58}
             blindCount={29}
@@ -188,12 +188,6 @@ export default function Home() {
             shineDirection="left"
           />
         </div>
-
-        {/* Decorative Grid Overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:4rem_4rem] md:bg-[size:6rem_6rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_10%,transparent_100%)] pointer-events-none z-0" />
-
-        {/* Spotlight Effect */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.2)_0%,#0a0a0a_80%)] pointer-events-none z-0" />
 
         <div className="max-w-[1600px] w-full mx-auto z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <motion.div
