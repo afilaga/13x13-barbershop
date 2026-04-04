@@ -78,7 +78,7 @@ const localBusinessJsonLd = {
   "@id": `${SITE_URL}/#barbershop`,
   "name": "13x13",
   "legalName": "ИП МАЛХАСЯН ГЕОРГИЙ ГЕОРГИЕВИЧ",
-  "description": "Новый лоукост барбершоп 13x13 в Сочи с честными ценами. Официальное открытие 13 апреля! Стрижём и бреем от 300 рублей! Находимся на Горького 81а, напротив клуба DDX.",
+  "description": "Новый барбершоп в Сочи с честными ценами. СТРИЖКА 600 ₽ БОРОДА 600 ₽ ДА, мы стрижем до 13 апреля со скидкой 50%! Находимся на Горького 81а, напротив клуба DDX.",
   "url": SITE_URL,
   "logo": `${SITE_URL}/logo_white.webp`,
   "image": [
@@ -117,7 +117,7 @@ const localBusinessJsonLd = {
       "closes": "22:00"
     }
   ],
-  "priceRange": "400-3000 RUB",
+  "priceRange": "300-2000 RUB",
   "currenciesAccepted": "RUB",
   "paymentAccepted": "Cash, Credit Card",
   "sameAs": [
@@ -141,7 +141,7 @@ const localBusinessJsonLd = {
             },
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": 400,
+              "minPrice": 300,
               "maxPrice": 1000,
               "priceCurrency": "RUB"
             }
@@ -161,7 +161,7 @@ const localBusinessJsonLd = {
             },
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": 500,
+              "minPrice": 200,
               "maxPrice": 800,
               "priceCurrency": "RUB"
             }
