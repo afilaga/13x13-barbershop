@@ -153,7 +153,7 @@ export default function Home() {
           {/* Logo */}
           <a href="#" className="relative z-50 focus-visible:outline-none">
             <Image
-              src="/logo.png"
+              src="/logo_white.webp"
               alt="13x13 Logo"
               width={120}
               height={60}
@@ -247,11 +247,11 @@ export default function Home() {
               <h1 className="w-full lg:w-auto flex justify-center lg:justify-start m-0 shrink-0">
                 <span className="sr-only">13x13</span>
                 <Image
-                  src="/logo.png"
+                  src="/logo_white.webp"
                   alt="13x13"
-                  width={500}
-                  height={500}
-                  className="w-[70vw] sm:w-[50vw] lg:w-[220px] xl:w-[280px] h-auto object-contain object-left lg:object-center mix-blend-lighten relative z-10"
+                  width={600}
+                  height={600}
+                  className="w-[85vw] sm:w-[65vw] lg:w-[350px] xl:w-[450px] h-auto object-contain object-left lg:object-center mix-blend-lighten relative z-10"
                   priority
                 />
               </h1>
@@ -543,7 +543,7 @@ export default function Home() {
 
           <div className="p-8 md:p-16 brutal-border-b border-white lg:border-b-0 lg:brutal-border-r flex justify-center items-center h-full bg-black">
             <Image
-              src="/logo.png"
+              src="/logo_white.webp"
               alt="Барбершоп 13x13 рядом с DDX в Сочи на Горького 81а"
               width={300}
               height={300}

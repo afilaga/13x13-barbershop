@@ -52,7 +52,7 @@ export default function CareerLanding() {
                 <div className="flex justify-between items-center px-4 md:px-8 py-2 md:py-4 max-w-[1600px] mx-auto">
                     <Link href="/">
                         <Image
-                            src="/logo.png"
+                            src="/logo_white.webp"
                             alt="13x13 Logo"
                             width={100}
                             height={50}
@@ -428,7 +428,7 @@ export default function CareerLanding() {
             <footer className="bg-black py-12 px-4 md:px-8 border-t-2 border-white">
                 <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12">
                     <Image
-                        src="/logo.png"
+                        src="/logo_white.webp"
                         alt="13x13 Logo"
                         width={120}
                         height={60}

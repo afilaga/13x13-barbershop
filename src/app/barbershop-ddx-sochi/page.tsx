@@ -13,6 +13,26 @@ export const metadata: Metadata = {
         "барбер горького сочи",
         "мужская стрижка у ddx сочи"
     ],
+    openGraph: {
+        title: "Барбершоп рядом с DDX в Сочи — 13x13",
+        description: "Напротив DDX Fitness на Горького. Мужские стрижки от 400 ₽. Быстро, честно, рядом с ТЦ Сан Сити.",
+        url: "https://13x13.ru/barbershop-ddx-sochi",
+        siteName: "13x13",
+        images: [
+            {
+                url: "/logo_white.webp",
+                width: 1200,
+                height: 630,
+                alt: "Барбершоп 13x13 рядом с DDX в Сочи на Горького 81а",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "13x13 | Барбершоп рядом с DDX в Сочи",
+        description: "Стрижки от 400 ₽ рядом с DDX на Горького. Заходи до или после тренировки!",
+        images: ["/logo_white.webp"],
+    },
 };
 
 export default function DDXLanding() {
@@ -23,7 +43,7 @@ export default function DDXLanding() {
                 <div className="flex justify-between items-center px-4 md:px-8 py-3 md:py-4 max-w-[1600px] mx-auto">
                     <Link href="/" className="relative z-50">
                         <Image
-                            src="/logo.png"
+                            src="/logo_white.webp"
                             alt="Барбершоп 13x13 рядом с DDX в Сочи на Горького 81а"
                             width={120}
                             height={60}
@@ -133,7 +153,7 @@ export default function DDXLanding() {
             <footer className="bg-black py-12 px-4 md:px-8 border-t-4 border-white text-center">
                 <div className="max-w-[1200px] mx-auto flex flex-col items-center gap-8">
                     <Image
-                        src="/logo.png"
+                        src="/logo_white.webp"
                         alt="13x13 Logo"
                         width={100}
                         height={50}

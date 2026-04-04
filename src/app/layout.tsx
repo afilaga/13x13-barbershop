@@ -22,6 +22,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Барбершоп рядом с DDX в Сочи — 13x13 на Горького 81а",
   description: "13x13 — барбершоп рядом с DDX в Сочи, ул. Горького 81а. Мужские стрижки и оформление бороды от 400 ₽. Быстро, честно, по записи.",
+  icons: {
+    icon: [
+      { url: "/favicon_white.svg", media: "(prefers-color-scheme: dark)" },
+      { url: "/favicon_black.svg", media: "(prefers-color-scheme: light)" },
+    ],
+    shortcut: "/favicon_white.svg",
+    apple: "/favicon_white.svg",
+  },
   verification: {
     yandex: YANDEX_VERIFICATION_TOKEN,
   },
@@ -37,9 +45,9 @@ export const metadata: Metadata = {
     siteName: "13x13",
     images: [
       {
-        url: "/og-image.png",
-        width: 1024,
-        height: 1024,
+        url: "/logo_white.webp",
+        width: 1200,
+        height: 630,
         alt: "Барбершоп 13x13 рядом с DDX в Сочи на Горького 81а",
       },
     ],
@@ -48,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "13x13 | Барбершоп рядом с DDX в Сочи",
     description: "Стрижки от 400 ₽ рядом с DDX на Горького. Заходи до или после тренировки!",
-    images: ["/og-image.png"],
+    images: ["/logo_white.webp"],
   },
   keywords: [
     "барбершоп рядом с ddx сочи",
@@ -72,9 +80,9 @@ const localBusinessJsonLd = {
   "legalName": "ИП МАЛХАСЯН ГЕОРГИЙ ГЕОРГИЕВИЧ",
   "description": "Новый лоукост барбершоп 13x13 в Сочи с честными ценами. Стрижём и бреем от 400 рублей! Получи скидку на первую стрижку! Находимся на Горького 81а, напротив клуба DDX.",
   "url": SITE_URL,
-  "logo": `${SITE_URL}/logo.png`,
+  "logo": `${SITE_URL}/logo_white.webp`,
   "image": [
-    `${SITE_URL}/og-image.png`,
+    `${SITE_URL}/logo_white.webp`,
     `${SITE_URL}/hero-bg.png`
   ],
   "telephone": "+79002871313",
