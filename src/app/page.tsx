@@ -174,7 +174,7 @@ export default function Home() {
           <GradientBlinds
             className=""
             dpr={1}
-            gradientColors={['#FF0000', '#FFFFFF']}
+            gradientColors={['#FF0000', '#FFFFFF', '#0011FF']}
             angle={251}
             noise={0.58}
             blindCount={29}
