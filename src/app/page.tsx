@@ -174,15 +174,16 @@ export default function Home() {
           <GradientBlinds
             dpr={1}
             gradientColors={['#FF0000', '#FFFFFF']}
-            angle={0}
-            noise={0.3}
-            blindCount={12}
-            blindMinWidth={50}
-            spotlightRadius={0.4}
-            spotlightSoftness={0.9}
+            angle={251}
+            noise={0.58}
+            blindCount={29}
+            blindMinWidth={60}
+            mouseDampening={0.53}
+            mirrorGradient={false}
+            spotlightRadius={0.5}
+            spotlightSoftness={1}
             spotlightOpacity={1}
-            mouseDampening={0.15}
-            distortAmount={0}
+            distortAmount={26}
             shineDirection="left"
             mixBlendMode="lighten"
           />

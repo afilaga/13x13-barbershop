@@ -153,9 +153,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec2 uv = pr * 0.5 + 0.5;
 
     vec2 uvMod = uv;
+    // Add a slow, continuous scroll to the blinds
+    uvMod.x += iTime * 0.03;
+    
     if (uDistort > 0.0) {
-      float a = uvMod.y * 6.0;
-      float b = uvMod.x * 6.0;
+      float a = uvMod.y * 6.0 + iTime * 0.5;
+      float b = uvMod.x * 6.0 + iTime * 0.5;
       float w = 0.01 * uDistort;
       uvMod.x += sin(a) * w;
       uvMod.y += cos(b) * w;
