@@ -6,6 +6,8 @@ import { ArrowUpRight, Scissors, ShieldAlert, Clock, MapPin, Search, Menu, X, Ch
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
+import BootScreen from "@/components/BootScreen";
 
 const GradientBlinds = dynamic(() => import('@/components/GradientBlinds'), { ssr: false });
 
@@ -54,6 +56,21 @@ const PriceCategory = ({ title, items }: { title: string, items: { id: string, n
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isBooting, setIsBooting] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hasBooted = sessionStorage.getItem("boot_shown");
+      if (hasBooted) {
+        setIsBooting(false);
+      }
+    }
+  }, []);
+
+  const handleBootComplete = () => {
+    setIsBooting(false);
+    sessionStorage.setItem("boot_shown", "true");
+  };
 
   // Полная база услуг с разбивкой по категориям
   const menu = useMemo(() => ({
@@ -98,6 +115,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black uppercase flex flex-col overflow-x-hidden">
+      <AnimatePresence>
+        {isBooting && <BootScreen onComplete={handleBootComplete} />}
+      </AnimatePresence>
 
       {/* 
         Aesthetic Anchor: Solid brutalist navigation 
@@ -170,23 +190,32 @@ export default function Home() {
       <section className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-end px-4 md:px-8 pb-10 md:pb-24 pt-32 brutal-border-b bg-[#0a0a0a] overflow-hidden">
 
         {/* Background Animation */}
-        <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen">
-          <GradientBlinds
-            className=""
-            dpr={1}
-            gradientColors={['#FF0000', '#FFFFFF', '#0011FF']}
-            angle={251}
-            noise={0.58}
-            blindCount={29}
-            blindMinWidth={60}
-            mouseDampening={0.53}
-            mirrorGradient={false}
-            spotlightRadius={0.5}
-            spotlightSoftness={1}
-            spotlightOpacity={1}
-            distortAmount={26}
-            shineDirection="left"
-          />
+        <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen overflow-hidden">
+          {!isBooting && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0"
+            >
+              <GradientBlinds
+                className=""
+                dpr={1}
+                gradientColors={['#FF0000', '#FFFFFF', '#0011FF']}
+                angle={251}
+                noise={0.58}
+                blindCount={29}
+                blindMinWidth={60}
+                mouseDampening={0.53}
+                mirrorGradient={false}
+                spotlightRadius={0.5}
+                spotlightSoftness={1}
+                spotlightOpacity={1}
+                distortAmount={26}
+                shineDirection="left"
+              />
+            </motion.div>
+          )}
         </div>
 
         <div className="max-w-[1600px] w-full mx-auto z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
@@ -201,23 +230,31 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 mb-8 lg:mb-16 w-full">
-              <h1 className="w-full lg:w-auto flex justify-center lg:justify-start m-0 shrink-0">
-                <span className="sr-only">13x13</span>
-                <Image
-                  src="/logo_white.webp"
-                  alt="13x13"
-                  width={600}
-                  height={600}
-                  className="w-[70vw] sm:w-[60vw] lg:w-[350px] xl:w-[450px] h-auto object-contain object-center mix-blend-lighten relative z-10"
-                  priority
-                />
-              </h1>
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={!isBooting ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                className="w-full lg:w-auto flex flex-col items-center lg:items-start shrink-0 relative"
+              >
+                <div className="absolute inset-0 bg-black z-[-1] pointer-events-none" />
+                <h1 className="m-0 flex justify-center lg:justify-start">
+                  <span className="sr-only">13x13</span>
+                  <Image
+                    src="/logo_white.webp"
+                    alt="13x13"
+                    width={600}
+                    height={600}
+                    className="w-[70vw] sm:w-[60vw] lg:w-[350px] xl:w-[450px] h-auto object-contain object-center mix-blend-lighten relative z-10"
+                    priority
+                  />
+                </h1>
+                <div className="mt-2 font-[family-name:var(--font-jetbrains-mono)] font-light text-sm md:text-base tracking-widest text-[#a3a3a3] uppercase self-center lg:self-start">
+                  ЧЕСТНЫЕ ЦЕНЫ
+                </div>
+              </motion.div>
 
               <div className="flex flex-col gap-2 shrink-0 items-center lg:items-start">
-                <h2 className="font-[family-name:var(--font-oswald)] text-[9vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-1 brutal-border border-black brutal-shadow-inverse z-30">
-                  ЛОУКОСТ
-                </h2>
-                <h2 className="font-[family-name:var(--font-oswald)] text-[9vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-black text-white px-4 py-2 md:px-6 md:py-3 transform -rotate-1 brutal-border border-white brutal-shadow z-20 -mt-2 lg:-mt-4">
+                <h2 className="font-[family-name:var(--font-oswald)] text-[9vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-black text-white px-4 py-2 md:px-6 md:py-3 transform -rotate-1 brutal-border border-white brutal-shadow z-20">
                   БАРБЕРШОП
                 </h2>
                 <h2 className="font-[family-name:var(--font-oswald)] text-[9vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-white text-black px-4 py-2 md:px-6 md:py-3 transform rotate-2 brutal-border border-black brutal-shadow-inverse z-10 -mt-2 lg:-mt-4 lg:ml-4 text-center lg:text-left">
@@ -227,16 +264,16 @@ export default function Home() {
             </div>
 
             {/* Mobile Action Buttons (visible only on md and below) */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50 md:hidden pointer-events-auto">
-              <a href="#price" className="relative group w-[56px] h-[56px] rounded-full bg-red-600 border-[3px] border-white brutal-shadow flex items-center justify-center font-[family-name:var(--font-oswald)] font-black text-sm uppercase text-white active:scale-95 transition-transform overflow-hidden">
-                <span className="relative z-10 drop-shadow-md">ЦЕНЫ</span>
-                <div className="absolute inset-0 bg-red-500 opacity-0 group-active:opacity-100 transition-opacity z-0" />
-                <div className="absolute -inset-2 bg-red-600 opacity-40 blur-md rounded-full pointer-events-none z-[-1]" />
+            <div className="absolute right-2 top-1/2 -translate-y-[calc(50%+50px)] flex flex-col gap-3 z-50 md:hidden pointer-events-auto">
+              <a href="#price" className="relative group w-[60px] h-[60px] rounded-full bg-[#111] border border-neutral-800 flex items-center justify-center font-[family-name:var(--font-oswald)] font-bold text-[13px] uppercase text-red-500 active:scale-95 transition-transform overflow-visible">
+                <span className="relative z-10 flex">ЦЕНЫ</span>
+                <div className="absolute -inset-1 rounded-full bg-red-600 opacity-20 blur-md pointer-events-none z-0" />
+                <div className="absolute inset-px rounded-full border border-red-600/30 pointer-events-none z-10" />
               </a>
-              <a href="https://dikidi.net/#widget=205276" className="relative group w-[56px] h-[56px] rounded-full bg-blue-600 border-[3px] border-white brutal-shadow flex items-center justify-center font-[family-name:var(--font-oswald)] font-black text-xs uppercase text-white active:scale-95 transition-transform overflow-hidden">
-                <span className="relative z-10 drop-shadow-md">ЗАПИСЬ</span>
-                <div className="absolute inset-0 bg-blue-500 opacity-0 group-active:opacity-100 transition-opacity z-0" />
-                <div className="absolute -inset-2 bg-blue-600 opacity-40 blur-md rounded-full pointer-events-none z-[-1]" />
+              <a href="https://dikidi.net/#widget=205276" className="relative group w-[60px] h-[60px] rounded-full bg-[#111] border border-neutral-800 flex items-center justify-center font-[family-name:var(--font-oswald)] font-bold text-[13px] uppercase text-blue-500 active:scale-95 transition-transform overflow-visible">
+                <span className="relative z-10 flex text-center leading-none">ЗАПИСЬ</span>
+                <div className="absolute -inset-1 rounded-full bg-blue-600 opacity-20 blur-md pointer-events-none z-0" />
+                <div className="absolute inset-px rounded-full border border-blue-600/30 pointer-events-none z-10" />
               </a>
             </div>
 
