@@ -226,7 +226,6 @@ export default function Home() {
                 transition={{ duration: 1, delay: 0.2 }}
                 className="w-full lg:w-auto flex flex-col items-center lg:items-start shrink-0 relative"
               >
-                <div className="absolute inset-0 bg-black z-[-1] pointer-events-none" />
                 <h1 className="m-0 flex justify-center lg:justify-start">
                   <span className="sr-only">13x13</span>
                   <Image

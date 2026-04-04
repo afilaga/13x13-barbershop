@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 const GradientBlinds = dynamic(() => import('@/components/GradientBlinds'), { ssr: false });
 
@@ -70,6 +71,23 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
+      {/* Logo */}
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="mb-8"
+      >
+        <Image
+          src="/logo_white.webp"
+          alt="13x13 Logo"
+          width={200}
+          height={100}
+          className="w-[150px] md:w-[200px] h-auto mix-blend-lighten opacity-80"
+          priority
+        />
+      </motion.div>
+
       {/* Realistic React Component Barber Pole */}
       <div className="relative mb-12 w-20 h-64 md:w-24 md:h-80 rounded-full overflow-hidden brutal-border border-4 border-neutral-800 shadow-[0_0_50px_rgba(255,255,255,0.1)]">
         <GradientBlinds

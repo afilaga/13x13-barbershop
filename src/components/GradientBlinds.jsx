@@ -162,9 +162,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
       uvMod.x += sin(a) * w;
       uvMod.y += cos(b) * w;
     }
-    float t = uvMod.x;
+    float t = fract(uvMod.x);
     if (uMirror > 0.5) {
-      t = 1.0 - abs(1.0 - 2.0 * fract(t));
+      t = 1.0 - abs(1.0 - 2.0 * t);
     }
     vec3 base = getGradientColor(t);
 
