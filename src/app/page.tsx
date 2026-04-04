@@ -56,89 +56,91 @@ export default function Home() {
   // Полная база услуг с разбивкой по категориям
   const menu = useMemo(() => ({
     hair: [
-      { id: 'h1', name: '«Сделай красиво» (топ)', price: 1000, desc: 'Фейд включен, мытье, укладка' },
-      { id: 'h2', name: 'Стильно', price: 800, desc: 'С фейдом, мытье, укладка' },
-      { id: 'h3', name: 'Классика', price: 600, desc: 'Верх ножницами, мытье, укладка' },
-      { id: 'h4', name: 'Бока короче / верх длиннее', price: 500, desc: 'Только насадки' },
-      { id: 'h5', name: 'Фейд', price: 500, desc: 'Только фейд + мытье' },
-      { id: 'h6', name: '«Пох»', price: 400, desc: '1 насадка, без мытья. Быстро и ровно' },
-      { id: 'h7', name: 'Укладка (с мытьем)', price: 200, desc: 'Освежиться перед движем' },
+      { id: 'h1', name: '«Удлиненная»', price: 1000, desc: 'Полностью ножницами. Мытье + укладка' },
+      { id: 'h2', name: '«Стильно»', price: 800, desc: 'Фейд с 0. Мытье + укладка' },
+      { id: 'h3', name: '«Классика»', price: 600, desc: 'Бока короче / верх длиннее. Мытье + укладка' },
+      { id: 'h4', name: '«Пох»', price: 400, desc: 'Под 1 насадку / машинкой. Быстро и ровно' },
+      { id: 'h5', name: 'Мытьё головы', price: 200, desc: 'Освежиться перед движем' },
     ],
     beard: [
       { id: 'b1', name: 'Королевское бритьё', price: 800, desc: 'С распариванием и кайфом' },
-      { id: 'b2', name: 'Борода', price: 500, desc: 'Форма + окантовка лезвием бонусом' },
+      { id: 'b2', name: 'Моделирование бороды', price: 600, desc: 'С окантовкой лезвием' },
+      { id: 'b3', name: 'Бритьё', price: 400, desc: 'Машинкой' },
+      { id: 'b4', name: 'Оформление усов', price: 200, desc: 'Четкие контуры' },
     ],
     kids: [
       { id: 'k1', name: 'Трудный ребёнок', price: 1000, desc: '0–5 лет. Найдем подход' },
-      { id: 'k2', name: 'Школьник', price: 600, desc: 'Для ровных пацанов' },
+      { id: 'k2', name: 'Подросток', price: 800, desc: 'От 12 лет и выше' },
+      { id: 'k3', name: 'Школьник', price: 600, desc: 'Для ровных пацанов' },
     ],
     tuning: [
       { id: 't1', name: 'Окрашивание (по длине)', price: 2000, desc: 'От 1500 до 2000 ₽' },
-      { id: 't2', name: 'Биозавивка / химия', price: 1500, desc: 'Стиль кудрявых' },
+      { id: 't2', name: 'Кудри Stile', price: 1500, desc: 'Короткие/длинные волосы: 1500/2000 руб' },
       { id: 't3', name: 'Обесцвечивание', price: 1300, desc: 'Стать блондом' },
       { id: 't4', name: 'Тонирование (1 зона)', price: 1000, desc: 'Скрыть седину. От 800 до 1000 ₽' },
     ],
     details: [
-      { id: 'd1', name: 'Воск «под ключ»', price: 500, desc: 'Уберем лишнее везде' },
-      { id: 'd2', name: 'Хайр-тату', price: 300, desc: 'Полоски, молнии' },
-      { id: 'd3', name: 'Пилинг головы', price: 200, desc: 'Чистая кожа, свежая голова' },
-      { id: 'd4', name: 'Воск (одна зона)', price: 200, desc: 'Нос / уши' },
-      { id: 'd5', name: 'Брови', price: 100, desc: 'Четкий взгляд' },
-      { id: 'd6', name: 'Пробор', price: 100, desc: 'Выбритый пробор' },
+      { id: 'd1', name: 'Уход «На максималках»', price: 700, desc: 'Маска + патчи' },
+      { id: 'd2', name: 'Уход «Фейс контроль»', price: 500, desc: 'Альгинатная / тканевая маска' },
+      { id: 'd3', name: 'Воск «под ключ»', price: 500, desc: 'Уберем лишнее везде' },
+      { id: 'd4', name: 'Хайр-тату', price: 300, desc: 'Полоски, молнии' },
+      { id: 'd5', name: 'Коррекция бровей воском', price: 250, desc: 'Четкая форма' },
+      { id: 'd6', name: 'Пилинг головы/лица', price: 200, desc: 'Чистая кожа, свежая голова' },
+      { id: 'd7', name: 'Воск (1 зона)', price: 200, desc: 'Нос / уши / брови' },
+      { id: 'd8', name: 'Уход «Pro-взгляд»', price: 200, desc: 'Патчи под глаза' },
+      { id: 'd9', name: 'Брови', price: 100, desc: 'Четкий взгляд' },
+      { id: 'd10', name: 'Пробор', price: 100, desc: 'Выбритый пробор' },
     ]
   }), []);
 
   const result = useMemo(() => {
-    // Data logic now references memorized 'menu' variable.
-
     let status = { title: "ЧИСТО СПРОСИТЬ", desc: "Братан, на стрижку не хватит, но брови сделаем ровными." };
     let comboName = "СЕТ «НА МИНИМАЛКАХ»";
     let recommendations: { id: string; name: string; price: number; desc: string }[] = [];
 
+    const getById = (cat: keyof typeof menu, id: string) => menu[cat].find(i => i.id === id);
+
     if (budget >= 100 && budget < 400) {
       status = { title: "ЛАЙТОВЫЙ ТЮНИНГ", desc: "Освежим детали. Будешь выглядеть опрятнее за копейки." };
       comboName = "СЕТ «ДЕТАЛИ»";
-      recommendations = [menu.details[4], menu.details[3], menu.details[5]].filter(s => s.price <= budget);
+      recommendations = [getById('details', 'd9'), getById('details', 'd7'), getById('details', 'd10')].filter((s): s is any => !!s && s.price <= budget);
     }
     else if (budget >= 400 && budget < 900) {
       status = { title: "БАЗА НА РАЙОНЕ", desc: "Быстро, четко, без лишних слов. То, что нужно для суеты." };
       comboName = "СЕТ «РОВНЫЙ ТИП»";
-      if (budget >= 800) recommendations = [menu.hair[1]]; // Стильно
-      else if (budget >= 600) recommendations = [menu.hair[2]]; // Классика
-      else recommendations = [menu.hair[5]]; // Пох
+      if (budget >= 800) recommendations = [getById('hair', 'h2')].filter((s): s is any => !!s);
+      else if (budget >= 600) recommendations = [getById('hair', 'h3')].filter((s): s is any => !!s);
+      else recommendations = [getById('hair', 'h4')].filter((s): s is any => !!s);
     }
     else if (budget >= 900 && budget < 1600) {
       status = { title: "МЕСТНЫЙ АВТОРИТЕТ", desc: "Стрижем красиво, оформляем бороду. Девчонки уже оборачиваются." };
       comboName = "СЕТ «ПОЛНЫЙ ПОРЯДОК»";
-      recommendations = [
-        menu.hair[0], // Сделай красиво (1000)
-        menu.beard[1] // Борода (500) - если бюджет 1500
-      ];
-      if (budget < 1500) recommendations.pop(); // Оставляем только стрижку, если на бороду не хватает
+      const h1 = getById('hair', 'h1');
+      if (h1) recommendations.push(h1);
     }
-    else if (budget >= 1600 && budget < 3000) {
+    else if (budget >= 1600 && budget < 3100) {
       status = { title: "КОРОЛЬ ВЕЧЕРИНКИ", desc: "Заряжаем по полной. Отличная стрижка, спа-бритье и воск. Кайф обеспечен." };
       comboName = "СЕТ «КОРОЛЕВСКИЙ»";
       recommendations = [
-        menu.hair[0], // Сделай красиво (1000)
-        menu.beard[0], // Королевское бритье (800)
-        menu.details[0] // Воск под ключ (500)
-      ];
+        getById('hair', 'h1'),
+        getById('beard', 'b1'),
+        getById('details', 'd3')
+      ].filter((s): s is any => !!s);
     }
-    else if (budget >= 3000) {
+    else if (budget >= 3100) {
       status = { title: "БАБКИ НЕ ПРОБЛЕМА", desc: "Тотальная трансформация. Химия или цвет, топовая стрижка. Заведение работает на тебя." };
       comboName = "СЕТ «ПЕРЕЗАГРУЗКА»";
       recommendations = [
-        menu.tuning[1], // Биозавивка (1500)
-        menu.hair[0], // Сделай красиво (1000)
-        menu.beard[1], // Борода (500)
-      ];
+        getById('tuning', 't2'),
+        getById('hair', 'h1'),
+        getById('beard', 'b2'),
+      ].filter((s): s is any => !!s);
     }
 
     const comboTotal = recommendations.reduce((sum, item) => sum + item.price, 0);
 
     return { status, comboName, recommendations, comboTotal };
-  }, [budget]);
+  }, [budget, menu]);
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black uppercase flex flex-col overflow-x-hidden">
@@ -432,13 +434,13 @@ export default function Home() {
               <input
                 type="range"
                 min="100"
-                max="3000"
+                max="4000"
                 step="100"
                 value={budget}
                 onChange={(e) => setBudget(parseInt(e.target.value))}
                 className="brutal-slider w-full outline-none focus:outline-none focus:ring-0 appearance-none h-5 md:h-12 bg-white brutal-border border-white"
                 style={{
-                  backgroundImage: `linear-gradient(to right, #000000 ${((budget - 100) / 2900) * 100}%, transparent ${((budget - 100) / 2900) * 100}%)`,
+                  backgroundImage: `linear-gradient(to right, #000000 ${((budget - 100) / 3900) * 100}%, transparent ${((budget - 100) / 3900) * 100}%)`,
                 }}
               />
             </div>
