@@ -5,7 +5,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Барбершоп рядом с DDX в Сочи — 13x13 на Горького 81а",
-    description: "Ищете барбершоп рядом с DDX в Сочи? 13x13 находится прямо напротив входа в DDX Fitness на Горького 81а. Стрижки от 400 ₽ для тех, кто ценит дисциплину и время.",
+    description: "Ищете барбершоп рядом с DDX в Сочи? 13x13 находится прямо напротив входа в DDX Fitness на Горького 81а. Стрижки от 300 ₽ для тех, кто ценит дисциплину и время. Официальное открытие 13 апреля!",
     keywords: [
         "барбершоп рядом с ddx сочи",
         "барбершоп напротив ddx",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     ],
     openGraph: {
         title: "Барбершоп рядом с DDX в Сочи — 13x13",
-        description: "Напротив DDX Fitness на Горького. Мужские стрижки от 400 ₽. Быстро, честно, рядом с ТЦ Сан Сити.",
+        description: "Напротив DDX Fitness на Горького. Мужские стрижки от 300 ₽. Официальное открытие 13 апреля! Быстро, честно, рядом с ТЦ Сан Сити.",
         url: "https://13x13.ru/barbershop-ddx-sochi",
         siteName: "13x13",
         images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "13x13 | Барбершоп рядом с DDX в Сочи",
-        description: "Стрижки от 400 ₽ рядом с DDX на Горького. Заходи до или после тренировки!",
+        description: "Стрижки от 300 ₽ рядом с DDX на Горького. Официальное открытие 13 апреля! Заходи до или после тренировки!",
         images: ["/logo_white.webp"],
     },
 };
@@ -122,7 +122,7 @@ export default function DDXLanding() {
                             },
                             {
                                 q: "Сколько стоит мужская стрижка?",
-                                a: "Стрижки и оформление бороды от 400 ₽. У нас лоукост подход к сервису при сохранении высокого качества."
+                                a: "Стрижки и оформление бороды от 300 ₽. У нас лоукост подход к сервису при сохранении высокого качества."
                             }
                         ].map((faq, idx) => (
                             <div key={idx} className="bg-black border-2 border-neutral-800 p-8 hover:border-white transition-colors group">

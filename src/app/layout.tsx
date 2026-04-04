@@ -21,7 +21,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Барбершоп рядом с DDX в Сочи — 13x13 на Горького 81а",
-  description: "13x13 — барбершоп рядом с DDX в Сочи, ул. Горького 81а. Мужские стрижки и оформление бороды от 400 ₽. Быстро, честно, по записи.",
+  description: "13x13 — барбершоп рядом с DDX в Сочи, ул. Горького 81а. Мужские стрижки от 300 ₽. Официальное открытие 13 апреля! Быстро, честно, по записи.",
   icons: {
     icon: [
       { url: "/favicon_white.svg", media: "(prefers-color-scheme: dark)" },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     locale: "ru_RU",
     url: SITE_URL,
     title: "Барбершоп рядом с DDX в Сочи — 13x13",
-    description: "Напротив DDX Fitness на Горького. Мужские стрижки от 400 ₽. Быстро, честно, рядом с ТЦ Сан Сити.",
+    description: "Напротив DDX Fitness на Горького. Мужские стрижки от 300 ₽. Официальное открытие 13 апреля!",
     siteName: "13x13",
     images: [
       {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "13x13 | Барбершоп рядом с DDX в Сочи",
-    description: "Стрижки от 400 ₽ рядом с DDX на Горького. Заходи до или после тренировки!",
+    description: "Стрижки от 300 ₽ рядом с DDX на Горького. Официальное открытие 13 апреля!",
     images: ["/logo_white.webp"],
   },
   keywords: [
@@ -78,7 +78,7 @@ const localBusinessJsonLd = {
   "@id": `${SITE_URL}/#barbershop`,
   "name": "13x13",
   "legalName": "ИП МАЛХАСЯН ГЕОРГИЙ ГЕОРГИЕВИЧ",
-  "description": "Новый лоукост барбершоп 13x13 в Сочи с честными ценами. Стрижём и бреем от 400 рублей! Получи скидку на первую стрижку! Находимся на Горького 81а, напротив клуба DDX.",
+  "description": "Новый лоукост барбершоп 13x13 в Сочи с честными ценами. Официальное открытие 13 апреля! Стрижём и бреем от 300 рублей! Находимся на Горького 81а, напротив клуба DDX.",
   "url": SITE_URL,
   "logo": `${SITE_URL}/logo_white.webp`,
   "image": [

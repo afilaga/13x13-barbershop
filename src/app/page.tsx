@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Scissors, ShieldAlert, Clock, MapPin, Search, Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const GradientBlinds = dynamic(() => import('@/components/GradientBlinds'), { ssr: false });
 
 // Helper component for the brutalist accordion price categories
 const PriceCategory = ({ title, items }: { title: string, items: { id: string, name: string, price: number, desc: string }[] }) => {
@@ -215,14 +218,21 @@ export default function Home() {
       {/* HERO SECTION - NEO-BRUTALIST */}
       <section className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-end px-4 md:px-8 pb-10 md:pb-24 pt-32 brutal-border-b bg-[#0a0a0a] overflow-hidden">
 
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/hero-bg.png"
-            alt="13x13 Barbershop Background"
-            fill
-            className="object-cover opacity-60 mix-blend-luminosity"
-            priority
+        {/* Background Animation */}
+        <div className="absolute inset-0 z-0 opacity-50 mix-blend-screen">
+          <GradientBlinds
+            gradientColors={['#FF9FFC', '#5227FF']}
+            angle={0}
+            noise={0.3}
+            blindCount={12}
+            blindMinWidth={50}
+            spotlightRadius={0.5}
+            spotlightSoftness={1}
+            spotlightOpacity={1}
+            mouseDampening={0.15}
+            distortAmount={0}
+            shineDirection="left"
+            mixBlendMode="normal"
           />
         </div>
 
@@ -240,7 +250,7 @@ export default function Home() {
             className="lg:col-span-8 flex flex-col items-center lg:items-start"
           >
             <div className="w-fit bg-white text-black px-4 py-2 font-[family-name:var(--font-oswald)] font-black text-sm md:text-3xl mb-8 tracking-wider transform -rotate-2 brutal-border border-black shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
-              ОТКРЫТИЕ — АПРЕЛЬ 2026
+              ОФИЦИАЛЬНОЕ ОТКРЫТИЕ 13 АПРЕЛЯ
             </div>
 
             <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 mb-8 lg:mb-16 w-full">
@@ -271,16 +281,19 @@ export default function Home() {
 
             <div className="font-[family-name:var(--font-inter)] text-base sm:text-lg md:text-2xl lg:text-3xl max-w-4xl text-white font-medium leading-relaxed flex flex-col gap-3 md:gap-4 items-center text-center lg:items-start lg:text-left">
               <span className="font-bold p-2 bg-black border-l-0 border-b-4 lg:border-l-4 lg:border-b-0 border-white inline-block">Новый барбершоп в Сочи с честными ценами.</span>
-              <span className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-                Стрижём и бреем
-                <span className="bg-white text-black px-3 py-1 font-[family-name:var(--font-oswald)] font-black text-xl sm:text-2xl md:text-4xl lg:text-5xl uppercase tracking-tighter transform -rotate-2 brutal-border border-black shadow-[4px_4px_0px_0px_#fff]">
-                  от 400 рублей!
-                </span>
-              </span>
               <span className="p-2 border-b-2 border-dotted border-white/50 w-fit">Находимся на Горького 81а, напротив клуба DDX.</span>
-              <span className="text-neutral-400">Мы ценим ваше время и бережём бюджет.</span>
-              <div className="mt-4 bg-white text-black px-6 py-2 font-[family-name:var(--font-oswald)] font-black text-xl md:text-4xl uppercase tracking-tighter transform rotate-1 brutal-border border-black shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
-                Получи скидку на первую стрижку!
+              <span className="text-neutral-400 mb-2 mt-1">Мы ценим ваше время и бережём бюджет.</span>
+              
+              <div className="mt-4 bg-black text-white p-5 md:p-8 brutal-border border-white shadow-[8px_8px_0px_0px_#fff] flex flex-col items-center lg:items-start gap-3 transform rotate-1 w-full lg:w-fit">
+                <span className="font-[family-name:var(--font-oswald)] font-black text-3xl md:text-5xl uppercase tracking-tighter text-white">
+                  СТРИЖКА <span className="line-through text-neutral-500 mx-2 decoration-red-500">600 ₽</span> 300 РУБЛЕЙ
+                </span>
+                <span className="font-[family-name:var(--font-oswald)] font-black text-3xl md:text-5xl uppercase tracking-tighter text-white">
+                  БОРОДА <span className="line-through text-neutral-500 mx-2 decoration-red-500">600 ₽</span> 300 РУБЛЕЙ
+                </span>
+                <span className="text-[#FF9FFC] font-[family-name:var(--font-oswald)] font-black text-xl md:text-3xl leading-none uppercase mt-3 text-center lg:text-left">
+                  ДА, мы стрижем до 13 апреля со скидкой 50%!
+                </span>
               </div>
             </div>
           </motion.div>
@@ -296,7 +309,7 @@ export default function Home() {
               className="flex items-center justify-between bg-white text-black font-[family-name:var(--font-oswald)] text-3xl sm:text-4xl md:text-5xl font-black py-6 px-6 md:py-8 md:px-8 brutal-border border-white shadow-[8px_8px_0px_0px_#fff] hover:shadow-[12px_12px_0px_0px_#fff] hover:-translate-y-1 hover:-translate-x-1 group w-full cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 transition-all"
               aria-label="Записаться онлайн"
             >
-              <span className="uppercase tracking-wide">ЗАПИСЬ В АПРЕЛЕ</span>
+              <span className="uppercase tracking-wide">ЗАПИСАТЬСЯ</span>
               <div className="bg-black text-white p-2 rounded-none transform group-hover:rotate-12 transition-transform">
                 <ArrowUpRight className="w-8 h-8 md:w-12 md:h-12" strokeWidth={3} />
               </div>
@@ -448,7 +461,7 @@ export default function Home() {
             {/* Small Text / Rules */}
             <div className="text-center font-[family-name:var(--font-inter)] text-lg md:text-2xl font-black text-neutral-400 flex flex-col gap-4 mt-10 pt-10 border-t-2 border-neutral-800">
               <span className="uppercase tracking-[0.2em]">Честные цены. Без скрытых доплат.</span>
-              <span className="text-xl md:text-3xl text-white">* Минимальная услуга — стрижка от 400 ₽</span>
+              <span className="text-xl md:text-3xl text-white">* Скидка 50% действует до 13 апреля</span>
             </div>
           </div>
         </div>
