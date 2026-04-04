@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     siteName: '13x13 Барбершоп',
     images: [
       {
-        url: 'https://13x13.ru/logo_white.webp',
+        url: 'https://13x13.ru/logo_black.webp',
         width: 1200,
         height: 630,
         alt: 'Работа в 13x13 Барбершоп Сочи',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Работа Барбером в Сочи - 13x13',
     description: 'Ищем мастеров в 13x13. Лучшие условия в городе.',
-    images: ['https://13x13.ru/logo_white.webp'],
+    images: ['https://13x13.ru/logo_black.webp'],
   },
 };
 

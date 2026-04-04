@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     ],
     openGraph: {
         title: "Барбершоп рядом с DDX в Сочи — 13x13",
-        description: "Напротив DDX Fitness на Горького. Мужские стрижки от 300 ₽. Официальное открытие 13 апреля! Быстро, честно, рядом с ТЦ Сан Сити.",
+        description: "Новый барбершоп в Сочи с честными ценами. СТРИЖКА 600 ₽ БОРОДА 600 ₽ ДА, мы стрижем до 13 апреля со скидкой 50%!",
         url: "https://13x13.ru/barbershop-ddx-sochi",
         siteName: "13x13",
         images: [
             {
-                url: "/logo_white.webp",
+                url: "/logo_black.webp",
                 width: 1200,
                 height: 630,
                 alt: "Барбершоп 13x13 рядом с DDX в Сочи на Горького 81а",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "13x13 | Барбершоп рядом с DDX в Сочи",
-        description: "Стрижки от 300 ₽ рядом с DDX на Горького. Официальное открытие 13 апреля! Заходи до или после тренировки!",
-        images: ["/logo_white.webp"],
+        description: "Новый барбершоп в Сочи с честными ценами. СТРИЖКА 600 ₽ БОРОДА 600 ₽ ДА, мы стрижем до 13 апреля со скидкой 50%!",
+        images: ["/logo_black.webp"],
     },
 };
 
