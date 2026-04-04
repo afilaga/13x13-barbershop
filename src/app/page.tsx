@@ -130,6 +130,7 @@ export default function Home() {
           <div className="hidden lg:flex gap-8 items-center font-[family-name:var(--font-oswald)] font-bold text-xl uppercase tracking-widest">
             <a href="#price" className="hover:line-through transition-all hover:text-neutral-300">Услуги</a>
             <a href="#about" className="hover:line-through transition-all hover:text-neutral-300">Философия</a>
+            <Link href="/gallery" className="hover:line-through transition-all hover:text-neutral-300 text-red-500">Галерея</Link>
             <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" className="hover:line-through transition-all hover:text-neutral-300">TG</a>
             <a href="tel:+79002871313" className="hover:line-through transition-all hover:text-neutral-300 text-neutral-400">
               +7 900 287-13-13
@@ -161,6 +162,7 @@ export default function Home() {
               <div className="flex flex-col gap-6 font-[family-name:var(--font-oswald)] font-bold text-3xl uppercase tracking-widest p-6 pb-10">
                 <a href="#price" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit">Услуги</a>
                 <a href="#about" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit">Философия</a>
+                <Link href="/gallery" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit text-red-500">ГАЛЕРЕЯ</Link>
                 <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit">TELEGRAM</a>
                 <a href="tel:+79002871313" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit text-neutral-400">
                   +7 900 287-13-13
