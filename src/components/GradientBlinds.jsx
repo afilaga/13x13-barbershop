@@ -24,7 +24,7 @@ const GradientBlinds = ({
   className,
   dpr,
   paused = false,
-  onReady,
+  onReady = () => {},
   gradientColors,
   angle = 0,
   noise = 0.3,
