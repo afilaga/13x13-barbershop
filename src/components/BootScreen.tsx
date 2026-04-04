@@ -34,6 +34,7 @@ const PHRASES = [
 
 export default function BootScreen({ onComplete }: { onComplete: () => void }) {
   const [currentPhrase, setCurrentPhrase] = useState("");
+  const [isPoleReady, setIsPoleReady] = useState(false);
   const durationMs = 7500; // 7.5 seconds
   const iterations = 5;
   const intervalMs = durationMs / iterations;
@@ -91,10 +92,14 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
       {/* Realistic React Component Barber Pole */}
       <div className="relative mb-6 md:mb-12 w-16 h-48 md:w-24 md:h-80 rounded-full overflow-hidden brutal-border border-4 border-neutral-800 shadow-[0_0_50px_rgba(255,255,255,0.1)] shrink-0">
         {/* CSS fallback for slow/delayed webgl init (e.g. in-app browsers) */}
-        <div className="absolute inset-0 boot-pole-fallback z-0 pointer-events-none" />
+        <div
+          className="absolute inset-0 boot-pole-fallback z-[1] pointer-events-none transition-opacity duration-700"
+          style={{ opacity: isPoleReady ? 0.58 : 1 }}
+        />
         <GradientBlinds
           className=""
           dpr={1}
+          onReady={() => setIsPoleReady(true)}
           gradientColors={['#FFFFFF', '#0A3DFF', '#E10600', '#FFFFFF']}
           angle={30}
           noise={0.1}

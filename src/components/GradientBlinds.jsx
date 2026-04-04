@@ -24,6 +24,7 @@ const GradientBlinds = ({
   className,
   dpr,
   paused = false,
+  onReady,
   gradientColors,
   angle = 0,
   noise = 0.3,
@@ -47,10 +48,12 @@ const GradientBlinds = ({
   const mouseTargetRef = useRef([0, 0]);
   const lastTimeRef = useRef(0);
   const firstResizeRef = useRef(true);
+  const hasReportedReadyRef = useRef(false);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    hasReportedReadyRef.current = false;
 
     const renderer = new Renderer({
       dpr: dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
@@ -289,6 +292,12 @@ void main() {
       if (!paused && programRef.current && meshRef.current) {
         try {
           renderer.render({ scene: meshRef.current });
+          if (!hasReportedReadyRef.current) {
+            hasReportedReadyRef.current = true;
+            if (typeof onReady === 'function') {
+              onReady();
+            }
+          }
         } catch (e) {
           console.error(e);
         }
@@ -331,7 +340,8 @@ void main() {
     spotlightSoftness,
     spotlightOpacity,
     distortAmount,
-    shineDirection
+    shineDirection,
+    onReady
   ]);
 
   return (
