@@ -153,9 +153,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec2 uv = pr * 0.5 + 0.5;
 
     vec2 uvMod = uv;
-    // Add a slow, continuous scroll to the blinds
+    // Add continuous flowing motion
     uvMod.x += iTime * 0.03;
-    
     if (uDistort > 0.0) {
       float a = uvMod.y * 6.0 + iTime * 0.5;
       float b = uvMod.x * 6.0 + iTime * 0.5;
@@ -269,20 +268,6 @@ void main() {
       }
     };
     canvas.addEventListener('pointermove', onPointerMove);
-    // Optional mobile support for touch to move spotlight
-    canvas.addEventListener('touchmove', e => {
-      if (e.touches && e.touches.length > 0) {
-        const touch = e.touches[0];
-        const rect = canvas.getBoundingClientRect();
-        const scale = renderer.dpr || 1;
-        const x = (touch.clientX - rect.left) * scale;
-        const y = (rect.height - (touch.clientY - rect.top)) * scale;
-        mouseTargetRef.current = [x, y];
-        if (mouseDampening <= 0) {
-          uniforms.iMouse.value = [x, y];
-        }
-      }
-    }, { passive: true });
 
     const loop = t => {
       rafRef.current = requestAnimationFrame(loop);

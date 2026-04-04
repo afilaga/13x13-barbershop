@@ -172,8 +172,9 @@ export default function Home() {
         {/* Background Animation */}
         <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen">
           <GradientBlinds
+            className=""
             dpr={1}
-            gradientColors={['#FF0000', '#FFFFFF']}
+            gradientColors={["#1100ff","#ff0000"]}
             angle={251}
             noise={0.58}
             blindCount={29}
@@ -185,7 +186,6 @@ export default function Home() {
             spotlightOpacity={1}
             distortAmount={26}
             shineDirection="left"
-            mixBlendMode="lighten"
           />
         </div>
 
