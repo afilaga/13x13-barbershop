@@ -252,8 +252,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Mobile Action Buttons (visible only on md and below) */}
-            <div className="absolute right-2 top-1/2 -translate-y-[calc(50%+50px)] flex flex-col gap-3 z-50 md:hidden pointer-events-auto">
+            {/* Mobile Action Buttons (visible only on md and below) - Fixed to viewport */}
+            <div className="fixed right-2 top-1/2 -translate-y-[calc(50%+50px)] flex flex-col gap-3 z-[100] md:hidden pointer-events-auto">
               <a href="#price" className="relative group w-[60px] h-[60px] rounded-full bg-[#111] border border-neutral-800 flex items-center justify-center font-[family-name:var(--font-oswald)] font-bold text-[13px] uppercase text-red-500 active:scale-95 transition-transform overflow-visible">
                 <span className="relative z-10 flex">ЦЕНЫ</span>
                 <div className="absolute -inset-1 rounded-full bg-red-600 opacity-20 blur-md pointer-events-none z-0" />
