@@ -14,33 +14,40 @@ const SCENES = ["hero", "philosophy", "prices"] as const;
 type SceneId = (typeof SCENES)[number];
 
 const TV_NOTES = [
-  "13X13 • ДЕМО РЕЖИМ ДЛЯ ЗАЛА",
-  "СТРИЖКИ ОТ 400 ₽ • БОРОДА ОТ 400 ₽",
-  "СОЧИ • ГОРЬКОГО 81А • НАПРОТИВ DDX",
-  "ЧЕСТНЫЕ ЦЕНЫ • БЕЗ ПЕРЕПЛАТЫ ЗА ВОЗДУХ",
-  "АВТОРЕЖИМ: HERO • ФИЛОСОФИЯ • ПРАЙС",
+  "СОЧИ. ГОРЬКОГО, 81А.",
+  "ЧЕСТНЫЕ ЦЕНЫ. БЕЗ ПЕРЕПЛАТ.",
+  "СТРИЖКА ОТ 400 РУБЛЕЙ.",
+  "БОРОДА ОТ 500 РУБЛЕЙ.",
+  "13X13. МУЖСКОЙ КЛУБ.",
 ];
 
-const PHILOSOPHY_POINTS = [
+const PHILOSOPHY_CARDS = [
   {
-    title: "ОСОЗНАННЫЙ ВЫБОР",
-    text: "13x13 для тех, кто ценит качество, но не готов платить за лишний маркетинг.",
-    icon: "choice",
+    icon: Scissors,
+    title: "ОСТАВИЛИ ГЛАВНОЕ",
+    desc: "Сильный сервис, опытные мастера, качественные материалы и полностью понятная честная цена.",
   },
   {
-    title: "ЧЕСТНЫЙ ПРАЙС",
-    text: "Цена прозрачная до начала работы. Без скрытых услуг и доплат после кресла.",
-    icon: "price",
+    icon: ShieldAlert,
+    title: "БЕЗ ПЕРЕПЛАТ ЗА ВОЗДУХ",
+    desc: "Никаких приставок, бесплатного алкоголя, включённого кофе и искусственно раздутой барбер-атмосферы.",
   },
   {
-    title: "СТАБИЛЬНЫЙ УРОВЕНЬ",
-    text: "Регламенты, сильные мастера и чистая дисциплина времени каждый день.",
-    icon: "quality",
+    icon: Clock3,
+    title: "УМНЫЙ РАСХОД",
+    desc: "Вместо одной стрижки за 5000 ₽ — 2-3 визита к нам. Тот же уровень профессионального сервиса без переплаты за люкс.",
   },
 ];
 
-const DEMO_RELOAD_MIN_MS = 1000 * 60 * 12; // 12 minutes
-const DEMO_RELOAD_MAX_MS = 1000 * 60 * 22; // 22 minutes
+const PRICE_CATEGORY_ORDER = [
+  "mens-haircuts",
+  "beard-and-shave",
+  "kids",
+  "details-and-care",
+] as const;
+
+const DEMO_RELOAD_MIN_MS = 1000 * 60 * 12;
+const DEMO_RELOAD_MAX_MS = 1000 * 60 * 22;
 
 const randomMs = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -51,24 +58,30 @@ function pickDifferent<T>(arr: readonly T[], current: T): T {
   return filtered[Math.floor(Math.random() * filtered.length)];
 }
 
-function pickRandom<T>(arr: readonly T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
+function getNextScene(scene: SceneId): SceneId {
+  const index = SCENES.indexOf(scene);
+  return SCENES[(index + 1) % SCENES.length];
 }
 
 export default function TvInfoScreen() {
   const [activeScene, setActiveScene] = useState<SceneId>("hero");
-  const [activeNote, setActiveNote] = useState<string>(TV_NOTES[0]);
-  const [activePriceCategoryId, setActivePriceCategoryId] = useState<string>(prices[0]?.id ?? "");
+  const [activeTicker, setActiveTicker] = useState<string>(TV_NOTES[0]);
+  const [activePriceIndex, setActivePriceIndex] = useState(0);
   const [isBooting, setIsBooting] = useState(true);
   const [bootCycle, setBootCycle] = useState(0);
   const [timeLabel, setTimeLabel] = useState("--:--:--");
 
-  const priceCategoryIds = useMemo(() => prices.map((category) => category.id), []);
-
-  const activeCategory = useMemo(
-    () => prices.find((category) => category.id === activePriceCategoryId) ?? prices[0],
-    [activePriceCategoryId]
+  const orderedPriceCategories = useMemo(
+    () =>
+      PRICE_CATEGORY_ORDER.map((id) => prices.find((category) => category.id === id)).filter(
+        (category): category is (typeof prices)[number] => Boolean(category)
+      ),
+    []
   );
+
+  const activeCategory =
+    orderedPriceCategories[activePriceIndex % Math.max(orderedPriceCategories.length, 1)] ??
+    orderedPriceCategories[0];
 
   useEffect(() => {
     const updateTime = () => setTimeLabel(new Date().toLocaleTimeString("ru-RU"));
@@ -80,37 +93,36 @@ export default function TvInfoScreen() {
   useEffect(() => {
     if (isBooting) return;
     const timer = window.setInterval(() => {
-      setActiveNote((prev) => pickDifferent(TV_NOTES, prev));
-    }, 6000);
+      setActiveTicker((prev) => pickDifferent(TV_NOTES, prev));
+    }, 7000);
     return () => window.clearInterval(timer);
   }, [isBooting]);
 
   useEffect(() => {
     if (isBooting) return;
     const timeout = window.setTimeout(() => {
-      setActiveScene((prev) => pickDifferent(SCENES, prev));
-    }, randomMs(9000, 15000));
+      setActiveScene((prev) => getNextScene(prev));
+    }, randomMs(12000, 18000));
     return () => window.clearTimeout(timeout);
   }, [activeScene, isBooting]);
 
   useEffect(() => {
-    if (isBooting || activeScene !== "prices") return;
+    if (isBooting || activeScene !== "prices" || orderedPriceCategories.length <= 1) return;
     const interval = window.setInterval(() => {
-      setActivePriceCategoryId((prev) => pickDifferent(priceCategoryIds, prev));
-    }, 5000);
+      setActivePriceIndex((prev) => (prev + 1) % orderedPriceCategories.length);
+    }, 6000);
     return () => window.clearInterval(interval);
-  }, [activeScene, isBooting, priceCategoryIds]);
+  }, [activeScene, isBooting, orderedPriceCategories.length]);
 
   useEffect(() => {
     if (isBooting) return;
     const timeout = window.setTimeout(() => {
-      setActiveScene(pickRandom(SCENES));
-      setActivePriceCategoryId(pickRandom(priceCategoryIds));
       setBootCycle((prev) => prev + 1);
       setIsBooting(true);
-    }, randomMs(45000, 90000));
+      setActiveScene("hero");
+    }, randomMs(50000, 90000));
     return () => window.clearTimeout(timeout);
-  }, [isBooting, priceCategoryIds, bootCycle]);
+  }, [isBooting, activeScene]);
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
@@ -121,42 +133,37 @@ export default function TvInfoScreen() {
 
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-black text-white uppercase selection:bg-white selection:text-black">
-      <div className="absolute inset-0 z-0 opacity-45 mix-blend-screen">
+      <div className="absolute inset-0 z-0 opacity-70 mix-blend-screen">
         <GradientBlinds
           className="absolute inset-0"
           dpr={1}
-          gradientColors={["#080808", "#0A3DFF", "#E10600", "#080808"]}
-          angle={-65}
-          noise={0.45}
-          blindCount={32}
-          blindMinWidth={70}
+          gradientColors={["#070707", "#1100ff", "#ff0000", "#070707"]}
+          angle={-75}
+          noise={0.58}
+          blindCount={50}
+          blindMinWidth={50}
           mouseDampening={0}
           mirrorGradient={false}
-          spotlightRadius={0.72}
-          spotlightSoftness={0.85}
-          spotlightOpacity={0.95}
-          distortAmount={0.6}
+          spotlightRadius={0.7}
+          spotlightSoftness={0.7}
+          spotlightOpacity={1}
+          distortAmount={1}
           shineDirection="left"
         />
       </div>
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_45%),radial-gradient(circle_at_80%_70%,rgba(225,6,0,0.22),transparent_50%),linear-gradient(135deg,rgba(0,0,0,0.75),rgba(0,0,0,0.92))]" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_18%,rgba(255,255,255,0.1),transparent_36%),radial-gradient(circle_at_72%_72%,rgba(225,6,0,0.18),transparent_42%),linear-gradient(135deg,rgba(0,0,0,0.18),rgba(0,0,0,0.78))]" />
 
       <div className="relative z-10 flex h-full flex-col">
         <header className="border-b-2 border-white/35 px-8 py-5">
           <div className="mx-auto flex w-full max-w-[1920px] items-center justify-between gap-6">
-            <div className="flex items-center gap-6">
-              <Image
-                src="/logo_white.webp"
-                alt="13x13 Logo"
-                width={220}
-                height={100}
-                className="h-[58px] w-auto mix-blend-lighten"
-                priority
-              />
-              <div className="rounded-none border border-white/45 bg-black/60 px-4 py-2 font-[family-name:var(--font-oswald)] text-xl tracking-[0.18em] text-neutral-300">
-                TV DEMO
-              </div>
-            </div>
+            <Image
+              src="/logo_white.webp"
+              alt="13x13"
+              width={220}
+              height={110}
+              className="block h-[58px] w-auto mix-blend-lighten"
+              priority
+            />
 
             <div className="flex items-center gap-4">
               <div className="rounded-none border border-white/35 bg-black/55 px-4 py-2 font-[family-name:var(--font-jetbrains-mono)] text-sm font-bold tracking-[0.14em] text-neutral-300">
@@ -180,39 +187,67 @@ export default function TvInfoScreen() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -22 }}
                 transition={{ duration: 0.65 }}
-                className="grid h-full grid-cols-12 gap-8"
+                className="grid h-full grid-cols-12 gap-8 items-end"
               >
                 <div className="col-span-8 flex flex-col justify-center">
-                  <div className="mb-6 inline-flex w-fit border border-white bg-red-700 px-5 py-2 font-[family-name:var(--font-oswald)] text-3xl font-black tracking-[0.18em]">
-                    ГЛАВНАЯ СТРАНИЦА
+                  <div className="mb-5 w-fit bg-red-600 px-8 py-3 font-[family-name:var(--font-oswald)] text-4xl font-black tracking-[0.14em] text-white brutal-border border-white shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
+                    МЫ РАБОТАЕМ!
                   </div>
-                  <h1 className="font-[family-name:var(--font-oswald)] text-[6.6rem] leading-[0.82] font-black tracking-tight">
-                    БАРБЕРШОП
-                    <br />
-                    <span className="bg-white px-4 text-black">13X13</span>
-                    <br />
-                    В СОЧИ
-                  </h1>
-                  <p className="mt-8 max-w-5xl font-[family-name:var(--font-jetbrains-mono)] text-2xl font-medium leading-relaxed text-neutral-200 normal-case">
-                    Новый зал с честной ценой и взрослым сервисом. Стрижки и борода без переплаты за декорации.
-                  </p>
-                  <div className="mt-8 flex flex-wrap gap-4">
-                    <span className="border border-white/50 bg-black/70 px-5 py-3 font-[family-name:var(--font-oswald)] text-2xl font-bold tracking-widest text-white">
-                      СТРИЖКА ОТ 400 ₽
-                    </span>
-                    <span className="border border-white/50 bg-black/70 px-5 py-3 font-[family-name:var(--font-oswald)] text-2xl font-bold tracking-widest text-white">
-                      БОРОДА ОТ 400 ₽
-                    </span>
+
+                  <div className="mb-10 flex items-center gap-10">
+                    <div className="flex shrink-0 flex-col items-start">
+                      <Image
+                        src="/logo_white.webp"
+                        alt="13x13"
+                        width={620}
+                        height={620}
+                        className="block h-auto w-[420px] mix-blend-lighten"
+                        priority
+                      />
+                      <div className="mt-3 font-[family-name:var(--font-jetbrains-mono)] text-lg tracking-[0.28em] text-neutral-300">
+                        ЧЕСТНЫЕ ЦЕНЫ
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-3">
+                      <div className="w-fit bg-black px-8 py-4 font-[family-name:var(--font-oswald)] text-[5.5rem] leading-[0.8] font-black tracking-tighter text-white brutal-border border-white shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
+                        БАРБЕРШОП
+                      </div>
+                      <div className="ml-8 w-fit bg-white px-8 py-4 font-[family-name:var(--font-oswald)] text-[5.5rem] leading-[0.8] font-black tracking-tighter text-black brutal-border border-black shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
+                        В СОЧИ
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="max-w-5xl font-[family-name:var(--font-jetbrains-mono)] text-[1.75rem] font-medium leading-relaxed text-white">
+                    <div className="mb-3 inline-block border-b-4 border-white bg-black px-4 py-3 font-bold">
+                      Новый барбершоп в Сочи с честными ценами.
+                    </div>
+                    <div className="mb-4 w-fit border-b-2 border-dotted border-white/50 px-3 py-2 text-neutral-200">
+                      Находимся на Горького 81а, напротив клуба DDX.
+                    </div>
+                    <div className="text-neutral-300">Мы ценим ваше время и бережём бюджет.</div>
                   </div>
                 </div>
 
-                <div className="col-span-4 flex items-center">
-                  <div className="w-full border-2 border-white bg-black/70 p-7 shadow-[10px_10px_0px_0px_rgba(255,255,255,0.25)]">
-                    <h2 className="mb-4 font-[family-name:var(--font-oswald)] text-4xl font-black tracking-tight">НА ЭКРАНЕ СЕЙЧАС</h2>
-                    <div className="space-y-4 font-[family-name:var(--font-jetbrains-mono)] text-xl text-neutral-300">
-                      <p>HERO • ЛОГОТИП • АКЦЕНТЫ ЦЕНЫ</p>
-                      <p>ДАЛЕЕ АВТОМАТИЧЕСКИ: ФИЛОСОФИЯ И ПРАЙС</p>
-                      <p className="text-white">BOOT SCREEN ПЕРЕЗАПУСКАЕТСЯ СЛУЧАЙНО</p>
+                <div className="col-span-4 flex flex-col gap-6">
+                  <div className="bg-black/90 p-8 brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+                    <div className="font-[family-name:var(--font-oswald)] text-[3.5rem] leading-[0.88] font-black tracking-tight text-white">
+                      СТРИЖКА ОТ 400 РУБЛЕЙ
+                    </div>
+                    <div className="mt-3 font-[family-name:var(--font-oswald)] text-[3.5rem] leading-[0.88] font-black tracking-tight text-white">
+                      БОРОДА ОТ 500 РУБЛЕЙ
+                    </div>
+                  </div>
+
+                  <div className="bg-black/90 p-6 brutal-border border-white shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
+                    <div className="font-[family-name:var(--font-oswald)] text-2xl font-black tracking-[0.14em] text-neutral-400">
+                      ЛОКАЦИЯ
+                    </div>
+                    <div className="mt-4 font-[family-name:var(--font-oswald)] text-4xl font-black leading-tight text-white">
+                      ГОРЬКОГО, 81А
+                      <br />
+                      НАПРОТИВ DDX
                     </div>
                   </div>
                 </div>
@@ -228,123 +263,142 @@ export default function TvInfoScreen() {
                 transition={{ duration: 0.65 }}
                 className="flex h-full flex-col"
               >
-                <div className="mb-8 inline-flex w-fit border border-white bg-black/70 px-5 py-2 font-[family-name:var(--font-oswald)] text-3xl font-black tracking-[0.18em]">
-                  ФИЛОСОФИЯ БРЕНДА
+                <div className="mb-8 font-[family-name:var(--font-oswald)] text-[5.5rem] leading-none font-black tracking-tighter text-white">
+                  ФИЛОСОФИЯ <span className="block text-red-600">БРЕНДА</span>
                 </div>
+
+                <div className="mb-8 grid grid-cols-2 gap-12 font-[family-name:var(--font-jetbrains-mono)] text-[1.4rem] leading-tight">
+                  <div className="space-y-6 font-bold text-white">
+                    <p>Наш клиент — человек, который понимает ценность денег. Он не ищет самое дешёвое, но и не готов переплачивать за имя, тренды и маркетинг.</p>
+                    <p className="text-red-500">13x13 — это барбершоп для тех, кто устал платить 5000 рублей за стрижку, понимая, что половина этой суммы — это бренд, интерьер и навязанные «бонусы».</p>
+                  </div>
+                  <div className="space-y-6 text-neutral-300">
+                    <p>Он знает, что высокая цена не всегда равна высокому качеству. И выбирает осознанно. Мы убрали всё лишнее и оставили главное.</p>
+                    <p>Он не пойдёт в дешёвую парикмахерскую. Но и не видит смысла в завышенных ценах. Для него оптимум — это разумная стоимость и стабильное качество.</p>
+                    <p className="bg-red-600 p-4 font-bold text-white brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+                      13X13 — ЭТО ПРО ОСОЗНАННЫЙ ВЫБОР. ПРО СТИЛЬ БЕЗ ПЕРЕПЛАТЫ. ПРО СЕРВИС, КОТОРЫЙ СТОИТ СВОИХ ДЕНЕГ.
+                    </p>
+                  </div>
+                </div>
+
                 <div className="grid flex-1 grid-cols-3 gap-6">
-                  {PHILOSOPHY_POINTS.map((point) => (
-                    <div
-                      key={point.title}
-                      className="flex h-full flex-col border-2 border-white/40 bg-black/70 p-8"
-                    >
-                      <div className="mb-6 text-red-500">
-                        {point.icon === "choice" && <Scissors className="h-14 w-14" strokeWidth={1.8} />}
-                        {point.icon === "price" && <ShieldAlert className="h-14 w-14" strokeWidth={1.8} />}
-                        {point.icon === "quality" && <Clock3 className="h-14 w-14" strokeWidth={1.8} />}
+                  {PHILOSOPHY_CARDS.map((card) => {
+                    const Icon = card.icon;
+
+                    return (
+                      <div
+                        key={card.title}
+                        className="flex h-full flex-col bg-black p-8 text-white brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+                      >
+                        <Icon className="mb-6 h-14 w-14 text-white" strokeWidth={1.6} />
+                        <h3 className="font-[family-name:var(--font-oswald)] text-[2.2rem] leading-[0.95] font-black tracking-tight">
+                          {card.title}
+                        </h3>
+                        <p className="mt-6 font-[family-name:var(--font-jetbrains-mono)] text-[1.2rem] leading-relaxed text-neutral-300 normal-case">
+                          {card.desc}
+                        </p>
                       </div>
-                      <h3 className="font-[family-name:var(--font-oswald)] text-5xl font-black leading-[0.95] tracking-tight text-white">
-                        {point.title}
-                      </h3>
-                      <p className="mt-6 font-[family-name:var(--font-jetbrains-mono)] text-2xl leading-relaxed text-neutral-300 normal-case">
-                        {point.text}
-                      </p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </motion.div>
             )}
 
             {activeScene === "prices" && activeCategory && (
               <motion.div
-                key="prices"
+                key={`prices-${activeCategory.id}`}
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -22 }}
                 transition={{ duration: 0.65 }}
-                className="grid h-full grid-cols-12 gap-7"
+                className="flex h-full flex-col"
               >
-                <aside className="col-span-4 border-2 border-white/45 bg-black/70 p-5">
-                  <div className="mb-5 font-[family-name:var(--font-oswald)] text-4xl font-black tracking-tight text-white">
-                    МЕНЮ ЦЕН 16:9
+                <div className="mb-6 flex items-end justify-between gap-6">
+                  <div>
+                    <div className="font-[family-name:var(--font-oswald)] text-[5.2rem] leading-none font-black tracking-tighter text-white">
+                      ПРАЙС
+                    </div>
+                    <div className="mt-2 font-[family-name:var(--font-jetbrains-mono)] text-xl text-neutral-300 normal-case">
+                      Точный расчет стоимости перед началом. Вы платите ровно ту сумму, что указана здесь.
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-3">
-                    {prices.map((category) => (
-                      <button
-                        key={category.id}
-                        type="button"
-                        onClick={() => setActivePriceCategoryId(category.id)}
-                        className={`border px-4 py-4 text-left font-[family-name:var(--font-oswald)] text-[1.55rem] font-black tracking-wide transition-colors ${
-                          category.id === activeCategory.id
-                            ? "border-white bg-white text-black"
-                            : "border-white/35 bg-black/50 text-white hover:border-white"
-                        }`}
-                      >
-                        {category.category}
-                      </button>
-                    ))}
+                  <div className="font-[family-name:var(--font-oswald)] text-xl tracking-[0.18em] text-neutral-500">
+                    КАТЕГОРИИ ИДУТ ПО КРУГУ
                   </div>
-                </aside>
+                </div>
 
-                <div className="col-span-8 flex flex-col border-2 border-white/45 bg-black/70 p-6">
-                  <div className="mb-5 flex items-center justify-between">
-                    <h2 className="font-[family-name:var(--font-oswald)] text-5xl font-black leading-none tracking-tight text-white">
-                      {activeCategory.category}
-                    </h2>
-                    <span className="border border-white/35 bg-black/60 px-3 py-2 font-[family-name:var(--font-jetbrains-mono)] text-sm tracking-[0.16em] text-neutral-300">
-                      АВТОПЕРЕКЛЮЧЕНИЕ: 5С
-                    </span>
-                  </div>
+                <div className="mb-6 flex gap-4">
+                  {orderedPriceCategories.map((category, index) => (
+                    <div
+                      key={category.id}
+                      className={`px-5 py-3 font-[family-name:var(--font-oswald)] text-2xl font-black tracking-wide brutal-border ${
+                        index === activePriceIndex
+                          ? "border-white bg-white text-black"
+                          : "border-white/35 bg-black/60 text-neutral-400"
+                      }`}
+                    >
+                      {category.category}
+                    </div>
+                  ))}
+                </div>
 
-                  <div className="grid flex-1 grid-cols-2 gap-4 overflow-hidden">
-                    {activeCategory.items.map((item) => (
-                      <div
-                        key={item.id}
-                        className="flex flex-col justify-between border border-white/25 bg-black/45 p-4"
-                      >
-                        <div>
-                          <h3 className="font-[family-name:var(--font-oswald)] text-[1.95rem] font-black leading-tight tracking-tight text-white">
-                            {item.name}
-                          </h3>
-                          {item.desc && (
-                            <p className="mt-2 font-[family-name:var(--font-jetbrains-mono)] text-base leading-snug text-neutral-400 normal-case">
-                              {item.desc}
-                            </p>
-                          )}
+                <div className="mb-6 border-b-[6px] border-white pb-4 font-[family-name:var(--font-oswald)] text-[4.25rem] leading-none font-black tracking-tighter text-white">
+                  {activeCategory.category}
+                </div>
+
+                <div className="grid flex-1 grid-cols-2 gap-5">
+                  {activeCategory.items.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex flex-col justify-between bg-black/88 p-6 brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+                    >
+                      <div>
+                        <div className="font-[family-name:var(--font-oswald)] text-[2.35rem] leading-tight font-black tracking-tight text-white">
+                          {item.name}
                         </div>
-                        <div className="mt-4 inline-flex w-fit border border-white bg-white px-3 py-1 font-[family-name:var(--font-oswald)] text-3xl font-black tracking-wide text-black">
-                          {item.price}
-                        </div>
+                        {item.desc && (
+                          <div className="mt-3 font-[family-name:var(--font-jetbrains-mono)] text-lg leading-relaxed text-neutral-300 normal-case">
+                            {item.desc}
+                          </div>
+                        )}
                       </div>
-                    ))}
-                  </div>
+                      <div className="mt-6 inline-flex w-fit bg-white px-4 py-2 font-[family-name:var(--font-oswald)] text-[2.2rem] font-black tracking-wide text-black brutal-border border-black">
+                        {item.price}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </section>
 
-        <footer className="absolute bottom-0 left-0 right-0 border-t-2 border-white/35 bg-black/85 py-3">
-          <div className="flex overflow-hidden whitespace-nowrap">
-            <div className="tv-marquee flex shrink-0 items-center gap-10 px-6 font-[family-name:var(--font-oswald)] text-2xl font-black tracking-[0.16em] text-neutral-200">
-              <span>{activeNote}</span>
-              <span className="h-2 w-2 bg-white" />
-              <span>ТЕЛЕГРАМ: @BARBER_13X13</span>
-              <span className="h-2 w-2 bg-white" />
-              <span>СОЧИ • ГОРЬКОГО 81А • +7 900 287-13-13</span>
-              <span className="h-2 w-2 bg-white" />
-              <span>13X13 • TV DEMO MODE</span>
+        <footer className="absolute bottom-0 left-0 right-0 overflow-hidden border-t-2 border-white/35 bg-white py-3 text-black">
+          <div className="flex whitespace-nowrap">
+            <div className="tv-marquee flex shrink-0 items-center gap-8 px-6 font-[family-name:var(--font-oswald)] text-2xl font-black tracking-[0.14em]">
+              <span>{activeTicker}</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>13X13</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>МУЖСКОЙ КЛУБ</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>ДОСТУПНАЯ ЦЕНА</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>@BARBER_13X13</span>
             </div>
             <div
               aria-hidden="true"
-              className="tv-marquee flex shrink-0 items-center gap-10 px-6 font-[family-name:var(--font-oswald)] text-2xl font-black tracking-[0.16em] text-neutral-200"
+              className="tv-marquee flex shrink-0 items-center gap-8 px-6 font-[family-name:var(--font-oswald)] text-2xl font-black tracking-[0.14em]"
             >
-              <span>{activeNote}</span>
-              <span className="h-2 w-2 bg-white" />
-              <span>ТЕЛЕГРАМ: @BARBER_13X13</span>
-              <span className="h-2 w-2 bg-white" />
-              <span>СОЧИ • ГОРЬКОГО 81А • +7 900 287-13-13</span>
-              <span className="h-2 w-2 bg-white" />
-              <span>13X13 • TV DEMO MODE</span>
+              <span>{activeTicker}</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>13X13</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>МУЖСКОЙ КЛУБ</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>ДОСТУПНАЯ ЦЕНА</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>@BARBER_13X13</span>
             </div>
           </div>
         </footer>
@@ -356,8 +410,7 @@ export default function TvInfoScreen() {
             key={`boot-${bootCycle}`}
             onComplete={() => {
               setIsBooting(false);
-              setActiveScene(pickRandom(SCENES));
-              setActivePriceCategoryId(pickRandom(priceCategoryIds));
+              setActiveScene("hero");
             }}
           />
         )}
@@ -372,7 +425,7 @@ export default function TvInfoScreen() {
             }
 
             .tv-marquee {
-              animation: tvMarquee 22s linear infinite;
+              animation: tvMarquee 24s linear infinite;
             }
           `,
         }}
