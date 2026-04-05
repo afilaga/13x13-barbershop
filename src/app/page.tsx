@@ -135,7 +135,7 @@ export default function Home() {
             <a href="tel:+79002871313" className="hover:line-through transition-all hover:text-neutral-300 text-neutral-400">
               +7 900 287-13-13
             </a>
-            <a href="https://dikidi.net/#widget=205276" className="bg-white text-black px-4 py-2 hover:-translate-y-0.5 hover:-translate-x-0.5 brutal-border border-white shadow-[4px_4px_0px_0px_#fff] transition-transform ml-2">
+            <a href="https://dikidi.net/#widget=207607" className="bg-white text-black px-4 py-2 hover:-translate-y-0.5 hover:-translate-x-0.5 brutal-border border-white shadow-[4px_4px_0px_0px_#fff] transition-transform ml-2">
               ЗАПИСЬ
             </a>
           </div>
@@ -168,7 +168,7 @@ export default function Home() {
                   +7 900 287-13-13
                 </a>
                 <div className="mt-4">
-                  <a href="https://dikidi.net/#widget=205276" onClick={() => setIsMenuOpen(false)} className="inline-block bg-white text-black px-6 py-3 brutal-border border-white shadow-[6px_6px_0px_0px_#fff]">
+                  <a href="https://dikidi.net/#widget=207607" onClick={() => setIsMenuOpen(false)} className="inline-block bg-white text-black px-6 py-3 brutal-border border-white shadow-[6px_6px_0px_0px_#fff]">
                     ЗАПИСЬ ОНЛАЙН
                   </a>
                 </div>
@@ -261,7 +261,7 @@ export default function Home() {
                 <div className="absolute -inset-1 rounded-full bg-red-600 opacity-20 blur-md pointer-events-none z-0" />
                 <div className="absolute inset-px rounded-full border border-red-600/30 pointer-events-none z-10" />
               </a>
-              <a href="https://dikidi.net/#widget=205276" className="relative group w-[60px] h-[60px] rounded-full bg-[#111] border border-neutral-800 flex items-center justify-center font-[family-name:var(--font-oswald)] font-bold text-[13px] uppercase text-blue-500 active:scale-95 transition-transform overflow-visible">
+              <a href="https://dikidi.net/#widget=207607" className="relative group w-[60px] h-[60px] rounded-full bg-[#111] border border-neutral-800 flex items-center justify-center font-[family-name:var(--font-oswald)] font-bold text-[13px] uppercase text-blue-500 active:scale-95 transition-transform overflow-visible">
                 <span className="relative z-10 flex text-center leading-none">ЗАПИСЬ</span>
                 <div className="absolute -inset-1 rounded-full bg-blue-600 opacity-20 blur-md pointer-events-none z-0" />
                 <div className="absolute inset-px rounded-full border border-blue-600/30 pointer-events-none z-10" />
@@ -291,7 +291,7 @@ export default function Home() {
             className="lg:col-span-4 flex flex-col gap-6 w-full mt-8 md:mt-0"
           >
             <a
-              href="https://dikidi.net/#widget=205276"
+              href="https://dikidi.net/#widget=207607"
               className="flex items-center justify-between bg-white text-black font-[family-name:var(--font-oswald)] text-3xl sm:text-4xl md:text-5xl font-black py-6 px-6 md:py-8 md:px-8 brutal-border border-white shadow-[8px_8px_0px_0px_#fff] hover:shadow-[12px_12px_0px_0px_#fff] hover:-translate-y-1 hover:-translate-x-1 group w-full cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 transition-all"
               aria-label="Записаться онлайн"
             >
@@ -344,7 +344,7 @@ export default function Home() {
 
         <div className="mt-16 md:mt-32 w-full">
           <a
-            href="https://dikidi.net/#widget=205276"
+            href="https://dikidi.net/#widget=207607"
             className="group w-full flex flex-row items-center justify-between bg-white text-black p-6 md:p-16 brutal-border border-black brutal-shadow hover:bg-neutral-200 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50"
           >
             <span className="font-[family-name:var(--font-oswald)] text-3xl sm:text-5xl md:text-8xl font-black uppercase tracking-tighter">

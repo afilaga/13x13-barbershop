@@ -52,7 +52,7 @@ export default function DDXLanding() {
                     </Link>
                     <div className="flex gap-4 md:gap-8 items-center font-[family-name:var(--font-oswald)] font-bold text-lg md:text-xl uppercase">
                         <Link href="/" className="hover:line-through">На главную</Link>
-                        <a href="https://dikidi.net/#widget=205276" className="bg-white text-black px-4 py-2 brutal-border border-white shadow-[4px_4px_0px_0px_#fff]">
+                        <a href="https://dikidi.net/#widget=207607" className="bg-white text-black px-4 py-2 brutal-border border-white shadow-[4px_4px_0px_0px_#fff]">
                             ЗАПИСЬ
                         </a>
                     </div>
@@ -94,7 +94,7 @@ export default function DDXLanding() {
                             <div className="bg-white text-black p-8 brutal-border border-black shadow-[10px_10px_0px_0px_#fff]">
                                 <h2 className="font-[family-name:var(--font-oswald)] text-4xl font-black mb-4 tracking-tighter uppercase">ПЕРВАЯ СТРИЖКА</h2>
                                 <p className="font-bold text-2xl mb-6 uppercase">ПОЛУЧИ СПЕЦЦЕНУ ПРИ ПЕРВОМ ПОСЕЩЕНИИ!</p>
-                                <a href="https://dikidi.net/#widget=205276" className="flex items-center justify-between bg-black text-white p-6 font-black uppercase text-xl hover:bg-neutral-800 transition-colors">
+                                <a href="https://dikidi.net/#widget=207607" className="flex items-center justify-between bg-black text-white p-6 font-black uppercase text-xl hover:bg-neutral-800 transition-colors">
                                     Забронировать <ArrowUpRight />
                                 </a>
                             </div>

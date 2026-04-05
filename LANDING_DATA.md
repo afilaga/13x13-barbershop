@@ -11,14 +11,14 @@
 
 В код сайта необходимо вставить данный скрипт
 
-<script type="text/javascript" src="https://dikidi.net/assets/js/widget_record/widget2.min.js?v=1758698230"></script>
+<script type="text/javascript" src="https://dikidi.net/assets/js/widget_record/widget2.min.js?v=1773811740"></script>
 2
 Нажмите на кнопку "Сформировать код" - и в поле ниже отобразится код вашей кнопки для онлайн-записи.
 
 3
 Скопируйте код формы онлайн-записи в поле ниже, и разместите его под кнопку "Записаться" в нужных местах вашего сайта
 
-<a href="https://dikidi.net/#widget=205276">Записаться</a>
+<a href="https://dikidi.net/#widget=207607">Записаться</a>
 
 ## 2. Позиционирование и УТП
 *Интегрировать в блоки лендинга*

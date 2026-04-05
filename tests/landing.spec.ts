@@ -7,7 +7,7 @@ test('has correct title and brand name', async ({ page }) => {
 
 test('has dikidi button in hero section', async ({ page }) => {
     await page.goto('/');
-    const heroButton = page.locator('a[href="https://dikidi.net/#widget=205276"]').first();
+    const heroButton = page.locator('a[href="https://dikidi.net/#widget=207607"]').first();
     await expect(heroButton).toBeVisible();
     await expect(heroButton).toContainText('ЗАПИСАТЬСЯ');
 });

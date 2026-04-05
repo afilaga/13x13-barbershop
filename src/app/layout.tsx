@@ -121,7 +121,7 @@ const localBusinessJsonLd = {
   "currenciesAccepted": "RUB",
   "paymentAccepted": "Cash, Credit Card",
   "sameAs": [
-    "https://dikidi.net/#widget=205276",
+    "https://dikidi.net/#widget=207607",
     "https://yandex.ru/maps/org/13x13/92378568380/"
   ],
   "hasOfferCatalog": {
@@ -267,7 +267,7 @@ export default function RootLayout({
         {/* /Yandex.Metrika counter */}
 
         {children}
-        <Script src="https://dikidi.net/assets/js/widget_record/widget2.min.js?v=1758698230" strategy="beforeInteractive" />
+        <Script src="https://dikidi.net/assets/js/widget_record/widget2.min.js?v=1773811740" strategy="lazyOnload" />
       </body>
     </html>
   );
