@@ -10,15 +10,18 @@ import { prices } from "@/data/prices";
 
 const GradientBlinds = dynamic(() => import("@/components/GradientBlinds"), { ssr: false });
 
-const SCENES = ["hero", "philosophy", "prices"] as const;
+const SCENES = ["logo", "hero", "philosophy", "prices", "extras", "lounge"] as const;
 type SceneId = (typeof SCENES)[number];
 
 const TV_NOTES = [
   "СОЧИ. ГОРЬКОГО, 81А.",
   "ЧЕСТНЫЕ ЦЕНЫ. БЕЗ ПЕРЕПЛАТ.",
   "СТРИЖКА ОТ 400 РУБЛЕЙ.",
-  "БОРОДА ОТ 500 РУБЛЕЙ.",
+  "НЕ ЗАБУДЬТЕ СПРОСИТЬ ПРО ДОП УСЛУГИ.",
+  "ПАТЧИ, ВОСК, ПИЛИНГ, БРОВИ — ВСЁ ЕСТЬ.",
   "13X13. МУЖСКОЙ КЛУБ.",
+  "SEGA, NINTENDO, APPLE II И ТАМАГОЧИ В ЗОНЕ ОЖИДАНИЯ.",
+  "ХОТИТЕ КОФЕ? СПРАВА КОФЕЙНЫЙ АППАРАТ.",
 ];
 
 const PHILOSOPHY_CARDS = [
@@ -48,6 +51,7 @@ const PRICE_CATEGORY_ORDER = [
 
 const DEMO_RELOAD_MIN_MS = 1000 * 60 * 12;
 const DEMO_RELOAD_MAX_MS = 1000 * 60 * 22;
+const PRICE_ROTATION_MS = 6000;
 
 const randomMs = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -61,6 +65,13 @@ function pickDifferent<T>(arr: readonly T[], current: T): T {
 function getNextScene(scene: SceneId): SceneId {
   const index = SCENES.indexOf(scene);
   return SCENES[(index + 1) % SCENES.length];
+}
+
+function getSceneDuration(scene: SceneId): number {
+  if (scene === "logo") return 10000;
+  if (scene === "prices") return PRICE_ROTATION_MS * PRICE_CATEGORY_ORDER.length + 2000;
+  if (scene === "extras" || scene === "lounge") return 10000;
+  return 14000;
 }
 
 export default function TvInfoScreen() {
@@ -82,6 +93,7 @@ export default function TvInfoScreen() {
   const activeCategory =
     orderedPriceCategories[activePriceIndex % Math.max(orderedPriceCategories.length, 1)] ??
     orderedPriceCategories[0];
+  const isDenseCategory = (activeCategory?.items.length ?? 0) > 8;
 
   useEffect(() => {
     const updateTime = () => setTimeLabel(new Date().toLocaleTimeString("ru-RU"));
@@ -101,8 +113,14 @@ export default function TvInfoScreen() {
   useEffect(() => {
     if (isBooting) return;
     const timeout = window.setTimeout(() => {
-      setActiveScene((prev) => getNextScene(prev));
-    }, randomMs(12000, 18000));
+      setActiveScene((prev) => {
+        const nextScene = getNextScene(prev);
+        if (nextScene === "prices") {
+          setActivePriceIndex(0);
+        }
+        return nextScene;
+      });
+    }, getSceneDuration(activeScene));
     return () => window.clearTimeout(timeout);
   }, [activeScene, isBooting]);
 
@@ -110,7 +128,7 @@ export default function TvInfoScreen() {
     if (isBooting || activeScene !== "prices" || orderedPriceCategories.length <= 1) return;
     const interval = window.setInterval(() => {
       setActivePriceIndex((prev) => (prev + 1) % orderedPriceCategories.length);
-    }, 6000);
+    }, PRICE_ROTATION_MS);
     return () => window.clearInterval(interval);
   }, [activeScene, isBooting, orderedPriceCategories.length]);
 
@@ -119,8 +137,8 @@ export default function TvInfoScreen() {
     const timeout = window.setTimeout(() => {
       setBootCycle((prev) => prev + 1);
       setIsBooting(true);
-      setActiveScene("hero");
-    }, randomMs(50000, 90000));
+      setActiveScene("logo");
+    }, randomMs(130000, 190000));
     return () => window.clearTimeout(timeout);
   }, [isBooting, activeScene]);
 
@@ -180,6 +198,26 @@ export default function TvInfoScreen() {
 
         <section className="relative mx-auto flex w-full max-w-[1920px] flex-1 flex-col px-8 pb-24 pt-8">
           <AnimatePresence mode="wait">
+            {activeScene === "logo" && (
+              <motion.div
+                key="logo"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.7 }}
+                className="flex h-full items-center justify-center"
+              >
+                <Image
+                  src="/logo_white.webp"
+                  alt="13x13"
+                  width={960}
+                  height={960}
+                  className="block h-auto w-[560px] mix-blend-lighten"
+                  priority
+                />
+              </motion.div>
+            )}
+
             {activeScene === "hero" && (
               <motion.div
                 key="hero"
@@ -236,7 +274,7 @@ export default function TvInfoScreen() {
                       СТРИЖКА ОТ 400 РУБЛЕЙ
                     </div>
                     <div className="mt-3 font-[family-name:var(--font-oswald)] text-[3.5rem] leading-[0.88] font-black tracking-tight text-white">
-                      БОРОДА ОТ 500 РУБЛЕЙ
+                      БОРОДА ОТ 400 РУБЛЕЙ
                     </div>
                   </div>
 
@@ -304,6 +342,110 @@ export default function TvInfoScreen() {
               </motion.div>
             )}
 
+            {activeScene === "extras" && (
+              <motion.div
+                key="extras"
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -22 }}
+                transition={{ duration: 0.65 }}
+                className="grid h-full grid-cols-12 gap-8"
+              >
+                <div className="col-span-7 flex flex-col justify-center">
+                  <div className="mb-6 font-[family-name:var(--font-oswald)] text-[5.2rem] leading-none font-black tracking-tighter text-white">
+                    НЕ ЗАБУДЬТЕ
+                    <br />
+                    ДОБАВИТЬ <span className="text-red-600">ДОПЫ</span>
+                  </div>
+                  <div className="max-w-4xl font-[family-name:var(--font-jetbrains-mono)] text-[1.55rem] leading-relaxed text-neutral-200 normal-case">
+                    Патчи, воск, пилинг, брови, уходы и hair tattoo удобно добавить прямо к визиту. Если хотите усилить результат, просто скажите мастеру до начала стрижки.
+                  </div>
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    {[
+                      "ПАТЧИ • 200 ₽",
+                      "ПИЛИНГ • 200 ₽",
+                      "ВОСК 1 ЗОНА • 200 ₽",
+                      "БРОВИ • 100 ₽",
+                      "ВОСК ПОД КЛЮЧ • 500 ₽",
+                      "УХОД НА МАКСИМАЛКАХ • 700 ₽",
+                    ].map((text) => (
+                      <div
+                        key={text}
+                        className="bg-black/90 px-5 py-4 font-[family-name:var(--font-oswald)] text-2xl font-black tracking-wide text-white brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+                      >
+                        {text}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="col-span-5 flex flex-col gap-5 justify-center">
+                  <div className="bg-white p-6 text-black brutal-border border-black shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
+                    <div className="font-[family-name:var(--font-oswald)] text-[2.6rem] leading-[0.9] font-black tracking-tight">
+                      СКАЖИТЕ МАСТЕРУ:
+                    </div>
+                    <div className="mt-4 font-[family-name:var(--font-jetbrains-mono)] text-xl leading-relaxed normal-case">
+                      «Добавьте патчи», «сделайте воск», «давайте пилинг» или «оформим брови».
+                    </div>
+                  </div>
+                  <div className="bg-black/90 p-6 text-white brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+                    <div className="font-[family-name:var(--font-oswald)] text-[2.6rem] leading-[0.9] font-black tracking-tight">
+                      МЕЛОЧИ РЕШАЮТ
+                    </div>
+                    <div className="mt-4 font-[family-name:var(--font-jetbrains-mono)] text-xl leading-relaxed text-neutral-300 normal-case">
+                      Именно допуслуги часто дают тот самый аккуратный финальный вид после стрижки или бороды.
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeScene === "lounge" && (
+              <motion.div
+                key="lounge"
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -22 }}
+                transition={{ duration: 0.65 }}
+                className="grid h-full grid-cols-12 gap-8"
+              >
+                <div className="col-span-8 flex flex-col justify-center">
+                  <div className="mb-6 font-[family-name:var(--font-oswald)] text-[5.2rem] leading-none font-black tracking-tighter text-white">
+                    ЗОНА ОЖИДАНИЯ
+                    <br />
+                    С <span className="text-red-600">ХАРАКТЕРОМ</span>
+                  </div>
+                  <div className="max-w-5xl font-[family-name:var(--font-jetbrains-mono)] text-[1.5rem] leading-relaxed text-neutral-200 normal-case">
+                    У нас есть ретро игровой аппарат с играми на SEGA, Nintendo и даже Apple II. Плюс тамагочи, чтобы ожидание не было скучным.
+                  </div>
+                </div>
+
+                <div className="col-span-4 flex flex-col gap-5 justify-center">
+                  <div className="bg-black/90 p-6 text-white brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+                    <div className="font-[family-name:var(--font-oswald)] text-[2.4rem] leading-[0.95] font-black">
+                      SEGA
+                      <br />
+                      NINTENDO
+                      <br />
+                      APPLE II
+                    </div>
+                    <div className="mt-4 font-[family-name:var(--font-jetbrains-mono)] text-lg leading-relaxed text-neutral-300 normal-case">
+                      Можно залипнуть в классику, пока ждёте своё время или друга.
+                    </div>
+                  </div>
+
+                  <div className="bg-white p-6 text-black brutal-border border-black shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
+                    <div className="font-[family-name:var(--font-oswald)] text-[2.4rem] leading-[0.95] font-black">
+                      ХОТИТЕ КОФЕ?
+                    </div>
+                    <div className="mt-4 font-[family-name:var(--font-jetbrains-mono)] text-lg leading-relaxed normal-case">
+                      Справа кофейный аппарат. Берите кофе и устраивайтесь поудобнее.
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
             {activeScene === "prices" && activeCategory && (
               <motion.div
                 key={`prices-${activeCategory.id}`}
@@ -331,7 +473,7 @@ export default function TvInfoScreen() {
                   {orderedPriceCategories.map((category, index) => (
                     <div
                       key={category.id}
-                      className={`px-5 py-3 font-[family-name:var(--font-oswald)] text-2xl font-black tracking-wide brutal-border ${
+                      className={`px-4 py-[0.65rem] font-[family-name:var(--font-oswald)] text-[1.7rem] font-black tracking-wide brutal-border ${
                         index === activePriceIndex
                           ? "border-white bg-white text-black"
                           : "border-white/35 bg-black/60 text-neutral-400"
@@ -342,27 +484,31 @@ export default function TvInfoScreen() {
                   ))}
                 </div>
 
-                <div className="mb-6 border-b-[6px] border-white pb-4 font-[family-name:var(--font-oswald)] text-[4.25rem] leading-none font-black tracking-tighter text-white">
+                <div className="mb-4 border-b-[6px] border-white pb-3 font-[family-name:var(--font-oswald)] text-[4rem] leading-none font-black tracking-tighter text-white">
                   {activeCategory.category}
                 </div>
 
-                <div className="grid flex-1 grid-cols-2 gap-5">
+                <div className="mb-4 font-[family-name:var(--font-jetbrains-mono)] text-lg text-neutral-300 normal-case">
+                  Не забудьте спросить про допуслуги: патчи, воск, пилинг, брови и уходы.
+                </div>
+
+                <div className={`grid flex-1 ${isDenseCategory ? "grid-cols-3 gap-4" : "grid-cols-2 gap-4"}`}>
                   {activeCategory.items.map((item) => (
                     <div
                       key={item.id}
-                      className="flex flex-col justify-between bg-black/88 p-6 brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+                      className="flex flex-col justify-between bg-black/88 p-5 brutal-border border-white shadow-[7px_7px_0px_0px_rgba(255,255,255,1)]"
                     >
                       <div>
-                        <div className="font-[family-name:var(--font-oswald)] text-[2.35rem] leading-tight font-black tracking-tight text-white">
+                        <div className={`font-[family-name:var(--font-oswald)] leading-tight font-black tracking-tight text-white ${isDenseCategory ? "text-[1.75rem]" : "text-[2rem]"}`}>
                           {item.name}
                         </div>
                         {item.desc && (
-                          <div className="mt-3 font-[family-name:var(--font-jetbrains-mono)] text-lg leading-relaxed text-neutral-300 normal-case">
+                          <div className={`mt-2 font-[family-name:var(--font-jetbrains-mono)] leading-relaxed text-neutral-300 normal-case ${isDenseCategory ? "text-[0.95rem]" : "text-base"}`}>
                             {item.desc}
                           </div>
                         )}
                       </div>
-                      <div className="mt-6 inline-flex w-fit bg-white px-4 py-2 font-[family-name:var(--font-oswald)] text-[2.2rem] font-black tracking-wide text-black brutal-border border-black">
+                      <div className={`mt-5 inline-flex w-fit bg-white px-3 py-[0.45rem] font-[family-name:var(--font-oswald)] font-black tracking-wide text-black brutal-border border-black ${isDenseCategory ? "text-[1.85rem]" : "text-[1.9rem]"}`}>
                         {item.price}
                       </div>
                     </div>
@@ -385,6 +531,8 @@ export default function TvInfoScreen() {
               <span>ДОСТУПНАЯ ЦЕНА</span>
               <span className="h-2 w-2 bg-black" />
               <span>@BARBER_13X13</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>НЕ ЗАБУДЬТЕ ПРО ДОПЫ</span>
             </div>
             <div
               aria-hidden="true"
@@ -399,6 +547,8 @@ export default function TvInfoScreen() {
               <span>ДОСТУПНАЯ ЦЕНА</span>
               <span className="h-2 w-2 bg-black" />
               <span>@BARBER_13X13</span>
+              <span className="h-2 w-2 bg-black" />
+              <span>НЕ ЗАБУДЬТЕ ПРО ДОПЫ</span>
             </div>
           </div>
         </footer>
@@ -410,7 +560,7 @@ export default function TvInfoScreen() {
             key={`boot-${bootCycle}`}
             onComplete={() => {
               setIsBooting(false);
-              setActiveScene("hero");
+              setActiveScene("logo");
             }}
           />
         )}
