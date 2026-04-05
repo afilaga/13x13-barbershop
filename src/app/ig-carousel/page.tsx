@@ -71,32 +71,37 @@ export default function IGCarouselGenerator() {
     : { width: 1080, height: 1920 };
 
   return (
-    <div className="min-h-screen bg-neutral-900 overflow-x-auto overflow-y-auto p-12 flex flex-col items-start" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-      {/* КОНТРОЛЬНАЯ ПАНЕЛЬ */}
-      <div className="fixed top-6 left-6 bg-black text-white p-6 border border-white/20 z-50 rounded-none shadow-[20px_20px_0_0_rgba(0,0,0,0.5)] max-w-sm font-[family-name:var(--font-jetbrains-mono)] text-sm">
-        <h3 className="font-black text-red-600 mb-2 uppercase text-xl italic tracking-tighter leading-none underline">13x13 CONTENT LAB</h3>
-        <p className="text-neutral-500 mb-6 text-xs uppercase font-bold tracking-widest leading-tight">Интерфейс для генерации визуала</p>
+    <div className="min-h-screen bg-neutral-900 overflow-x-auto overflow-y-auto flex flex-col items-start" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+      {/* КОНТРОЛЬНАЯ ПАНЕЛЬ - SIDEBAR LOOK */}
+      <div className="fixed top-0 left-0 bottom-0 w-[380px] bg-black text-white p-8 border-r border-white/10 z-50 shadow-[50px_0_100px_rgba(0,0,0,0.5)] font-[family-name:var(--font-jetbrains-mono)] text-sm">
+        <div className="mb-10">
+           <h3 className="font-black text-red-600 uppercase text-2xl italic tracking-tighter leading-none mb-1">13x13 CONTENT LAB</h3>
+           <p className="text-neutral-500 text-[10px] uppercase font-bold tracking-widest leading-tight">Инструментарий генерации визуала</p>
+        </div>
         
-        <div className="space-y-6">
-          <div className="flex bg-neutral-900 p-1 border border-neutral-800">
-             <button 
-                onClick={() => setFormat("post")}
-                className={`flex-1 py-3 px-4 font-black transition-all text-xs uppercase tracking-widest ${format === "post" ? "bg-white text-black shadow-lg" : "text-neutral-500 hover:text-white"}`}
-             >
-                POST
-             </button>
-             <button 
-                onClick={() => setFormat("story")}
-                className={`flex-1 py-3 px-4 font-black transition-all text-xs uppercase tracking-widest ${format === "story" ? "bg-white text-black shadow-lg" : "text-neutral-500 hover:text-white"}`}
-             >
-                STORY
-             </button>
+        <div className="space-y-10">
+          <div className="space-y-4">
+             <label className="text-[10px] uppercase font-black text-neutral-400 tracking-tighter">Формат контента</label>
+             <div className="flex bg-neutral-900 p-1 border border-neutral-800">
+                <button 
+                    onClick={() => setFormat("post")}
+                    className={`flex-1 py-3 px-4 font-black transition-all text-xs uppercase tracking-widest ${format === "post" ? "bg-white text-black shadow-lg" : "text-neutral-500 hover:text-white"}`}
+                >
+                    POST (4:5)
+                </button>
+                <button 
+                    onClick={() => setFormat("story")}
+                    className={`flex-1 py-3 px-4 font-black transition-all text-xs uppercase tracking-widest ${format === "story" ? "bg-white text-black shadow-lg" : "text-neutral-500 hover:text-white"}`}
+                >
+                    STORY (9:16)
+                </button>
+             </div>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex justify-between text-[10px] uppercase font-bold text-neutral-400">
-               <span>Preview Scale</span>
-               <span>{Math.round(zoom * 100)}%</span>
+          <div className="space-y-4">
+            <div className="flex justify-between text-[10px] uppercase font-black text-neutral-400 tracking-tighter">
+               <span>Масштаб превью</span>
+               <span className="text-red-500">{Math.round(zoom * 100)}%</span>
             </div>
             <input 
               type="range" 
@@ -109,19 +114,26 @@ export default function IGCarouselGenerator() {
             />
           </div>
           
-          <div className="p-4 bg-red-600/10 border-l-4 border-l-red-600 mt-4 shadow-xl shadow-red-600/5">
-            <p className="text-[11px] text-white mb-2 font-black uppercase tracking-widest leading-none">Как скачать 4K:</p>
-            <ol className="list-decimal list-inside text-[10px] space-y-2 text-neutral-400 font-medium leading-relaxed">
-              <li>Открой F12</li>
-              <li>Нажми <span className="text-white">Ctrl+Shift+C</span> и выбери слайд</li>
+          <div className="p-6 bg-red-600/10 border-l-[6px] border-l-red-600 shadow-2xl">
+            <p className="text-xs text-white mb-4 font-black uppercase tracking-widest leading-none">Как скачать 4K:</p>
+            <ol className="list-decimal list-inside text-[11px] space-y-3 text-neutral-400 font-bold leading-relaxed uppercase">
+              <li>Открой ПАНЕЛЬ F12</li>
+              <li>Инструмент <span className="text-white">ВЫБОРА (Ctrl+C)</span></li>
+              <li>Кликни на нужный слайд</li>
               <li><span className="text-white">Ctrl+Shift+P</span> -{">"} "Capture node screenshot"</li>
             </ol>
+          </div>
+
+          <div className="pt-20 opacity-20 text-[10px] font-bold uppercase tracking-[0.2em] leading-relaxed">
+             © 2026 ANTIGRAVITY ENGINE<br/>
+             BUILT FOR 13X13 BARBERSHOP
           </div>
         </div>
       </div>
 
+      {/* МАЙН ПЛОЩАДКА - ДОБАВИЛ ОТСТУП СЛЕВА PL-400 */}
       <div 
-        className="flex gap-12 pt-12 pb-24 origin-top-left transition-all duration-300 ease-out" 
+        className="flex gap-12 pt-20 pb-24 pl-[450px] origin-top-left transition-all duration-300 ease-out" 
         style={{ transform: `scale(${zoom})` }}
       >
         {CAROUSEL_SLIDES.map((slide, i) => (
@@ -129,7 +141,7 @@ export default function IGCarouselGenerator() {
             key={i}
             id={`slide-${i}`}
             style={{ width: `${dimensions.width}px`, height: `${dimensions.height}px` }}
-            className="bg-black text-white relative shrink-0 overflow-hidden group flex flex-col shadow-[0_0_100px_rgba(0,0,0,1)] border-[20px] border-black"
+            className="bg-black text-white relative shrink-0 overflow-hidden group flex flex-col shadow-[0_0_150px_rgba(0,0,0,1)] border-[20px] border-black"
           >
             {/* ФОНОВЫЙ ШУМ */}
             <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none z-10" style={{ backgroundImage: "url('/noise.png')", backgroundSize: "400px" }} />
@@ -144,7 +156,7 @@ export default function IGCarouselGenerator() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#0c0c0c] via-[#111111] to-[#1a0c0c] z-0" />
             )}
 
-            {/* HEADER - NOW ABSOLUTE TO NOT TAKE UP CONTENT SPACE */}
+            {/* HEADER */}
             <div className="absolute top-16 left-16 right-16 flex justify-between items-start z-30">
               <div className="w-48 opacity-80 mix-blend-lighten">
                 <Image src="/logo_white.webp" alt="13x13" width={240} height={120} className="w-full" />
@@ -154,7 +166,7 @@ export default function IGCarouselGenerator() {
               </div>
             </div>
 
-            {/* CONTENT - MORE VERTICAL FREEDOM */}
+            {/* CONTENT */}
             <div className="flex-1 flex flex-col justify-center relative z-20 gap-12 px-16 pt-32 pb-40 overflow-hidden">
               
               {slide.type === "title" && (
@@ -165,7 +177,7 @@ export default function IGCarouselGenerator() {
                   <h1 className="text-[140px] font-[family-name:var(--font-oswald)] font-black leading-[0.8] tracking-tighter uppercase whitespace-pre-line text-white break-words" style={{ WebkitTextStroke: "2px white", color: "transparent" }}>
                     {slide.title}
                   </h1>
-                  <h2 className="text-5xl font-[family-name:var(--font-jetbrains-mono)] text-red-600 font-black max-w-[850px] leading-tight underline underline-offset-[16px] decoration-[10px] decoration-white">
+                  <h2 className="text-5xl font-[family-name:var(--font-jetbrains-mono)] text-white font-black max-w-[850px] leading-tight underline underline-offset-[16px] decoration-[10px] decoration-red-600">
                     {slide.subtitle}
                   </h2>
                 </div>
@@ -183,7 +195,7 @@ export default function IGCarouselGenerator() {
                     {slide.title}
                   </h1>
                   <div className="bg-white/5 backdrop-blur-md p-10 border-l-[30px] border-red-600">
-                    <p className="text-5.5xl md:text-6xl font-[family-name:var(--font-jetbrains-mono)] text-white font-black leading-[1.25] uppercase break-words tracking-tighter">
+                    <p className="text-6.5xl font-[family-name:var(--font-jetbrains-mono)] text-white font-black leading-[1.25] uppercase break-words tracking-tighter">
                       {slide.text}
                     </p>
                   </div>
@@ -192,18 +204,18 @@ export default function IGCarouselGenerator() {
 
               {slide.type === "comparison" && (
                 <div className="flex flex-col gap-14 items-center w-full">
-                   <h1 className="text-[120px] font-[family-name:var(--font-oswald)] font-black leading-[0.8] tracking-tighter uppercase text-white mb-4 border-b-[16px] border-red-600 pb-8 w-full text-center">
+                   <h1 className="text-[120px] font-[family-name:var(--font-oswald)] font-black leading-[0.8] tracking-tighter uppercase text-white mb-4 border-b-[16px] border-red-600 pb-8 w-full text-center italic">
                     {slide.title}
                   </h1>
                   <div className="grid grid-cols-2 gap-10 w-full px-4">
                     <div className="bg-neutral-900 border-[6px] border-white p-12 shadow-[15px_15px_0_0_rgba(255,255,255,0.05)] flex flex-col items-center gap-6 opacity-40 scale-90 grayscale">
-                       <span className="text-2xl font-black uppercase tracking-widest opacity-60">ДРУГИЕ</span>
+                       <span className="text-2xl font-black uppercase tracking-widest opacity-60 font-[family-name:var(--font-jetbrains-mono)]">ДРУГИЕ</span>
                        <span className="text-4xl font-black text-red-500 whitespace-nowrap">{slide.left?.val}</span>
                        <span className="text-[80px] font-black leading-none">{slide.left?.price}</span>
                     </div>
                     <div className="bg-white border-[8px] border-black p-12 shadow-[25px_25px_0_0_#e50000] flex flex-col items-center gap-6 transform -rotate-2 scale-110 z-30">
-                       <span className="text-2xl font-black text-black opacity-30 uppercase tracking-widest leading-none">13x13</span>
-                       <span className="text-6xl font-black text-blue-600 tracking-tighter whitespace-nowrap">{slide.right?.val}</span>
+                       <span className="text-2xl font-black text-black opacity-30 uppercase tracking-widest leading-none font-[family-name:var(--font-jetbrains-mono)]">13X13</span>
+                       <span className="text-6xl font-black text-blue-600 tracking-tighter whitespace-nowrap leading-none">{slide.right?.val}</span>
                        <span className="text-[110px] font-black text-black leading-none">{slide.right?.price}</span>
                        <div className="absolute -top-4 -right-4 bg-red-600 text-white font-black px-6 py-2 transform rotate-12 text-2xl border-4 border-black">WIN</div>
                     </div>
@@ -223,7 +235,7 @@ export default function IGCarouselGenerator() {
                     {slide.items?.map((item, idx) => (
                       <li key={idx} className="text-7xl font-black uppercase flex items-center gap-12 leading-none tracking-tighter">
                         <span className="w-16 h-16 bg-red-600 inline-block shrink-0 border-[6px] border-white shadow-[10px_10px_0_0_#000]" />
-                        <span className="break-words">{item}</span>
+                        <span className="break-words font-[family-name:var(--font-oswald)]">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -254,7 +266,7 @@ export default function IGCarouselGenerator() {
                   <p className="text-6.5xl font-[family-name:var(--font-jetbrains-mono)] text-neutral-300 font-black max-w-[850px] leading-tight uppercase tracking-tighter">
                     {slide.text}
                   </p>
-                  <div className="mt-16 bg-red-600 text-white text-[85px] px-20 py-10 font-black uppercase transform rotate-2 border-[14px] border-white shadow-[30px_30px_0_0_#000]">
+                  <div className="mt-16 bg-red-600 text-white text-[85px] px-24 py-12 font-black uppercase transform rotate-2 border-[14px] border-white shadow-[30px_30px_0_0_#000]">
                     {slide.cta}
                   </div>
                 </div>
@@ -262,13 +274,13 @@ export default function IGCarouselGenerator() {
 
             </div>
 
-            {/* FOOTER - ALWAYS FIXED AT BOTTOM */}
+            {/* FOOTER - FIXED AT BOTTOM */}
             <div className="absolute bottom-16 left-16 right-16 flex justify-between items-end z-20 opacity-90 border-t-[10px] border-red-600 pt-12">
               <div className="font-[family-name:var(--font-jetbrains-mono)] text-4xl font-black tracking-widest uppercase text-white">
                 SOCHI • GORKOGO 81A
               </div>
               <div className="font-[family-name:var(--font-jetbrains-mono)] text-4xl font-black text-black bg-white px-8 py-3 uppercase italic transform rotate-1 border-4 border-black">
-                @BARBER_13X13
+                13X13.RU
               </div>
             </div>
 
