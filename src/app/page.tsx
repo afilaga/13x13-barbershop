@@ -409,29 +409,43 @@ export default function Home() {
       {/* PHILOSOPHY SECTION */}
       <section id="about" className="py-16 md:py-40 px-4 md:px-8 border-b-[3px] border-white relative overflow-hidden bg-black">
         <div className="max-w-[1600px] mx-auto">
-          <h2 className="font-[family-name:var(--font-oswald)] text-5xl sm:text-6xl md:text-[8rem] font-black tracking-tighter mb-10 md:mb-20 leading-none uppercase">
-            ПОЧЕМУ <span className="text-neutral-500">МЫ?</span>
+          <h2 className="font-[family-name:var(--font-oswald)] text-5xl sm:text-6xl md:text-[8rem] font-black tracking-tighter mb-10 md:mb-16 leading-none uppercase text-white">
+            ФИЛОСОФИЯ <span className="text-red-600 block">БРЕНДА</span>
           </h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-20 text-white font-[family-name:var(--font-jetbrains-mono)]">
+            <div className="text-xl md:text-3xl font-bold leading-tight space-y-8 uppercase">
+              <p>Наш клиент — человек, который понимает ценность денег. Он не ищет самое дешёвое — но и не готов переплачивать за имя, тренды и маркетинг.</p>
+              <p className="text-red-500">13x13 — это барбершоп для тех, кто устал платить 5000 рублей за стрижку, понимая, что половина этой суммы — это бренд, интерьер и навязанные «бонусы».</p>
+            </div>
+            <div className="text-lg md:text-xl font-medium leading-relaxed text-neutral-400 space-y-6">
+              <p>Он знает, что высокая цена не всегда равна высокому качеству. И выбирает осознанно. Мы убрали всё лишнее и оставили главное.</p>
+              <p>Он не пойдёт в дешёвую парикмахерскую. Но и не видит смысла в завышенных ценах. Для него оптимум — это разумная стоимость и стабильное качество.</p>
+              <p className="text-white bg-red-600 p-4 font-bold border-4 border-white transform rotate-1 mt-8 brutal-shadow">
+                13x13 — ЭТО ПРО ОСОЗНАННЫЙ ВЫБОР. ПРО СТИЛЬ БЕЗ ПЕРЕПЛАТЫ. ПРО СЕРВИС, КОТОРЫЙ СТОИТ СВОИХ ДЕНЕГ.
+              </p>
+            </div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: <Scissors className="w-10 h-10 md:w-16 md:h-16 mb-4 md:mb-8" strokeWidth={1.5} />,
-                title: "СТАНДАРТ КАЧЕСТВА",
-                desc: "Мастера работают по строгим регламентам. Вы всегда получаете предсказуемый результат, независимо от того, в чьем кресле оказались."
+                title: "ОСТАВИЛИ ГЛАВНОЕ",
+                desc: "Сильный сервис, опытные мастера, качественные материалы и полностью понятная честная цена."
               },
               {
                 icon: <ShieldAlert className="w-10 h-10 md:w-16 md:h-16 mb-4 md:mb-8" strokeWidth={1.5} />,
-                title: "ПРАЙС БЕЗ СЮРПРИЗОВ",
-                desc: "Забудьте про навязанные услуги и скрытые чеки. Вы знаете точную сумму до того, как мастер возьмет в руки машинку."
+                title: "БЕЗ ПЕРЕПЛАТ ЗА ВОЗДУХ",
+                desc: "Никаких приставок, бесплатного алкоголя, включённого кофе и искусственно раздутой барбер-атмосферы."
               },
               {
                 icon: <Clock className="w-10 h-10 md:w-16 md:h-16 mb-4 md:mb-8" strokeWidth={1.5} />,
-                title: "ДИСЦИПЛИНА ВРЕМЕНИ",
-                desc: "Никаких задержек и томительных ожиданий. Мы уважаем ваше время: садитесь в кресло ровно в назначенную минуту, стрижем быстро, качественно и строго по делу."
+                title: "УМНЫЙ РАСХОД",
+                desc: "Вместо одной стрижки за 5000₽ — 2-3 визита к нам. Тот же уровень профессионального сервиса без переплаты за люкс."
               }
             ].map((item) => (
-              <div key={item.title} className="bg-black text-white p-6 md:p-10 lg:p-14 brutal-border group hover:bg-white hover:text-black transition-colors duration-300 flex flex-col h-full cursor-default">
+              <div key={item.title} className="bg-black text-white p-6 md:p-10 lg:p-14 border-4 border-white group hover:bg-white hover:text-black transition-colors duration-300 flex flex-col h-full cursor-default brutal-shadow">
                 <div className="text-white group-hover:text-black transition-colors">
                   {item.icon}
                 </div>
