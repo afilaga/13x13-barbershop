@@ -56,12 +56,12 @@ function pickRandom<T>(arr: readonly T[]): T {
 }
 
 export default function TvInfoScreen() {
-  const [activeScene, setActiveScene] = useState<SceneId>(() => pickRandom(SCENES));
-  const [activeNote, setActiveNote] = useState<string>(() => pickRandom(TV_NOTES));
-  const [activePriceCategoryId, setActivePriceCategoryId] = useState<string>(() => pickRandom(prices).id);
+  const [activeScene, setActiveScene] = useState<SceneId>("hero");
+  const [activeNote, setActiveNote] = useState<string>(TV_NOTES[0]);
+  const [activePriceCategoryId, setActivePriceCategoryId] = useState<string>(prices[0]?.id ?? "");
   const [isBooting, setIsBooting] = useState(true);
   const [bootCycle, setBootCycle] = useState(0);
-  const [now, setNow] = useState(() => new Date());
+  const [timeLabel, setTimeLabel] = useState("--:--:--");
 
   const priceCategoryIds = useMemo(() => prices.map((category) => category.id), []);
 
@@ -71,7 +71,9 @@ export default function TvInfoScreen() {
   );
 
   useEffect(() => {
-    const timer = window.setInterval(() => setNow(new Date()), 1000);
+    const updateTime = () => setTimeLabel(new Date().toLocaleTimeString("ru-RU"));
+    updateTime();
+    const timer = window.setInterval(updateTime, 1000);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -163,7 +165,7 @@ export default function TvInfoScreen() {
               </div>
               <div className="rounded-none border border-white/35 bg-black/55 px-4 py-2 font-[family-name:var(--font-jetbrains-mono)] text-sm font-bold tracking-[0.14em] text-neutral-300">
                 <Clock3 className="mr-2 inline h-4 w-4 align-[-2px]" />
-                {now.toLocaleTimeString("ru-RU")}
+                {timeLabel}
               </div>
             </div>
           </div>

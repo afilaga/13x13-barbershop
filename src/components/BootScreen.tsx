@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
@@ -32,39 +32,45 @@ const PHRASES = [
   "Хлеб — всему голова со стрижкой"
 ];
 
+const BOOT_DURATION_MS = 7500; // 7.5 seconds
+const BOOT_ITERATIONS = 5;
+const BOOT_INTERVAL_MS = BOOT_DURATION_MS / BOOT_ITERATIONS;
+
 export default function BootScreen({ onComplete }: { onComplete: () => void }) {
   const [currentPhrase, setCurrentPhrase] = useState("");
   const [isPoleReady, setIsPoleReady] = useState(false);
-  const durationMs = 7500; // 7.5 seconds
-  const iterations = 5;
-  const intervalMs = durationMs / iterations;
+  const onCompleteRef = useRef(onComplete);
 
   useEffect(() => {
-    // Generate 3 random unique phrases
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  useEffect(() => {
+    // Run one boot cycle per mount and avoid resetting timers on parent rerenders.
     const shuffled = [...PHRASES].sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, iterations);
-    
+    const selected = shuffled.slice(0, BOOT_ITERATIONS);
+
     let currentIndex = 0;
     setCurrentPhrase(selected[currentIndex]);
 
     const timer = setInterval(() => {
       currentIndex++;
-      if (currentIndex < iterations) {
+      if (currentIndex < BOOT_ITERATIONS) {
         setCurrentPhrase(selected[currentIndex]);
       } else {
         clearInterval(timer);
       }
-    }, intervalMs);
+    }, BOOT_INTERVAL_MS);
 
     const finishTimer = setTimeout(() => {
-      onComplete();
-    }, durationMs);
+      onCompleteRef.current();
+    }, BOOT_DURATION_MS);
 
     return () => {
       clearInterval(timer);
       clearTimeout(finishTimer);
     };
-  }, [onComplete, intervalMs, iterations]);
+  }, []);
 
   return (
     <motion.div
