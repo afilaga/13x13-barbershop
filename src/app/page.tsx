@@ -115,13 +115,13 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black brutal-border-b text-white">
         <div className="flex justify-between items-center px-4 md:px-8 py-3 md:py-4 max-w-[1600px] mx-auto">
           {/* Logo */}
-          <a href="#" className="relative z-50 focus-visible:outline-none">
+          <a href="#" className="relative z-50 inline-block focus-visible:outline-none">
             <Image
               src="/logo_white.webp"
               alt="13x13 Logo"
               width={120}
               height={60}
-              className="h-[35px] md:h-[50px] w-auto mix-blend-lighten"
+              className="block h-[35px] md:h-[50px] w-auto mix-blend-lighten"
               priority
             />
           </a>
@@ -226,16 +226,16 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={!isBooting ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 1, delay: 0.2 }}
-                className="w-full lg:w-auto flex flex-col items-center lg:items-start shrink-0 relative"
+                className="w-full lg:w-auto flex flex-col items-center lg:items-start shrink-0 self-center lg:self-start relative"
               >
-                <h1 className="m-0 flex justify-center lg:justify-start">
+                <h1 className="m-0 flex w-full justify-center lg:justify-start">
                   <span className="sr-only">13x13</span>
                   <Image
                     src="/logo_white.webp"
                     alt="13x13"
                     width={600}
                     height={600}
-                    className="w-[70vw] sm:w-[60vw] lg:w-[350px] xl:w-[450px] h-auto object-contain object-center mix-blend-lighten relative z-10"
+                    className="block w-[70vw] sm:w-[60vw] lg:w-[350px] xl:w-[450px] h-auto object-contain object-center mix-blend-lighten relative z-10"
                     priority
                   />
                 </h1>

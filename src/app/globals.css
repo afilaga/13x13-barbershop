@@ -22,6 +22,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Hide Next.js dev overlay/widget artifacts on presentation screens. */
+nextjs-portal,
+[data-nextjs-dialog-overlay],
+[data-nextjs-toast] {
+  display: none !important;
+}
+
 ::selection {
   background: var(--color-base-white);
   color: var(--color-base-black);
