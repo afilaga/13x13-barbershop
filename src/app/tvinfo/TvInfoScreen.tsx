@@ -506,9 +506,6 @@ export default function TvInfoScreen() {
                       Точный расчет стоимости перед началом. Вы платите ровно ту сумму, что указана здесь.
                     </div>
                   </div>
-                  <div className="font-[family-name:var(--font-oswald)] text-xl tracking-[0.18em] text-neutral-500">
-                    КАТЕГОРИИ ИДУТ ПО КРУГУ
-                  </div>
                 </div>
 
                 <div className="mb-6 flex gap-4">
@@ -568,8 +565,6 @@ export default function TvInfoScreen() {
               <span className="h-2 w-2 bg-black" />
               <span>13X13</span>
               <span className="h-2 w-2 bg-black" />
-              <span>МУЖСКОЙ КЛУБ</span>
-              <span className="h-2 w-2 bg-black" />
               <span>ДОСТУПНАЯ ЦЕНА</span>
               <span className="h-2 w-2 bg-black" />
               <span>@BARBER_13X13</span>
@@ -583,8 +578,6 @@ export default function TvInfoScreen() {
               <span>{activeTicker}</span>
               <span className="h-2 w-2 bg-black" />
               <span>13X13</span>
-              <span className="h-2 w-2 bg-black" />
-              <span>МУЖСКОЙ КЛУБ</span>
               <span className="h-2 w-2 bg-black" />
               <span>ДОСТУПНАЯ ЦЕНА</span>
               <span className="h-2 w-2 bg-black" />
