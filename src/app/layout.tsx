@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Барбершоп рядом с DDX в Сочи — 13x13 на Горького 81а",
-  description: "Новый барбершоп в Сочи с честными ценами. Стрижки и оформление бороды от 400 ₽. Напротив DDX Fitness на Горького.",
+  description: "Новый барбершоп в Сочи с честными ценами. Стрижки от 600 ₽. Комплексная стрижка и борода — 1200 ₽. Напротив DDX Fitness на Горького.",
   icons: {
     icon: [
       { url: "/favicon_white.svg", media: "(prefers-color-scheme: dark)" },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     locale: "ru_RU",
     url: SITE_URL,
     title: "Барбершоп рядом с DDX в Сочи — 13x13",
-    description: "Новый барбершоп в Сочи с честными ценами. Стрижки и оформление бороды от 400 ₽. Напротив DDX Fitness на Горького.",
+    description: "Новый барбершоп в Сочи с честными ценами. Стрижки от 600 ₽. Комплексная стрижка и борода — 1200 ₽. Напротив DDX Fitness на Горького.",
     siteName: "13x13",
     images: [
       {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "13x13 | Барбершоп рядом с DDX в Сочи",
-    description: "Новый барбершоп в Сочи с честными ценами. Стрижки и оформление бороды от 400 ₽. Напротив DDX Fitness на Горького.",
+    description: "Новый барбершоп в Сочи с честными ценами. Стрижки от 600 ₽. Комплексная стрижка и борода — 1200 ₽. Напротив DDX Fitness на Горького.",
     images: ["/logo_black.webp"],
   },
   keywords: [
@@ -78,7 +78,7 @@ const localBusinessJsonLd = {
   "@id": `${SITE_URL}/#barbershop`,
   "name": "13x13",
   "legalName": "ИП МАЛХАСЯН ГЕОРГИЙ ГЕОРГИЕВИЧ",
-  "description": "Новый барбершоп в Сочи с честными ценами. Стрижки и оформление бороды от 400 ₽. Находимся на Горького 81а, напротив клуба DDX.",
+  "description": "Новый барбершоп в Сочи с честными ценами. Стрижки от 600 ₽. Комплексная стрижка и борода — 1200 ₽. Находимся на Горького 81а, напротив клуба DDX.",
   "url": SITE_URL,
   "logo": `${SITE_URL}/logo_white.webp`,
   "image": [
@@ -117,7 +117,7 @@ const localBusinessJsonLd = {
       "closes": "22:00"
     }
   ],
-  "priceRange": "400-2000 RUB",
+  "priceRange": "600-2000 RUB",
   "currenciesAccepted": "RUB",
   "paymentAccepted": "Cash, Credit Card",
   "sameAs": [
@@ -141,7 +141,7 @@ const localBusinessJsonLd = {
             },
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": 400,
+              "minPrice": 600,
               "maxPrice": 1000,
               "priceCurrency": "RUB"
             }
@@ -161,8 +161,27 @@ const localBusinessJsonLd = {
             },
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": 400,
+              "minPrice": 600,
               "maxPrice": 800,
+              "priceCurrency": "RUB"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Комплексные услуги",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Комплексная стрижка и борода",
+              "description": "Полный комплекс: мужская стрижка и оформление бороды"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": 1200,
               "priceCurrency": "RUB"
             }
           }
