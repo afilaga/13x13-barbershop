@@ -16,7 +16,6 @@ type SceneId = (typeof SCENES)[number];
 const TV_NOTES = [
   "СОЧИ. ГОРЬКОГО, 81А.",
   "ЧЕСТНЫЕ ЦЕНЫ. БЕЗ ПЕРЕПЛАТ.",
-  "СТРИЖКА ОТ 400 РУБЛЕЙ.",
   "НЕ ЗАБУДЬТЕ СПРОСИТЬ ПРО ДОП УСЛУГИ.",
   "ПАТЧИ, ВОСК, ПИЛИНГ, БРОВИ — ВСЁ ЕСТЬ.",
   "У НАС ЕСТЬ ОНЛАЙН ЗАПИСЬ.",
@@ -273,16 +272,7 @@ export default function TvInfoScreen() {
                   </div>
                 </div>
 
-                <div className="col-span-4 flex flex-col gap-6">
-                  <div className="bg-black/90 p-8 brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
-                    <div className="font-[family-name:var(--font-oswald)] text-[3.5rem] leading-[0.88] font-black tracking-tight text-white">
-                      СТРИЖКА ОТ 400 РУБЛЕЙ
-                    </div>
-                    <div className="mt-3 font-[family-name:var(--font-oswald)] text-[3.5rem] leading-[0.88] font-black tracking-tight text-white">
-                      БОРОДА ОТ 400 РУБЛЕЙ
-                    </div>
-                  </div>
-
+                <div className="col-span-4 flex flex-col justify-center gap-6">
                   <div className="bg-black/90 p-6 brutal-border border-white shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
                     <div className="font-[family-name:var(--font-oswald)] text-2xl font-black tracking-[0.14em] text-neutral-400">
                       ЛОКАЦИЯ
