@@ -6,7 +6,6 @@ import { ArrowUpRight, Scissors, ShieldAlert, Clock, MapPin, Search, Menu, X, Ch
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useEffect } from "react";
 import BootScreen from "@/components/BootScreen";
 
 const GradientBlinds = dynamic(() => import('@/components/GradientBlinds'), { ssr: false });
@@ -68,7 +67,7 @@ export default function Home() {
       { id: 'h1', name: '«Удлиненная»', price: 1000, desc: 'Полностью ножницами. Мытье + укладка' },
       { id: 'h2', name: '«Стильно»', price: 800, desc: 'Фейд с 0. Мытье + укладка' },
       { id: 'h3', name: '«Классика»', price: 600, desc: 'Бока короче / верх длиннее. Мытье + укладка' },
-      { id: 'h4', name: '«Пох»', price: 400, desc: 'Под 1 насадку / машинкой. Быстро и ровно' },
+      { id: 'h4', name: 'Машинка', price: 400, desc: 'Под 1 насадку / машинкой. Быстро и ровно' },
       { id: 'h5', name: 'Мытьё головы', price: 200, desc: 'Освежиться перед движем' },
     ],
     beard: [

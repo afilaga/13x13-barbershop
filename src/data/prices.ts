@@ -16,7 +16,7 @@ export const prices: PriceCategory[] = [
     id: "mens-haircuts",
     category: "МУЖСКИЕ СТРИЖКИ",
     items: [
-      { id: "poh", name: "«Пох»", price: "400 ₽", desc: "Под 1 насадку / машинкой" },
+      { id: "machine", name: "Машинка", price: "400 ₽", desc: "Под 1 насадку / машинкой" },
       { id: "classic", name: "«Классика»", price: "600 ₽", desc: "Бока короче / верх длиннее • мытье • укладка" },
       { id: "stylish", name: "«Стильно»", price: "800 ₽", desc: "Фейд с 0 • мытье • укладка" },
       { id: "long", name: "«Удлиненная»", price: "1000 ₽", desc: "Полностью ножницами • мытье • укладка" },
@@ -56,6 +56,27 @@ export const prices: PriceCategory[] = [
       { id: "peeling", name: "Пилинг головы / лица", price: "200 ₽" },
       { id: "face-control", name: "Уход «Фейс контроль»", price: "500 ₽", desc: "Альгинатная или тканевая маска" },
       { id: "max-care", name: "Уход «На максималках»", price: "700 ₽", desc: "Маска + патчи" },
+    ],
+  },
+  {
+    id: "chemistry-and-curls",
+    category: "ХИМИЯ / ЗАВИВКА",
+    items: [
+      {
+        id: "stile-curls",
+        name: "Кудри Stile",
+        price: "1500 / 2000 ₽",
+        desc: "Короткие / длинные волосы",
+      },
+    ],
+  },
+  {
+    id: "coloring",
+    category: "ОКРАШИВАНИЕ",
+    items: [
+      { id: "tone-zone", name: "Тонирование (1 зона)", price: "800 / 1000 ₽", desc: "Скрыть седину" },
+      { id: "bleach", name: "Обесцвечивание", price: "1300 ₽", desc: "Осветление" },
+      { id: "full-color", name: "Окрашивание (по длине)", price: "1500 / 2000 ₽", desc: "По длине волос" },
     ],
   },
 ];
