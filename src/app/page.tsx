@@ -272,14 +272,6 @@ export default function Home() {
               <span className="p-2 border-b-2 border-dotted border-white/50 w-fit">Находимся на Горького 81а, напротив клуба DDX.</span>
               <span className="text-neutral-400 mb-2 mt-1">Мы ценим ваше время и бережём бюджет.</span>
               
-              <div className="mt-4 bg-black text-white p-5 md:p-8 brutal-border border-white shadow-[8px_8px_0px_0px_#fff] flex flex-col items-center lg:items-start gap-3 transform rotate-1 w-full lg:w-fit">
-                <span className="font-[family-name:var(--font-oswald)] font-black text-4xl md:text-6xl uppercase tracking-tighter text-white">
-                  СТРИЖКА ОТ 400 РУБЛЕЙ
-                </span>
-                <span className="font-[family-name:var(--font-oswald)] font-black text-4xl md:text-6xl uppercase tracking-tighter text-white">
-                  БОРОДА ОТ 400 РУБЛЕЙ
-                </span>
-              </div>
             </div>
           </motion.div>
 
