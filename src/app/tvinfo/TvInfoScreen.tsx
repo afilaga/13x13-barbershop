@@ -596,7 +596,7 @@ export default function TvInfoScreen() {
                     <div className="font-[family-name:var(--font-oswald)] text-[5.2rem] leading-none font-black tracking-tighter text-white">
                       ПРАЙС
                     </div>
-                    <div className="mt-2 font-[family-name:var(--font-jetbrains-mono)] text-xl text-neutral-300 normal-case">
+                    <div className="mt-2 font-[family-name:var(--font-jetbrains-mono)] text-[2rem] text-neutral-300 normal-case">
                       Точный расчет стоимости перед началом. Вы платите ровно ту сумму, что указана здесь.
                     </div>
                   </div>
@@ -606,7 +606,7 @@ export default function TvInfoScreen() {
                   {orderedPriceCategories.map((category, index) => (
                     <div
                       key={category.id}
-                      className={`px-4 py-[0.65rem] font-[family-name:var(--font-oswald)] text-[1.7rem] font-black tracking-wide brutal-border ${
+                      className={`px-5 py-3 font-[family-name:var(--font-oswald)] text-[2.35rem] leading-none font-black tracking-wide brutal-border ${
                         index === activePriceIndex
                           ? "border-white bg-white text-black"
                           : "border-white/35 bg-black/60 text-neutral-400"
@@ -617,30 +617,30 @@ export default function TvInfoScreen() {
                   ))}
                 </div>
 
-                <div className="mb-4 border-b-[6px] border-white pb-3 font-[family-name:var(--font-oswald)] text-[4rem] leading-none font-black tracking-tighter text-white">
+                <div className="mb-4 border-b-[6px] border-white pb-3 font-[family-name:var(--font-oswald)] text-[6.2rem] leading-none font-black tracking-tighter text-white">
                   {activeCategory.category}
                 </div>
 
-                <div className="mb-4 font-[family-name:var(--font-jetbrains-mono)] text-lg text-neutral-300 normal-case">
+                <div className="mb-5 font-[family-name:var(--font-jetbrains-mono)] text-[2rem] text-neutral-300 normal-case">
                   Не забудьте спросить про допуслуги: патчи, воск, пилинг, брови и уходы.
                 </div>
 
-                <div className={`grid flex-1 ${isExtraDenseCategory ? "grid-cols-5 gap-2.5" : isDenseCategory ? "grid-cols-4 gap-3" : "grid-cols-2 gap-4"}`}>
+                <div className={`grid flex-1 ${isExtraDenseCategory ? "grid-cols-4 gap-3" : isDenseCategory ? "grid-cols-4 gap-3" : "grid-cols-2 gap-4"}`}>
                   {activeCategory.items.map((item) => (
                     <div
                       key={item.id}
                       className={`flex flex-col justify-between bg-black/88 brutal-border border-white ${
                         isExtraDenseCategory
-                          ? "p-2.5 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
+                          ? "p-3.5 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
                           : isDenseCategory
-                            ? "p-3 shadow-[5px_5px_0px_0px_rgba(255,255,255,1)]"
+                            ? "p-3.5 shadow-[5px_5px_0px_0px_rgba(255,255,255,1)]"
                             : "p-5 shadow-[7px_7px_0px_0px_rgba(255,255,255,1)]"
                       }`}
                     >
                       <div>
                         <div
                           className={`font-[family-name:var(--font-oswald)] leading-tight font-black tracking-tight text-white ${
-                            isExtraDenseCategory ? "text-[1rem]" : isDenseCategory ? "text-[1.22rem]" : "text-[2rem]"
+                            isExtraDenseCategory ? "text-[1.55rem]" : isDenseCategory ? "text-[1.9rem]" : "text-[3rem]"
                           }`}
                         >
                           {item.name}
@@ -648,7 +648,7 @@ export default function TvInfoScreen() {
                         {item.desc && (
                           <div
                             className={`mt-2 font-[family-name:var(--font-jetbrains-mono)] leading-relaxed text-neutral-300 normal-case ${
-                              isExtraDenseCategory ? "text-[0.64rem]" : isDenseCategory ? "text-[0.72rem]" : "text-base"
+                              isExtraDenseCategory ? "text-[1rem]" : isDenseCategory ? "text-[1.15rem]" : "text-[1.4rem]"
                             }`}
                           >
                             {item.desc}
@@ -657,7 +657,7 @@ export default function TvInfoScreen() {
                       </div>
                       <div
                         className={`mt-4 inline-flex w-fit bg-white px-3 py-[0.35rem] font-[family-name:var(--font-oswald)] font-black tracking-wide text-black brutal-border border-black ${
-                          isExtraDenseCategory ? "text-[1.04rem]" : isDenseCategory ? "text-[1.28rem]" : "text-[1.9rem]"
+                          isExtraDenseCategory ? "text-[1.8rem]" : isDenseCategory ? "text-[2.05rem]" : "text-[2.8rem]"
                         }`}
                       >
                         {item.price}
