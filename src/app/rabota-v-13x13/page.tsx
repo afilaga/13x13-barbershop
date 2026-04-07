@@ -4,33 +4,54 @@ import { useState } from "react";
 import { ArrowUpRight, Scissors, Star, Users, Zap, Briefcase, CheckCircle2, BarChart3, Clock, Wallet, Hammer, TrendingUp, Phone, Send, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { motion, AnimatePresence } from "framer-motion";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 export default function CareerLanding() {
     const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [formData, setFormData] = useState({ name: "", phone: "", age: "", experience: "" });
     const [agreed, setAgreed] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const resetTurnstile = () => {
+        const turnstile = (window as Window & { turnstile?: { reset: () => void } }).turnstile;
+        turnstile?.reset();
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setFormStatus("loading");
+
+        const form = e.currentTarget;
+        const formPayload = new FormData(form);
+        const captchaToken = (formPayload.get("cf-turnstile-response")?.toString() ?? "").trim();
+        const companyTrap = (formPayload.get("company")?.toString() ?? "").trim();
+
+        if (TURNSTILE_SITE_KEY && !captchaToken) {
+            setFormStatus("error");
+            return;
+        }
 
         try {
             const res = await fetch("/api/hiring", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...formData, agreed }),
+                body: JSON.stringify({ ...formData, agreed, captchaToken, company: companyTrap }),
             });
 
             if (res.ok) {
                 setFormStatus("success");
                 setFormData({ name: "", phone: "", age: "", experience: "" });
                 setAgreed(false);
+                resetTurnstile();
             } else {
                 setFormStatus("error");
+                resetTurnstile();
             }
-        } catch (err) {
+        } catch {
             setFormStatus("error");
+            resetTurnstile();
         }
     };
 
@@ -38,13 +59,16 @@ export default function CareerLanding() {
         { label: "ПРОЦЕНТ", network: "35-40%", our: "50%", icon: <Wallet className="w-5 h-5" />, isSame: false },
         { label: "СМЕНА", network: "12 ЧАСОВ", our: "12 ЧАСОВ", icon: <Clock className="w-5 h-5" />, isSame: true },
         { label: "ВЫПЛАТЫ", network: "2 РАЗА / МЕС", our: "КАЖДЫЙ ДЕНЬ", icon: <Zap className="w-5 h-5" />, isSame: false },
-        { label: "ГАРАНТИЯ", network: "НЕТ / МАЛО", our: "3 000 ₽ / СМЕНА", icon: <Briefcase className="w-5 h-5" />, isSame: false },
         { label: "ИНСТРУМЕНТ", network: "СВОЙ", our: "СВОЙ (НОРМА)", icon: <Scissors className="w-5 h-5" />, isSame: true },
         { label: "ОФОРМЛЕНИЕ", network: "НЕТ / ЧЕРНУЮ", our: "ОФИЦИАЛЬНО", icon: <CheckCircle2 className="w-5 h-5" />, isSame: false },
     ];
 
     return (
         <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black uppercase flex flex-col overflow-x-hidden">
+            {TURNSTILE_SITE_KEY && (
+                <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+            )}
+
             {/* Meta (Handled by Layout/Metadata API if possible, but here we can add it via Head if needed. For App Router, metadata is usually in a separate file or exported from the layout/page. Since this is "use client", we move metadata to a separate layout or sibling page file. For now, we focus on UI.) */}
             
             {/* Navigation */}
@@ -266,6 +290,18 @@ export default function CareerLanding() {
                                             </label>
                                         </div>
 
+                                        <div className="hidden" aria-hidden="true">
+                                            <label htmlFor="company">Company</label>
+                                            <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+                                        </div>
+
+                                        {TURNSTILE_SITE_KEY && (
+                                            <div className="space-y-2 py-2">
+                                                <p className="text-xs font-black uppercase opacity-50 block">Проверка безопасности</p>
+                                                <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-theme="dark" data-action="hiring_form" />
+                                            </div>
+                                        )}
+
                                         <button
                                             disabled={formStatus === "loading" || !agreed}
                                             type="submit"
@@ -328,7 +364,6 @@ export default function CareerLanding() {
                             <h3 className="bg-white text-black px-4 py-2 font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black w-fit transform -rotate-1">ФИНАНСЫ:</h3>
                             <ul className="space-y-3 font-bold text-sm md:text-lg text-neutral-300">
                                 <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> 50% С КАЖДОЙ УСЛУГИ</li>
-                                <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> ГАРАНТИЯ 3 000 ₽ / СМЕНА</li>
                                 <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> 20% ОТ ПРОДАЖ КОСМЕТИКИ</li>
                                 <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> ОФИЦИАЛЬНОЕ УСТРОЙСТВО</li>
                                 <li className="flex gap-3"><CheckCircle2 className="w-5 h-5 shrink-0 text-white" /> ВЫПЛАТЫ ЕЖЕДНЕВНО</li>

@@ -1,6 +1,19 @@
 # 13x13 Landing
 
-Лендинг барбершопа 13x13 (Сочи, ул. Северная, 6) на Next.js 16.
+Сайт барбершопа **13x13** в Сочи (ул. Горького, 81а, напротив DDX Fitness) на Next.js 16.
+
+## Описание проекта
+
+Проект решает две задачи:
+- маркетинговый лендинг с акцентом на честный прайс и быструю запись;
+- локальное SEO-присутствие (поиск по Сочи/району DDX) с корректной структурированной разметкой.
+
+Ключевые возможности:
+- главный лендинг с hero, прайсом, контактами, картой и CTA на онлайн-запись;
+- отдельные страницы под SEO и найм (`/barbershop-ddx-sochi`, `/rabota-v-13x13`);
+- страница галереи (`/gallery`);
+- API-роут для формы отклика в раздел вакансий (`/api/hiring`);
+- boot-screen и анимации интерфейса на Framer Motion/WebGL.
 
 ## Stack
 
@@ -38,13 +51,20 @@ npm run dev
 ```text
 src/
   app/
-    layout.tsx      # глобальная обертка, metadata, JSON-LD
-    page.tsx        # лендинг
-    globals.css     # стили и утилиты
+    layout.tsx               # глобальная обертка, metadata, JSON-LD
+    page.tsx                 # главная страница
+    barbershop-ddx-sochi/    # SEO-страница "рядом с DDX"
+    rabota-v-13x13/          # страница вакансий
+    gallery/                 # страница галереи
+    api/hiring/route.ts      # обработка формы отклика
+    globals.css              # глобальные стили
+  components/
+    BootScreen.tsx           # стартовый загрузочный экран
+    GradientBlinds.jsx       # WebGL-эффект для boot-screen
   data/
-    prices.ts       # прайс-лист
+    prices.ts                # прайс-лист
 tests/
-  landing.spec.ts   # smoke e2e
+  landing.spec.ts            # smoke e2e
 playwright.config.ts
 ```
 
