@@ -154,7 +154,7 @@ export default function TvInfoScreen() {
   }, []);
 
   return (
-    <main className="relative h-screen w-screen overflow-hidden bg-black text-white uppercase selection:bg-white selection:text-black">
+    <main className="tv-shell relative h-screen w-screen overflow-hidden bg-black text-white uppercase selection:bg-white selection:text-black">
       <div className="absolute inset-0 z-0 opacity-[0.92] mix-blend-screen">
         <GradientBlinds
           className="absolute inset-0"
@@ -176,14 +176,14 @@ export default function TvInfoScreen() {
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.22),transparent_34%),radial-gradient(circle_at_52%_22%,rgba(42,87,255,0.28),transparent_40%),radial-gradient(circle_at_78%_72%,rgba(255,17,17,0.26),transparent_42%),linear-gradient(135deg,rgba(0,0,0,0.14),rgba(0,0,0,0.76))]" />
 
       <div className="relative z-10 flex h-full flex-col">
-        <header className="border-b-2 border-white/35 px-8 py-5">
-          <div className="mx-auto flex w-full max-w-[1920px] items-center justify-between gap-6">
+        <header className="border-b-2 border-white/35 px-8 py-5 min-[2560px]:px-12 min-[3200px]:px-16 min-[3840px]:px-20">
+          <div className="mx-auto flex w-full max-w-[min(95vw,3600px)] items-center justify-between gap-6">
             <Image
               src="/logo_white.webp"
               alt="13x13"
               width={220}
               height={110}
-              className="block h-[58px] w-auto mix-blend-lighten"
+              className="block h-[58px] w-auto mix-blend-lighten min-[2560px]:h-[78px] min-[3200px]:h-[92px] min-[3840px]:h-[108px]"
               priority
             />
 
@@ -200,7 +200,7 @@ export default function TvInfoScreen() {
           </div>
         </header>
 
-        <section className="relative mx-auto flex w-full max-w-[1920px] flex-1 flex-col px-8 pb-24 pt-8">
+        <section className="relative mx-auto flex w-full max-w-[min(95vw,3600px)] flex-1 flex-col px-8 pb-24 pt-8 min-[2560px]:px-12 min-[3200px]:px-16 min-[3840px]:px-20">
           <AnimatePresence mode="wait">
             {activeScene === "logo" && (
               <motion.div
@@ -216,7 +216,7 @@ export default function TvInfoScreen() {
                   alt="13x13"
                   width={960}
                   height={960}
-                  className="block h-auto w-[560px] mix-blend-lighten"
+                  className="block h-auto w-[560px] mix-blend-lighten min-[2560px]:w-[760px] min-[3200px]:w-[920px] min-[3840px]:w-[1100px]"
                   priority
                 />
               </motion.div>
@@ -243,7 +243,7 @@ export default function TvInfoScreen() {
                         alt="13x13"
                         width={620}
                         height={620}
-                        className="block h-auto w-[420px] mix-blend-lighten"
+                        className="block h-auto w-[420px] mix-blend-lighten min-[2560px]:w-[560px] min-[3200px]:w-[680px] min-[3840px]:w-[820px]"
                         priority
                       />
                       <div className="mt-3 font-[family-name:var(--font-jetbrains-mono)] text-lg tracking-[0.28em] text-neutral-300">
@@ -518,7 +518,7 @@ export default function TvInfoScreen() {
                       alt="QR-код для отзыва о 13x13"
                       width={680}
                       height={680}
-                      className="block h-auto w-[640px]"
+                      className="block h-auto w-[640px] min-[2560px]:w-[860px] min-[3200px]:w-[1020px] min-[3840px]:w-[1180px]"
                       priority
                     />
                   </div>
@@ -660,7 +660,7 @@ export default function TvInfoScreen() {
           </AnimatePresence>
         </section>
 
-        <footer className="absolute bottom-0 left-0 right-0 overflow-hidden border-t-2 border-white/35 bg-white py-3 text-black">
+        <footer className="absolute bottom-0 left-0 right-0 overflow-hidden border-t-2 border-white/35 bg-white py-3 text-black min-[2560px]:py-4 min-[3200px]:py-5">
           <div className="flex whitespace-nowrap">
             <div className="tv-marquee flex shrink-0 items-center gap-8 px-6 font-[family-name:var(--font-oswald)] text-2xl font-black tracking-[0.14em]">
               <span>{activeTicker}</span>
@@ -717,6 +717,28 @@ export default function TvInfoScreen() {
 
             .tv-marquee {
               animation: tvMarquee 24s linear infinite;
+            }
+
+            .tv-shell {
+              font-size: 16px;
+            }
+
+            @media (min-width: 2560px) {
+              .tv-shell {
+                font-size: 20px;
+              }
+            }
+
+            @media (min-width: 3200px) {
+              .tv-shell {
+                font-size: 24px;
+              }
+            }
+
+            @media (min-width: 3840px) {
+              .tv-shell {
+                font-size: 28px;
+              }
             }
           `,
         }}
