@@ -156,7 +156,7 @@ const localBusinessJsonLd = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Стрижка «Пох»",
+              "name": "Стрижка «Машина»",
               "description": "Стрижка под одну насадку машинкой"
             },
             "price": 400,
@@ -222,26 +222,6 @@ const localBusinessJsonLd = {
               "description": "Стрижка детей от 0 до 5 лет"
             },
             "price": 1000,
-            "priceCurrency": "RUB"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Стрижка «Школьник»",
-              "description": "Стрижка для школьников"
-            },
-            "price": 600,
-            "priceCurrency": "RUB"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Стрижка «Подросток»",
-              "description": "Стрижка для подростков от 12 лет"
-            },
-            "price": 800,
             "priceCurrency": "RUB"
           }
         ]
