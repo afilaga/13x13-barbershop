@@ -78,7 +78,7 @@ const localBusinessJsonLd = {
   "@id": `${SITE_URL}/#barbershop`,
   "name": "13x13",
   "legalName": "ИП МАЛХАСЯН ГЕОРГИЙ ГЕОРГИЕВИЧ",
-  "description": "Новый барбершоп в Сочи с честными ценами. Стрижки от 600 ₽. Комплексная стрижка и борода — 1200 ₽. Находимся на Горького 81а, напротив клуба DDX.",
+  "description": "Новый барбершоп в Сочи с честными ценами. Стрижки от 400 ₽. Комплексная стрижка и борода — 1200 ₽. Находимся на Горького 81а, напротив клуба DDX.",
   "url": SITE_URL,
   "logo": `${SITE_URL}/logo_white.webp`,
   "image": [
@@ -117,7 +117,7 @@ const localBusinessJsonLd = {
       "closes": "22:00"
     }
   ],
-  "priceRange": "600-2000 RUB",
+  "priceRange": "400-2000 RUB",
   "currenciesAccepted": "RUB",
   "paymentAccepted": "Cash, Credit Card",
   "sameAs": [
@@ -136,15 +136,41 @@ const localBusinessJsonLd = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Мужская стрижка",
-              "description": "Классические и современные мужские стрижки"
+              "name": "Стрижка «Классика»",
+              "description": "Бока короче, верх длиннее"
             },
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "minPrice": 600,
-              "maxPrice": 1000,
-              "priceCurrency": "RUB"
-            }
+            "price": 600,
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Стрижка «Стильно»",
+              "description": "Фейд с нуля"
+            },
+            "price": 800,
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Стрижка «Пох»",
+              "description": "Стрижка под одну насадку машинкой"
+            },
+            "price": 400,
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Стрижка «Удлиненная»",
+              "description": "Стрижка полностью ножницами"
+            },
+            "price": 1000,
+            "priceCurrency": "RUB"
           }
         ]
       },
@@ -156,34 +182,31 @@ const localBusinessJsonLd = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Оформление бороды и бритье",
-              "description": "Королевское бритье и коррекция бороды"
+              "name": "Моделирование бороды",
+              "description": "Оформление бороды с окантовкой лезвием"
             },
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "minPrice": 600,
-              "maxPrice": 800,
-              "priceCurrency": "RUB"
-            }
-          }
-        ]
-      },
-      {
-        "@type": "OfferCatalog",
-        "name": "Комплексные услуги",
-        "itemListElement": [
+            "price": 600,
+            "priceCurrency": "RUB"
+          },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Комплексная стрижка и борода",
-              "description": "Полный комплекс: мужская стрижка и оформление бороды"
+              "name": "Королевское бритьё",
+              "description": "Традиционное бритье с использованием опасной бритвы и горячего полотенца"
             },
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "price": 1200,
-              "priceCurrency": "RUB"
-            }
+            "price": 800,
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Бритьё машинкой",
+              "description": "Быстрое бритье бороды машинкой"
+            },
+            "price": 400,
+            "priceCurrency": "RUB"
           }
         ]
       },
@@ -195,53 +218,83 @@ const localBusinessJsonLd = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Детская стрижка",
-              "description": "Стрижки для детей от 0 до 12 лет"
+              "name": "Стрижка «Трудный ребёнок»",
+              "description": "Стрижка детей от 0 до 5 лет"
             },
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "minPrice": 600,
-              "maxPrice": 1000,
-              "priceCurrency": "RUB"
-            }
+            "price": 1000,
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Стрижка «Школьник»",
+              "description": "Стрижка для школьников"
+            },
+            "price": 600,
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Стрижка «Подросток»",
+              "description": "Стрижка для подростков от 12 лет"
+            },
+            "price": 800,
+            "priceCurrency": "RUB"
           }
         ]
       },
       {
         "@type": "OfferCatalog",
-        "name": "Тюнинг и окрашивание",
+        "name": "Уход и окрашивание",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Окрашивание и биозавивка",
-              "description": "Стильные решения для волос"
+              "name": "Комплексная стрижка и борода",
+              "description": "Полный комплекс: мужская стрижка и оформление бороды"
+            },
+            "price": 1200,
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Воск «Под ключ»",
+              "description": "Удаление волос воском во всех необходимых зонах"
+            },
+            "price": 500,
+            "priceCurrency": "RUB"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Кудри Stile",
+              "description": "Химическая завивка волос"
             },
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": 800,
+              "minPrice": 1500,
               "maxPrice": 2000,
               "priceCurrency": "RUB"
             }
-          }
-        ]
-      },
-      {
-        "@type": "OfferCatalog",
-        "name": "Детали и уход",
-        "itemListElement": [
+          },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Дополнительные услуги",
-              "description": "Воск, брови, пилинг головы"
+              "name": "Окрашивание волос",
+              "description": "Профессиональное окрашивание по всей длине"
             },
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": 100,
-              "maxPrice": 500,
+              "minPrice": 1500,
+              "maxPrice": 2000,
               "priceCurrency": "RUB"
             }
           }
