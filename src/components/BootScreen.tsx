@@ -6,6 +6,7 @@ import Image from 'next/image';
 const GradientBlinds = dynamic(() => import('@/components/GradientBlinds'), { ssr: false });
 
 const PHRASES = [
+  "Позволь себе немного чаще.",
   "Затачиваем ножницы",
   "чистим цены от мусора",
   "подбираем насадку",

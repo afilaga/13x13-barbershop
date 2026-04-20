@@ -239,6 +239,9 @@ export default function Home() {
                 <div className="mt-2 font-[family-name:var(--font-jetbrains-mono)] font-light text-sm md:text-base tracking-widest text-[#a3a3a3] uppercase self-center lg:self-start">
                   ЧЕСТНЫЕ ЦЕНЫ
                 </div>
+                <div className="mt-3 font-[family-name:var(--font-oswald)] text-2xl md:text-4xl lg:text-5xl font-black tracking-tight normal-case text-white self-center lg:self-start text-center lg:text-left">
+                  Позволь себе немного чаще.
+                </div>
               </motion.div>
 
               <div className="flex flex-col gap-2 shrink-0 items-center lg:items-start">

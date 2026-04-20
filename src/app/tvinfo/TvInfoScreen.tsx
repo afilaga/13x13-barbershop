@@ -249,6 +249,9 @@ export default function TvInfoScreen() {
                       <div className="mt-3 font-[family-name:var(--font-jetbrains-mono)] text-lg tracking-[0.28em] text-neutral-300">
                         ЧЕСТНЫЕ ЦЕНЫ
                       </div>
+                      <div className="mt-4 font-[family-name:var(--font-oswald)] text-[2.6rem] leading-[0.95] font-black tracking-tight text-white normal-case">
+                        Позволь себе немного чаще.
+                      </div>
                     </div>
 
                     <div className="flex flex-col gap-3">
