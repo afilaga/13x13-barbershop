@@ -178,8 +178,8 @@ export default function TvInfoScreen() {
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.22),transparent_34%),radial-gradient(circle_at_52%_22%,rgba(42,87,255,0.28),transparent_40%),radial-gradient(circle_at_78%_72%,rgba(255,17,17,0.26),transparent_42%),linear-gradient(135deg,rgba(0,0,0,0.14),rgba(0,0,0,0.76))]" />
 
       <div className="relative z-10 flex h-full flex-col">
-        <header className="border-b-2 border-white/35 px-8 py-5 min-[2560px]:px-12 min-[3200px]:px-16 min-[3840px]:px-20">
-          <div className="mx-auto flex w-full max-w-[min(95vw,3600px)] items-center justify-between gap-6">
+        <header className="border-b-2 border-white/35 px-8 py-6 min-[2560px]:px-12 min-[3200px]:px-16 min-[3840px]:px-20">
+          <div className="mx-auto flex w-full max-w-[min(95vw,3600px)] items-center justify-between gap-8">
             <Image
               src="/logo_white.webp"
               alt="13x13"
@@ -189,13 +189,13 @@ export default function TvInfoScreen() {
               priority
             />
 
-            <div className="flex items-center gap-4">
-              <div className="rounded-none border border-white/35 bg-black/55 px-4 py-2 font-[family-name:var(--font-jetbrains-mono)] text-sm font-bold tracking-[0.14em] text-neutral-300">
-                <MapPin className="mr-2 inline h-4 w-4 align-[-2px]" />
+            <div className="flex items-center gap-5">
+              <div className="rounded-none border border-white/35 bg-black/65 px-5 py-3 font-[family-name:var(--font-jetbrains-mono)] text-base font-bold tracking-[0.16em] text-neutral-100 min-[2560px]:text-xl min-[3200px]:text-2xl min-[3840px]:text-[2rem]">
+                <MapPin className="mr-3 inline h-5 w-5 align-[-3px] min-[2560px]:h-6 min-[2560px]:w-6 min-[3200px]:h-7 min-[3200px]:w-7" />
                 СОЧИ • ГОРЬКОГО 81А
               </div>
-              <div className="rounded-none border border-white/35 bg-black/55 px-4 py-2 font-[family-name:var(--font-jetbrains-mono)] text-sm font-bold tracking-[0.14em] text-neutral-300">
-                <Clock3 className="mr-2 inline h-4 w-4 align-[-2px]" />
+              <div className="rounded-none border border-white/35 bg-black/65 px-5 py-3 font-[family-name:var(--font-jetbrains-mono)] text-base font-bold tracking-[0.16em] text-neutral-100 min-[2560px]:text-xl min-[3200px]:text-2xl min-[3840px]:text-[2rem]">
+                <Clock3 className="mr-3 inline h-5 w-5 align-[-3px] min-[2560px]:h-6 min-[2560px]:w-6 min-[3200px]:h-7 min-[3200px]:w-7" />
                 {timeLabel}
               </div>
             </div>
@@ -233,12 +233,12 @@ export default function TvInfoScreen() {
                 transition={{ duration: 0.65 }}
                 className="grid h-full grid-cols-12 gap-8 items-end"
               >
-                <div className="col-span-8 flex flex-col justify-center">
+                <div className="col-span-7 flex flex-col justify-center">
                   <div className="mb-5 w-fit bg-red-600 px-8 py-3 font-[family-name:var(--font-oswald)] text-4xl font-black tracking-[0.14em] text-white brutal-border border-white shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
                     ДОБРО ПОЖАЛОВАТЬ!
                   </div>
 
-                  <div className="mb-10 flex items-center gap-10">
+                  <div className="mb-10 flex items-start gap-10">
                     <div className="flex shrink-0 flex-col items-start">
                       <Image
                         src="/logo_white.webp"
@@ -251,17 +251,17 @@ export default function TvInfoScreen() {
                       <div className="mt-3 font-[family-name:var(--font-jetbrains-mono)] text-lg tracking-[0.28em] text-neutral-300">
                         ЧЕСТНЫЕ ЦЕНЫ
                       </div>
-                      <div className="mt-4 font-[family-name:var(--font-oswald)] text-[2.6rem] leading-[0.95] font-black tracking-tight text-white normal-case">
-                        Позволь себе немного чаще.
-                      </div>
                     </div>
 
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-1 flex-col gap-3 self-center">
                       <div className="w-fit bg-black px-8 py-4 font-[family-name:var(--font-oswald)] text-[5.5rem] leading-[0.8] font-black tracking-tighter text-white brutal-border border-white shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
                         БАРБЕРШОП
                       </div>
                       <div className="ml-8 w-fit bg-white px-8 py-4 font-[family-name:var(--font-oswald)] text-[5.5rem] leading-[0.8] font-black tracking-tighter text-black brutal-border border-black shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
                         В СОЧИ
+                      </div>
+                      <div className="mt-6 ml-12 max-w-[26rem] bg-black/70 px-6 py-5 font-[family-name:var(--font-oswald)] text-[3rem] leading-[0.95] font-black tracking-tight text-white normal-case brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+                        Позволь себе немного чаще.
                       </div>
                     </div>
                   </div>
@@ -277,7 +277,7 @@ export default function TvInfoScreen() {
                   </div>
                 </div>
 
-                <div className="col-span-4 flex flex-col justify-center gap-6">
+                <div className="col-span-5 flex flex-col justify-center gap-6">
                   <div className="bg-black/90 p-6 brutal-border border-white shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
                     <div className="font-[family-name:var(--font-oswald)] text-2xl font-black tracking-[0.14em] text-neutral-400">
                       ЛОКАЦИЯ
