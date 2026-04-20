@@ -37,7 +37,9 @@ const GradientBlinds = ({
   spotlightOpacity = 1,
   distortAmount = 0,
   shineDirection = 'left',
-  mixBlendMode = 'lighten'
+  mixBlendMode = 'lighten',
+  antialias = true,
+  shaderPrecision = 'highp'
 }) => {
   const containerRef = useRef(null);
   const rafRef = useRef(null);
@@ -58,7 +60,7 @@ const GradientBlinds = ({
     const renderer = new Renderer({
       dpr: dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
       alpha: true,
-      antialias: true
+      antialias
     });
     rendererRef.current = renderer;
     const gl = renderer.gl;
@@ -82,7 +84,7 @@ void main() {
 
     const fragment = `
 #ifdef GL_ES
-precision mediump float;
+precision ${shaderPrecision} float;
 #endif
 
 uniform vec3  iResolution;
@@ -341,7 +343,9 @@ void main() {
     spotlightOpacity,
     distortAmount,
     shineDirection,
-    onReady
+    onReady,
+    antialias,
+    shaderPrecision
   ]);
 
   return (

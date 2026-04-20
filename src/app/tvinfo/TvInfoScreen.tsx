@@ -159,17 +159,19 @@ export default function TvInfoScreen() {
         <GradientBlinds
           className="absolute inset-0"
           dpr={1}
+          antialias={false}
+          shaderPrecision="highp"
           gradientColors={["#ffffff", "#2450ff", "#ff1c1c", "#ffffff"]}
           angle={-75}
-          noise={0.42}
-          blindCount={50}
-          blindMinWidth={50}
+          noise={0.12}
+          blindCount={18}
+          blindMinWidth={90}
           mouseDampening={0}
           mirrorGradient={false}
-          spotlightRadius={0.82}
-          spotlightSoftness={0.78}
-          spotlightOpacity={1}
-          distortAmount={1.15}
+          spotlightRadius={0.62}
+          spotlightSoftness={0.85}
+          spotlightOpacity={0.72}
+          distortAmount={0}
           shineDirection="left"
         />
       </div>
