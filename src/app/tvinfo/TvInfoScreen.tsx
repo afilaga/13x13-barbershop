@@ -194,8 +194,8 @@ export default function TvInfoScreen() {
                 <MapPin className="mr-3 inline h-6 w-6 align-[-4px] min-[2560px]:h-8 min-[2560px]:w-8 min-[3200px]:h-9 min-[3200px]:w-9 min-[3840px]:h-10 min-[3840px]:w-10" />
                 СОЧИ • ГОРЬКОГО 81А
               </div>
-              <div className="rounded-none border border-white/35 bg-black/72 px-6 py-4 font-[family-name:var(--font-jetbrains-mono)] text-xl font-bold tracking-[0.16em] text-neutral-100 min-[2560px]:text-[1.9rem] min-[3200px]:text-[2.3rem] min-[3840px]:text-[2.8rem]">
-                <Clock3 className="mr-3 inline h-6 w-6 align-[-4px] min-[2560px]:h-8 min-[2560px]:w-8 min-[3200px]:h-9 min-[3200px]:w-9 min-[3840px]:h-10 min-[3840px]:w-10" />
+              <div className="rounded-none border border-white/35 bg-black/72 px-6 py-3 font-[family-name:var(--font-jetbrains-mono)] text-[1.9rem] font-black tracking-[0.16em] leading-none text-neutral-100 min-[2560px]:text-[2.5rem] min-[3200px]:text-[3rem] min-[3840px]:text-[3.6rem]">
+                <Clock3 className="mr-3 inline h-8 w-8 align-[-6px] min-[2560px]:h-10 min-[2560px]:w-10 min-[3200px]:h-12 min-[3200px]:w-12 min-[3840px]:h-14 min-[3840px]:w-14" />
                 {timeLabel}
               </div>
             </div>
