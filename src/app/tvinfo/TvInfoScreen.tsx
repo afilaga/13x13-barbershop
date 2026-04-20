@@ -86,6 +86,7 @@ export default function TvInfoScreen() {
   const [isBooting, setIsBooting] = useState(true);
   const [bootCycle, setBootCycle] = useState(0);
   const [timeLabel, setTimeLabel] = useState("--:--:--");
+  const [dateLabel, setDateLabel] = useState("--.--.----");
 
   const orderedPriceCategories = useMemo(
     () =>
@@ -102,7 +103,11 @@ export default function TvInfoScreen() {
   const isExtraDenseCategory = activeCategory?.id === "details-and-care";
 
   useEffect(() => {
-    const updateTime = () => setTimeLabel(new Date().toLocaleTimeString("ru-RU"));
+    const updateTime = () => {
+      const now = new Date();
+      setTimeLabel(now.toLocaleTimeString("ru-RU"));
+      setDateLabel(now.toLocaleDateString("ru-RU"));
+    };
     updateTime();
     const timer = window.setInterval(updateTime, 1000);
     return () => window.clearInterval(timer);
@@ -197,6 +202,8 @@ export default function TvInfoScreen() {
               <div className="rounded-none border border-white/35 bg-black/72 px-6 py-3 font-[family-name:var(--font-jetbrains-mono)] text-[1.9rem] font-black tracking-[0.16em] leading-none text-neutral-100 min-[2560px]:text-[2.5rem] min-[3200px]:text-[3rem] min-[3840px]:text-[3.6rem]">
                 <Clock3 className="mr-3 inline h-8 w-8 align-[-6px] min-[2560px]:h-10 min-[2560px]:w-10 min-[3200px]:h-12 min-[3200px]:w-12 min-[3840px]:h-14 min-[3840px]:w-14" />
                 {timeLabel}
+                <span className="mx-4 inline-block opacity-60">•</span>
+                {dateLabel}
               </div>
             </div>
           </div>
