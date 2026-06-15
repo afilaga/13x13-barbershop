@@ -57,11 +57,31 @@ const GradientBlinds = ({
     if (!container) return;
     hasReportedReadyRef.current = false;
 
-    const renderer = new Renderer({
-      dpr: dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
-      alpha: true,
-      antialias
-    });
+    const testCanvas = document.createElement('canvas');
+    const hasWebGL =
+      Boolean(testCanvas.getContext('webgl')) ||
+      Boolean(testCanvas.getContext('experimental-webgl'));
+    if (!hasWebGL) {
+      if (typeof onReady === 'function') {
+        onReady();
+      }
+      return;
+    }
+
+    let renderer;
+    try {
+      renderer = new Renderer({
+        dpr: dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
+        alpha: true,
+        antialias
+      });
+    } catch {
+      console.warn('GradientBlinds disabled: WebGL context is unavailable.');
+      if (typeof onReady === 'function') {
+        onReady();
+      }
+      return;
+    }
     rendererRef.current = renderer;
     const gl = renderer.gl;
     const canvas = gl.canvas;

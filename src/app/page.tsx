@@ -1,55 +1,50 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Scissors, ShieldAlert, Clock, MapPin, Search, Menu, X, ChevronDown } from "lucide-react";
+import { ArrowUpRight, Scissors, ShieldAlert, Clock, MapPin, Search, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import BootScreen from "@/components/BootScreen";
+import { haircutPriceNote, prices } from "@/data/prices";
 
 const GradientBlinds = dynamic(() => import('@/components/GradientBlinds'), { ssr: false });
 
-// Helper component for the brutalist accordion price categories
-const PriceCategory = ({ title, items }: { title: string, items: { id: string, name: string, price: number, desc: string }[] }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const sortedItems = [...items].sort((a, b) => a.price - b.price);
-
+const PriceCategoryBlock = ({ category }: { category: (typeof prices)[number] }) => {
   return (
-    <div className="mb-4 w-full">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-6 md:p-8 bg-black border-4 border-neutral-800 hover:border-white transition-colors uppercase font-black text-xl md:text-3xl text-neutral-300 hover:text-white group brutal-shadow-inverse focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50"
-      >
-        <span>{title}</span>
-        <ChevronDown className={`w-8 h-8 md:w-12 md:h-12 transform transition-transform ${isOpen ? 'rotate-180 text-white' : 'text-neutral-600 group-hover:text-white'}`} />
-      </button>
+    <section className="bg-black brutal-border border-white shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] md:shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
+      <div className="flex items-end justify-between gap-4 border-b-[3px] border-white p-4 md:p-6">
+        <h3 className="font-[family-name:var(--font-oswald)] text-3xl md:text-5xl font-black leading-none tracking-tight text-white">
+          {category.category}
+        </h3>
+        <span className="hidden h-4 w-4 shrink-0 bg-white md:block" />
+      </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden"
+      <div className="divide-y divide-dashed divide-neutral-700">
+        {category.items.map((item) => (
+          <div
+            key={item.id}
+            className="group grid grid-cols-1 gap-3 p-4 transition-colors hover:bg-white hover:text-black md:grid-cols-[1fr_auto] md:items-center md:gap-6 md:p-6"
           >
-            <div className="p-6 md:p-10 bg-neutral-900 border-4 border-t-0 border-neutral-800 space-y-6">
-              {sortedItems.map(item => (
-                <div key={item.id} className="flex flex-col group/item">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-dashed border-neutral-700 pb-4 group-hover/item:border-white transition-colors gap-2">
-                    <span className="font-bold text-xl md:text-3xl uppercase text-neutral-300 group-hover/item:text-white font-[family-name:var(--font-oswald)]">{item.name}</span>
-                    <span className="font-black text-white text-2xl md:text-4xl font-[family-name:var(--font-oswald)] bg-black px-4 py-2 border-2 border-neutral-800 md:ml-4 shrink-0 transition-transform group-hover/item:scale-105 group-hover/item:border-white">
-                      {item.price} ₽
-                    </span>
-                  </div>
-                  <span className="text-sm md:text-lg text-neutral-400 mt-3 font-[family-name:var(--font-jetbrains-mono)] font-semibold">{item.desc}</span>
+            <div>
+              <div className="font-[family-name:var(--font-oswald)] text-2xl md:text-4xl font-black leading-tight tracking-tight text-white group-hover:text-black">
+                {item.name}
+              </div>
+              {item.desc && (
+                <div className="mt-1 font-[family-name:var(--font-jetbrains-mono)] text-sm md:text-base font-bold leading-snug text-neutral-400 normal-case group-hover:text-neutral-700">
+                  {item.desc}
                 </div>
-              ))}
+              )}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+
+            <div className="w-fit bg-white px-3 py-2 font-[family-name:var(--font-oswald)] text-3xl md:text-5xl font-black leading-none text-black brutal-border border-white group-hover:border-black md:justify-self-end">
+              {item.price}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 
@@ -60,45 +55,6 @@ export default function Home() {
   const handleBootComplete = () => {
     setIsBooting(false);
   };
-
-  // Полная база услуг с разбивкой по категориям
-  const menu = useMemo(() => ({
-    hair: [
-      { id: 'h1', name: '«Удлиненная»', price: 1000, desc: 'Полностью ножницами. Мытье + укладка' },
-      { id: 'h2', name: '«Стильно»', price: 800, desc: 'Фейд с 0. Мытье + укладка' },
-      { id: 'h3', name: '«Классика»', price: 600, desc: 'Бока короче / верх длиннее. Мытье + укладка' },
-      { id: 'h4', name: '«Машина»', price: 400, desc: 'Под 1 насадку / машинкой. Быстро и ровно' },
-      { id: 'h5', name: 'Мытьё головы', price: 200, desc: 'Освежиться перед движем' },
-    ],
-    beard: [
-      { id: 'b1', name: 'Королевское бритьё', price: 800, desc: 'С распариванием и кайфом' },
-      { id: 'b2', name: 'Моделирование бороды', price: 600, desc: 'С окантовкой лезвием' },
-      { id: 'b3', name: 'Бритьё', price: 400, desc: 'Машинкой' },
-      { id: 'b4', name: 'Оформление усов', price: 200, desc: 'Четкие контуры' },
-    ],
-    kids: [
-      { id: 'k1', name: 'Трудный ребёнок', price: 1000, desc: '0–5 лет. Найдем подход' },
-    ],
-    tuning: [
-      { id: 't1', name: 'Окрашивание (по длине)', price: 2000, desc: 'От 1500 до 2000 ₽' },
-      { id: 't2', name: 'Кудри Stile', price: 1500, desc: 'Короткие/длинные волосы: 1500/2000 руб' },
-      { id: 't3', name: 'Обесцвечивание', price: 1300, desc: 'Стать блондом' },
-      { id: 't4', name: 'Тонирование (1 зона)', price: 1000, desc: 'Скрыть седину. От 800 до 1000 ₽' },
-    ],
-    details: [
-      { id: 'd1', name: 'Уход «На максималках»', price: 700, desc: 'Маска + патчи' },
-      { id: 'd2', name: 'Уход «Фейс контроль»', price: 500, desc: 'Альгинатная / тканевая маска' },
-      { id: 'd3', name: 'Воск «под ключ»', price: 500, desc: 'Уберем лишнее везде' },
-      { id: 'd4', name: 'Хайр-тату', price: 300, desc: 'Полоски, молнии' },
-      { id: 'd5', name: 'Коррекция бровей воском', price: 250, desc: 'Четкая форма' },
-      { id: 'd6', name: 'Пилинг головы/лица', price: 200, desc: 'Чистая кожа, свежая голова' },
-      { id: 'd7', name: 'Воск (1 зона)', price: 200, desc: 'Нос / уши / брови' },
-      { id: 'd8', name: 'Уход «Pro-взгляд»', price: 200, desc: 'Патчи под глаза' },
-      { id: 'd9', name: 'Брови', price: 100, desc: 'Четкий взгляд' },
-      { id: 'd10', name: 'Пробор', price: 100, desc: 'Выбритый пробор' },
-    ]
-  }), []);
-
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black uppercase flex flex-col overflow-x-hidden">
@@ -119,6 +75,7 @@ export default function Home() {
               width={120}
               height={60}
               className="block h-[35px] md:h-[50px] w-auto mix-blend-lighten"
+              style={{ width: "auto" }}
               priority
             />
           </a>
@@ -133,7 +90,7 @@ export default function Home() {
               +7 900 287-13-13
             </a>
             <a href="https://dikidi.net/#widget=207607" className="bg-white text-black px-4 py-2 hover:-translate-y-0.5 hover:-translate-x-0.5 brutal-border border-white shadow-[4px_4px_0px_0px_#fff] transition-transform ml-2">
-              ЗАПИСЬ
+              ЗАПИСАТЬСЯ
             </a>
           </div>
 
@@ -233,6 +190,7 @@ export default function Home() {
                     width={600}
                     height={600}
                     className="block w-[70vw] sm:w-[60vw] lg:w-[350px] xl:w-[450px] h-auto object-contain object-center mix-blend-lighten relative z-10"
+                    style={{ height: "auto" }}
                     priority
                   />
                 </h1>
@@ -316,20 +274,19 @@ export default function Home() {
           </p>
         </div>
 
-        {/* ЗАГОЛОВОК ПРАЙСА */}
         <div className="w-full mb-12 border-b-[6px] border-white pb-6">
           <h2 className="font-[family-name:var(--font-oswald)] text-4xl md:text-7xl lg:text-9xl font-black uppercase text-left tracking-tighter mix-blend-difference">
             ВЕСЬ РАСКЛАД
           </h2>
+          <p className="mt-5 max-w-3xl font-[family-name:var(--font-jetbrains-mono)] text-sm md:text-lg font-bold leading-relaxed text-neutral-400 normal-case">
+            {haircutPriceNote}
+          </p>
         </div>
 
-        {/* АККОРДЕОНЫ КАТЕГОРИЙ */}
-        <div className="flex flex-col gap-6 md:gap-8 max-w-4xl mx-auto w-full mb-20 md:mb-40">
-          <PriceCategory title="Мужские стрижки" items={menu.hair} />
-          <PriceCategory title="Борода и Бритье" items={menu.beard} />
-          <PriceCategory title="Тюнинг (Химия / Цвет)" items={menu.tuning} />
-          <PriceCategory title="Детали и Уход" items={menu.details} />
-          <PriceCategory title="Мелкие (Дети)" items={menu.kids} />
+        <div className="grid w-full grid-cols-1 gap-8 md:gap-10 xl:grid-cols-2 mb-20 md:mb-40">
+          {prices.map((category) => (
+            <PriceCategoryBlock key={category.id} category={category} />
+          ))}
         </div>
 
 
@@ -474,6 +431,7 @@ export default function Home() {
               width={300}
               height={300}
               className="w-full max-w-[200px] md:max-w-[280px] h-auto mix-blend-lighten"
+              style={{ height: "auto" }}
             />
           </div>
 

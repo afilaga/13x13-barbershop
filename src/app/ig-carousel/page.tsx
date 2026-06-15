@@ -119,7 +119,7 @@ export default function IGCarouselGenerator() {
                   <li className="flex gap-3"><span className="text-red-600">01</span> F12 (Inspect)</li>
                   <li className="flex gap-3"><span className="text-red-600">02</span> Ctrl+Shift+C</li>
                   <li className="flex gap-3"><span className="text-red-600">03</span> Select slide</li>
-                  <li className="flex gap-3 whitespace-pre-wrap"><span className="text-red-600">04</span> Ctrl+Shift+P -{">"}<br/>"Capture node screenshot"</li>
+                  <li className="flex gap-3 whitespace-pre-wrap"><span className="text-red-600">04</span> Ctrl+Shift+P -{">"}<br/>&quot;Capture node screenshot&quot;</li>
                </ul>
             </div>
           </div>

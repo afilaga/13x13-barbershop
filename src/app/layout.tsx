@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Oswald, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
+import { prices } from "@/data/prices";
 import "./globals.css";
 
 const SITE_URL = "https://13x13.ru";
@@ -18,10 +19,51 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["cyrillic", "latin"],
 });
 
+const siteDescription =
+  "13x13 — барбершоп в Сочи с честной ценой, сильным сервисом и мужскими стрижками без переплаты за лишнее. Стрижки от 400 ₽, комплекс «под ключ» — 2000 ₽.";
+
+function getPriceSchema(price: string) {
+  const amounts = price.match(/\d+/g)?.map(Number) ?? [];
+
+  if (amounts.length > 1 && amounts[0] !== amounts[amounts.length - 1]) {
+    return {
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": Math.min(...amounts),
+        "maxPrice": Math.max(...amounts),
+        "priceCurrency": "RUB",
+      },
+    };
+  }
+
+  return {
+    "price": amounts[0] ?? price,
+    "priceCurrency": "RUB",
+  };
+}
+
+const serviceOfferCatalog = {
+  "@type": "OfferCatalog",
+  "name": "Услуги барбершопа 13x13",
+  "itemListElement": prices.map((category) => ({
+    "@type": "OfferCatalog",
+    "name": category.category,
+    "itemListElement": category.items.map((item) => ({
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": item.name,
+        ...(item.desc ? { "description": item.desc } : {}),
+      },
+      ...getPriceSchema(item.price),
+    })),
+  })),
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "13x13 — барбершоп в Сочи на Горького 81а",
-  description: "13x13 — барбершоп в Сочи с честной ценой, сильным сервисом и мужскими стрижками без переплаты за лишнее. Стрижки от 600 ₽, комплексная стрижка и борода — 1200 ₽.",
+  description: siteDescription,
   icons: {
     icon: [
       { url: "/favicon_white.svg", media: "(prefers-color-scheme: dark)" },
@@ -41,7 +83,7 @@ export const metadata: Metadata = {
     locale: "ru_RU",
     url: SITE_URL,
     title: "13x13 — барбершоп в Сочи на Горького 81а",
-    description: "13x13 — барбершоп в Сочи с честной ценой, сильным сервисом и мужскими стрижками без переплаты за лишнее. Стрижки от 600 ₽, комплексная стрижка и борода — 1200 ₽.",
+    description: siteDescription,
     siteName: "13x13",
     images: [
       {
@@ -55,7 +97,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "13x13 — барбершоп в Сочи на Горького 81а",
-    description: "13x13 — барбершоп в Сочи с честной ценой, сильным сервисом и мужскими стрижками без переплаты за лишнее. Стрижки от 600 ₽, комплексная стрижка и борода — 1200 ₽.",
+    description: siteDescription,
     images: ["/logo_black.webp"],
   },
   keywords: [
@@ -117,171 +159,14 @@ const localBusinessJsonLd = {
       "closes": "22:00"
     }
   ],
-  "priceRange": "600-2000 RUB",
+  "priceRange": "100-3000 RUB",
   "currenciesAccepted": "RUB",
   "paymentAccepted": "Cash, Credit Card",
   "sameAs": [
     "https://dikidi.net/#widget=207607",
     "https://yandex.ru/maps/org/13x13/92378568380/"
   ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Услуги барбершопа 13x13",
-    "itemListElement": [
-      {
-        "@type": "OfferCatalog",
-        "name": "Мужские стрижки",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Стрижка «Классика»",
-              "description": "Бока короче, верх длиннее"
-            },
-            "price": 600,
-            "priceCurrency": "RUB"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Стрижка «Стильно»",
-              "description": "Фейд с нуля"
-            },
-            "price": 800,
-            "priceCurrency": "RUB"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Стрижка «Машина»",
-              "description": "Стрижка под одну насадку машинкой"
-            },
-            "price": 400,
-            "priceCurrency": "RUB"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Стрижка «Удлиненная»",
-              "description": "Стрижка полностью ножницами"
-            },
-            "price": 1000,
-            "priceCurrency": "RUB"
-          }
-        ]
-      },
-      {
-        "@type": "OfferCatalog",
-        "name": "Борода и бритье",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Моделирование бороды",
-              "description": "Оформление бороды с окантовкой лезвием"
-            },
-            "price": 600,
-            "priceCurrency": "RUB"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Королевское бритьё",
-              "description": "Традиционное бритье с использованием опасной бритвы и горячего полотенца"
-            },
-            "price": 800,
-            "priceCurrency": "RUB"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Бритьё машинкой",
-              "description": "Быстрое бритье бороды машинкой"
-            },
-            "price": 400,
-            "priceCurrency": "RUB"
-          }
-        ]
-      },
-      {
-        "@type": "OfferCatalog",
-        "name": "Детские стрижки",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Стрижка «Трудный ребёнок»",
-              "description": "Стрижка детей от 0 до 5 лет"
-            },
-            "price": 1000,
-            "priceCurrency": "RUB"
-          }
-        ]
-      },
-      {
-        "@type": "OfferCatalog",
-        "name": "Уход и окрашивание",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Комплексная стрижка и борода",
-              "description": "Полный комплекс: мужская стрижка и оформление бороды"
-            },
-            "price": 1200,
-            "priceCurrency": "RUB"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Воск «Под ключ»",
-              "description": "Удаление волос воском во всех необходимых зонах"
-            },
-            "price": 500,
-            "priceCurrency": "RUB"
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Кудри Stile",
-              "description": "Химическая завивка волос"
-            },
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "minPrice": 1500,
-              "maxPrice": 2000,
-              "priceCurrency": "RUB"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Окрашивание волос",
-              "description": "Профессиональное окрашивание по всей длине"
-            },
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "minPrice": 1500,
-              "maxPrice": 2000,
-              "priceCurrency": "RUB"
-            }
-          }
-        ]
-      }
-    ]
-  }
+  "hasOfferCatalog": serviceOfferCatalog
 };
 
 export default function RootLayout({
@@ -314,6 +199,7 @@ export default function RootLayout({
 
         <noscript>
           <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={`https://mc.yandex.ru/watch/${YANDEX_METRIKA_ID}`} style={{ position: 'absolute', left: '-9999px' }} alt="" />
           </div>
         </noscript>

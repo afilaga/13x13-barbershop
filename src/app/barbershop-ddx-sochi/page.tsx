@@ -1,4 +1,4 @@
-import { ArrowUpRight, MapPin, Clock, Scissors, Info } from "lucide-react";
+import { ArrowUpRight, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";

@@ -92,6 +92,7 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
           width={200}
           height={100}
           className="w-[120px] md:w-[200px] h-auto mix-blend-lighten opacity-80"
+          style={{ height: "auto" }}
           priority
         />
       </motion.div>

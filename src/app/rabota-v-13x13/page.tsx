@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, Scissors, Star, Users, Zap, Briefcase, CheckCircle2, BarChart3, Clock, Wallet, Hammer, TrendingUp, Phone, Send, Loader2 } from "lucide-react";
+import { Scissors, Zap, CheckCircle2, Clock, Wallet, TrendingUp, Phone, Send, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";

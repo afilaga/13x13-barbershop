@@ -25,7 +25,7 @@ const TV_NOTES = [
   "SEGA, NINTENDO, APPLE II И ТАМАГОЧИ В ЗОНЕ ОЖИДАНИЯ.",
   "ХОТИТЕ КОФЕ? СПРАВА КОФЕЙНЫЙ АППАРАТ.",
   "ВСЁ ПОНРАВИЛОСЬ? ОСТАВЬТЕ ОТЗЫВ.",
-  "ПОД КЛЮЧ — ПОЛНЫЙ КОМПЛЕКС УХОДА ЗА 2000 ₽.",
+  "ПОД КЛЮЧ — СТРИЖКА, БОРОДА, ВОСК И ПАТЧИ ЗА 2000 ₽.",
 ];
 
 const PHILOSOPHY_CARDS = [
@@ -421,10 +421,10 @@ export default function TvInfoScreen() {
                     ПОД <span className="text-red-600">КЛЮЧ</span>
                   </div>
                   <div className="max-w-4xl font-[family-name:var(--font-jetbrains-mono)] text-[1.6rem] leading-relaxed text-neutral-200 normal-case">
-                    Полный комплекс ухода головы и лица за 2000 ₽: чтобы не выбирать по отдельности, а просто расслабиться и получить весь спектр.
+                    Стрижка, борода, воск все зоны и патчи за 2000 ₽: чтобы не выбирать по отдельности, а сразу взять полный сценарий.
                   </div>
                   <div className="mt-8 flex flex-wrap gap-4">
-                    {["ПИЛИНГ", "МАСКА", "ПАТЧИ", "ВОСК", "ФИНИШНЫЙ УХОД"].map((text) => (
+                    {["СТРИЖКА", "БОРОДА", "ВОСК ВСЕ ЗОНЫ", "ПАТЧИ"].map((text) => (
                       <div
                         key={text}
                         className="bg-black/90 px-5 py-4 font-[family-name:var(--font-oswald)] text-2xl font-black tracking-wide text-white brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
@@ -441,7 +441,7 @@ export default function TvInfoScreen() {
                       2000 ₽
                     </div>
                     <div className="mt-4 font-[family-name:var(--font-jetbrains-mono)] text-xl leading-relaxed normal-case">
-                      Один готовый сценарий ухода вместо набора отдельных опций.
+                      Один готовый сценарий вместо набора отдельных опций.
                     </div>
                   </div>
                   <div className="bg-black/90 p-6 text-white brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
@@ -449,7 +449,7 @@ export default function TvInfoScreen() {
                       ПРОСТО СКАЖИТЕ:
                     </div>
                     <div className="mt-4 font-[family-name:var(--font-jetbrains-mono)] text-xl leading-relaxed text-neutral-300 normal-case">
-                      «Мне под ключ» — и мастер соберёт полный комплекс ухода головы и лица.
+                      «Мне под ключ» — и мастер соберёт стрижку, бороду, воск и патчи в один визит.
                     </div>
                   </div>
                 </div>
