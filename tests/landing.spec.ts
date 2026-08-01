@@ -24,3 +24,24 @@ test('mobile hero CTA is visible', async ({ page }) => {
     const cta = page.getByRole('link', { name: /записаться/i }).first();
     await expect(cta).toBeVisible();
 });
+
+test('mobile homepage does not show a blocking preload screen', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    await expect(page.getByRole('heading', { name: /барбершоп/i }).first()).toBeVisible();
+    await expect(page.getByTestId('desktop-preloader')).not.toBeVisible();
+    await expect(page.locator('canvas')).toHaveCount(0);
+});
+
+test('desktop homepage keeps the branded preload screen', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    await expect(page.getByTestId('desktop-preloader')).toBeVisible();
+});
+
+test('native mobile menu opens without client hydration', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    await page.locator('summary[aria-label="Открыть меню"]').click();
+    await expect(page.getByRole('link', { name: 'ГАЛЕРЕЯ' })).toBeVisible();
+});

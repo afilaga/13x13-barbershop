@@ -1,15 +1,8 @@
-"use client";
-
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Scissors, ShieldAlert, Clock, MapPin, Search, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import BootScreen from "@/components/BootScreen";
+import DesktopPreloader from "@/components/DesktopPreloader";
 import { haircutPriceNote, prices } from "@/data/prices";
-
-const GradientBlinds = dynamic(() => import('@/components/GradientBlinds'), { ssr: false });
 
 const PriceCategoryBlock = ({ category }: { category: (typeof prices)[number] }) => {
   return (
@@ -49,18 +42,9 @@ const PriceCategoryBlock = ({ category }: { category: (typeof prices)[number] })
 };
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isBooting, setIsBooting] = useState(true);
-
-  const handleBootComplete = () => {
-    setIsBooting(false);
-  };
-
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black uppercase flex flex-col overflow-x-hidden">
-      <AnimatePresence>
-        {isBooting && <BootScreen onComplete={handleBootComplete} />}
-      </AnimatePresence>
+      <DesktopPreloader />
 
       {/* 
         Aesthetic Anchor: Solid brutalist navigation 
@@ -76,6 +60,7 @@ export default function Home() {
               height={60}
               className="block h-[35px] md:h-[50px] w-auto mix-blend-lighten"
               style={{ width: "auto" }}
+              fetchPriority="high"
               priority
             />
           </a>
@@ -94,42 +79,34 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="lg:hidden relative z-50 p-2 bg-white text-black brutal-border border-black shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] focus-visible:outline-none"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle Menu"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" strokeWidth={3} /> : <Menu className="w-6 h-6" strokeWidth={3} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu Dropdown */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden absolute top-full left-0 right-0 bg-black brutal-border-b border-t-0 overflow-hidden shadow-2xl"
+          {/* Native mobile menu: interactive without hydrating the whole page. */}
+          <details className="group lg:hidden">
+            <summary
+              className="relative z-50 list-none cursor-pointer p-2 bg-white text-black brutal-border border-black shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] focus-visible:outline-none [&::-webkit-details-marker]:hidden"
+              aria-label="Открыть меню"
             >
+              <Menu className="w-6 h-6 group-open:hidden" strokeWidth={3} />
+              <X className="hidden w-6 h-6 group-open:block" strokeWidth={3} />
+            </summary>
+
+            <div className="absolute top-full left-0 right-0 bg-black brutal-border-b border-t-0 overflow-hidden shadow-2xl">
               <div className="flex flex-col gap-6 font-[family-name:var(--font-oswald)] font-bold text-3xl uppercase tracking-widest p-6 pb-10">
-                <a href="#price" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit">Услуги</a>
-                <a href="#about" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit">Философия</a>
-                <Link href="/gallery" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit text-red-500">ГАЛЕРЕЯ</Link>
-                <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit">TELEGRAM</a>
-                <a href="tel:+79002871313" onClick={() => setIsMenuOpen(false)} className="hover:line-through w-fit text-neutral-400">
+                <a href="#price" className="hover:line-through w-fit">Услуги</a>
+                <a href="#about" className="hover:line-through w-fit">Философия</a>
+                <Link href="/gallery" className="hover:line-through w-fit text-red-500">ГАЛЕРЕЯ</Link>
+                <a href="https://t.me/barber_13x13" target="_blank" rel="noopener noreferrer" className="hover:line-through w-fit">TELEGRAM</a>
+                <a href="tel:+790****1313" className="hover:line-through w-fit text-neutral-400">
                   +7 900 287-13-13
                 </a>
                 <div className="mt-4">
-                  <a href="https://dikidi.net/#widget=207607" onClick={() => setIsMenuOpen(false)} className="inline-block bg-white text-black px-6 py-3 brutal-border border-white shadow-[6px_6px_0px_0px_#fff]">
+                  <a href="https://dikidi.net/#widget=207607" className="inline-block bg-white text-black px-6 py-3 brutal-border border-white shadow-[6px_6px_0px_0px_#fff]">
                     ЗАПИСЬ ОНЛАЙН
                   </a>
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </details>
+        </div>
       </nav>
 
       {/* HERO SECTION - NEO-BRUTALIST */}
@@ -137,51 +114,17 @@ export default function Home() {
 
         {/* Background Animation */}
         <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen overflow-hidden">
-          {!isBooting && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0"
-            >
-              <GradientBlinds
-                className=""
-                dpr={1}
-                gradientColors={["#1100ff","#ff0000"]}
-                angle={-75}
-                noise={0.58}
-                blindCount={50}
-                blindMinWidth={50}
-                mouseDampening={0.45}
-                mirrorGradient={false}
-                spotlightRadius={0.7}
-                spotlightSoftness={0.7}
-                spotlightOpacity={0.95}
-                distortAmount={1}
-                shineDirection="left"
-              />
-            </motion.div>
-          )}
+          <div className="hero-gradient-bg absolute inset-0" aria-hidden="true" />
         </div>
 
         <div className="max-w-[1600px] w-full mx-auto z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-8 flex flex-col items-center lg:items-start relative"
-          >
+          <div className="hero-enter-up lg:col-span-8 flex flex-col items-center lg:items-start relative">
             <div className="w-fit bg-red-600 text-white px-3 py-1 md:px-10 md:py-4 font-[family-name:var(--font-oswald)] font-black text-xl md:text-5xl mb-3 md:mb-10 tracking-[0.1em] md:tracking-[0.2em] transform -rotate-1 brutal-border border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] md:shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]">
               МЫ РАБОТАЕМ!
             </div>
 
             <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 mb-8 lg:mb-16 w-full">
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={!isBooting ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="w-full lg:w-auto flex flex-col items-center lg:items-start shrink-0 self-center lg:self-start relative"
-              >
+              <div className="hero-enter-fade w-full lg:w-auto flex flex-col items-center lg:items-start shrink-0 self-center lg:self-start relative">
                 <h1 className="m-0 flex w-full justify-center lg:justify-start">
                   <span className="sr-only">13x13</span>
                   <Image
@@ -191,6 +134,7 @@ export default function Home() {
                     height={600}
                     className="block w-[70vw] sm:w-[60vw] lg:w-[350px] xl:w-[450px] h-auto object-contain object-center mix-blend-lighten relative z-10"
                     style={{ height: "auto" }}
+                    fetchPriority="high"
                     priority
                   />
                 </h1>
@@ -200,7 +144,7 @@ export default function Home() {
                 <div className="mt-3 font-[family-name:var(--font-oswald)] text-2xl md:text-4xl lg:text-5xl font-black tracking-tight normal-case text-white self-center lg:self-start text-center lg:text-left">
                   Позволь себе немного чаще.
                 </div>
-              </motion.div>
+              </div>
 
               <div className="flex flex-col gap-2 shrink-0 items-center lg:items-start">
                 <h2 className="font-[family-name:var(--font-oswald)] text-[9vw] md:text-[6vw] lg:text-[4rem] xl:text-[5rem] 2xl:text-[6.5rem] leading-[0.8] font-black tracking-tighter break-words w-fit bg-black text-white px-4 py-2 md:px-6 md:py-3 transform -rotate-1 brutal-border border-white brutal-shadow z-20">
@@ -232,14 +176,9 @@ export default function Home() {
               <span className="text-neutral-400 mb-2 mt-1">Мы ценим ваше время и бережём бюджет.</span>
               
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="lg:col-span-4 flex flex-col gap-6 w-full mt-8 md:mt-0"
-          >
+          <div className="hero-enter-right lg:col-span-4 flex flex-col gap-6 w-full mt-8 md:mt-0">
             <a
               href="https://dikidi.net/#widget=207607"
               className="flex items-center justify-between bg-white text-black font-[family-name:var(--font-oswald)] text-3xl sm:text-4xl md:text-5xl font-black py-6 px-6 md:py-8 md:px-8 brutal-border border-white shadow-[8px_8px_0px_0px_#fff] hover:shadow-[12px_12px_0px_0px_#fff] hover:-translate-y-1 hover:-translate-x-1 group w-full cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 transition-all"
@@ -259,12 +198,12 @@ export default function Home() {
                 <span className="underline underline-offset-4 decoration-neutral-500 group-hover:decoration-white uppercase tracking-wider leading-snug">г. Сочи, ул. Горького, 81а<br />напротив ТЦ Сан Сити</span>
               </a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* PRICE LIST */}
-      <section id="price" className="py-16 md:py-40 px-4 md:px-8 max-w-[1600px] mx-auto w-full border-b-[3px] border-white">
+      <section id="price" className="defer-render py-16 md:py-40 px-4 md:px-8 max-w-[1600px] mx-auto w-full border-b-[3px] border-white">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 md:mb-24 gap-4 md:gap-8">
           <h2 className="font-[family-name:var(--font-oswald)] text-[14vw] md:text-[12vw] lg:text-[10rem] font-black tracking-tighter leading-none uppercase m-0 p-0">
             ПРАЙС
@@ -307,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* HIRING / RECRUITMENT BLOCK */}
-      <section className="bg-white text-black py-16 md:py-40 px-4 md:px-8 brutal-border-b relative overflow-hidden">
+      <section className="defer-render bg-white text-black py-16 md:py-40 px-4 md:px-8 brutal-border-b relative overflow-hidden">
         <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           <div className="flex flex-col items-start z-10">
             <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
@@ -356,7 +295,7 @@ export default function Home() {
       </div>
 
       {/* PHILOSOPHY SECTION */}
-      <section id="about" className="py-16 md:py-40 px-4 md:px-8 border-b-[3px] border-white relative overflow-hidden bg-black">
+      <section id="about" className="defer-render py-16 md:py-40 px-4 md:px-8 border-b-[3px] border-white relative overflow-hidden bg-black">
         <div className="max-w-[1600px] mx-auto">
           <h2 className="font-[family-name:var(--font-oswald)] text-5xl sm:text-6xl md:text-[8rem] font-black tracking-tighter mb-10 md:mb-16 leading-none uppercase text-white">
             ФИЛОСОФИЯ <span className="text-red-600 block">БРЕНДА</span>
@@ -409,7 +348,7 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer id="contacts" className="bg-black text-white relative brutal-border-t">
+      <footer id="contacts" className="defer-render bg-black text-white relative brutal-border-t">
         {/* YANDEX MAP */}
         <div className="w-full h-[300px] md:h-[450px] border-b-[3px] border-white relative overflow-hidden bg-neutral-900 group">
           <div className="absolute inset-0 pointer-events-none group-hover:opacity-0 transition-opacity duration-500 z-10 bg-black/20 mix-blend-multiply" />
@@ -417,6 +356,7 @@ export default function Home() {
             src="https://yandex.ru/map-widget/v1/?z=18&ol=biz&oid=92378568380"
             className="w-full h-full border-0 grayscale hover:grayscale-0 contrast-125 transition-all duration-700 ease-in-out"
             style={{ filter: "invert(90%) hue-rotate(180deg)" }}
+            loading="lazy"
             allowFullScreen={true}
             title="Яндекс Карта: 13x13"
           />
@@ -436,12 +376,12 @@ export default function Home() {
           </div>
 
           <div className="p-8 md:p-16 brutal-border-b border-white lg:border-b-0 lg:brutal-border-r flex flex-col justify-center text-center lg:text-left">
-            <h4 className="font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black mb-4 md:mb-8 text-neutral-500 uppercase tracking-widest flex flex-col gap-2">
+            <div className="font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black mb-4 md:mb-8 text-neutral-400 uppercase tracking-widest flex flex-col gap-2">
               <span>ЛОКАЦИЯ</span>
               <span className="text-white text-sm md:text-base tracking-normal normal-case font-bold bg-neutral-900 px-3 py-1 border border-neutral-700 w-fit mx-auto lg:mx-0">
                 Напротив DDX Fitness
               </span>
-            </h4>
+            </div>
             <h2 className="not-italic font-[family-name:var(--font-oswald)] text-3xl sm:text-4xl md:text-5xl font-black leading-[1.1] uppercase mb-4 text-white">
               Находимся напротив DDX:<br />
               ул. Горького, 81а
@@ -455,7 +395,7 @@ export default function Home() {
           </div>
 
           <div className="p-8 md:p-16 flex flex-col justify-center text-center lg:text-left">
-            <h4 className="font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black mb-4 md:mb-8 text-neutral-500 uppercase tracking-widest">СВЯЗЬ</h4>
+            <h2 className="font-[family-name:var(--font-oswald)] text-xl md:text-2xl font-black mb-4 md:mb-8 text-neutral-400 uppercase tracking-widest">СВЯЗЬ</h2>
             <a href="tel:+79002871313" className="font-[family-name:var(--font-oswald)] text-3xl sm:text-5xl md:text-6xl font-black leading-none hover:underline underline-offset-8 mb-6 md:mb-8 inline-block focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/20 p-2 -ml-2 text-white">
               +7 900 287-13-13
             </a>
@@ -469,7 +409,7 @@ export default function Home() {
 
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center px-4 md:px-16 py-6 md:py-8 text-xs sm:text-sm md:text-base font-[family-name:var(--font-jetbrains-mono)] font-medium bg-[#111] text-neutral-500 gap-4">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center px-4 md:px-16 py-6 md:py-8 text-xs sm:text-sm md:text-base font-[family-name:var(--font-jetbrains-mono)] font-medium bg-[#111] text-neutral-400 gap-4">
           <div className="text-center md:text-left flex flex-col gap-1">
             <span>ИП МАЛХАСЯН ГЕОРГИЙ ГЕОРГИЕВИЧ</span>
             <span>ИНН: 232003837758 / ОГРН: 1027700067328</span>
@@ -485,9 +425,9 @@ export default function Home() {
               className="group flex flex-col items-center md:items-end transition-all duration-300"
             >
               <div className="flex flex-col items-center md:items-end">
-                <span className="text-[10px] uppercase tracking-widest text-neutral-600 group-hover:text-neutral-400 transition-colors leading-none mb-1">Разработано</span>
+                <span className="text-[10px] uppercase tracking-widest text-neutral-400 group-hover:text-white transition-colors leading-none mb-1">Разработано</span>
                 <span className="text-sm md:text-lg font-black font-[family-name:var(--font-oswald)] text-neutral-400 group-hover:text-white transition-colors leading-none uppercase">Андрей Филатьев</span>
-                <span className="text-[10px] md:text-xs text-neutral-600 group-hover:text-neutral-500 transition-colors mt-1 font-bold">Помогаю бизнесу работать удобно</span>
+                <span className="text-[10px] md:text-xs text-neutral-400 group-hover:text-white transition-colors mt-1 font-bold">Помогаю бизнесу работать удобно</span>
               </div>
             </a>
           </div>

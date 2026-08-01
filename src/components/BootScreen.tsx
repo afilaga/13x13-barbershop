@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
@@ -75,7 +77,8 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] bg-[#0a0a0a] flex flex-col items-center justify-center overflow-hidden"
+      data-testid="desktop-preloader"
+      className="fixed inset-0 z-[9999] hidden bg-[#0a0a0a] lg:flex flex-col items-center justify-center overflow-hidden"
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
