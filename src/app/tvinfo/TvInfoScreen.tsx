@@ -99,8 +99,15 @@ export default function TvInfoScreen() {
   const activeCategory =
     orderedPriceCategories[activePriceIndex % Math.max(orderedPriceCategories.length, 1)] ??
     orderedPriceCategories[0];
-  const isDenseCategory = (activeCategory?.items.length ?? 0) > 8;
+  const activePriceItemCount = activeCategory?.items.length ?? 0;
+  const isDenseCategory = activePriceItemCount > 8;
   const isExtraDenseCategory = activeCategory?.id === "details-and-care";
+  const priceGridColumns =
+    activePriceItemCount > 8
+      ? "grid-cols-4"
+      : activePriceItemCount > 4
+        ? "grid-cols-3"
+        : "grid-cols-2";
 
   useEffect(() => {
     const updateTime = () => {
@@ -306,40 +313,30 @@ export default function TvInfoScreen() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -22 }}
                 transition={{ duration: 0.65 }}
-                className="flex h-full flex-col"
+                className="flex h-full min-h-0 flex-col"
               >
-                <div className="mb-8 font-[family-name:var(--font-oswald)] text-[5.5rem] leading-none font-black tracking-tighter text-white">
+                <div className="mb-7 font-[family-name:var(--font-oswald)] text-[5.5rem] leading-none font-black tracking-tighter text-white">
                   ФИЛОСОФИЯ <span className="block text-red-600">БРЕНДА</span>
                 </div>
 
-                <div className="mb-8 grid grid-cols-2 gap-8 font-[family-name:var(--font-jetbrains-mono)] text-[1.18rem] leading-tight">
-                  <div className="space-y-5 font-bold text-white">
-                    <p>Наш клиент — человек, который понимает ценность денег. Он не ищет самое дешёвое, но и не готов переплачивать за имя, тренды и маркетинг.</p>
-                    <p className="text-red-500">13x13 — это барбершоп для тех, кто устал платить 5000 рублей за стрижку, понимая, что половина этой суммы — это бренд, интерьер и навязанные «бонусы».</p>
-                  </div>
-                  <div className="space-y-5 text-neutral-300">
-                    <p>Он знает, что высокая цена не всегда равна высокому качеству. И выбирает осознанно. Мы убрали всё лишнее и оставили главное.</p>
-                    <p>Он не пойдёт в дешёвую парикмахерскую. Но и не видит смысла в завышенных ценах. Для него оптимум — это разумная стоимость и стабильное качество.</p>
-                    <p className="bg-red-600 px-4 py-3 font-bold text-white brutal-border border-white shadow-[7px_7px_0px_0px_rgba(255,255,255,1)]">
-                      13X13 — ЭТО ПРО ОСОЗНАННЫЙ ВЫБОР. ПРО СТИЛЬ БЕЗ ПЕРЕПЛАТЫ. ПРО СЕРВИС, КОТОРЫЙ СТОИТ СВОИХ ДЕНЕГ.
-                    </p>
-                  </div>
+                <div className="mb-8 max-w-[86rem] bg-red-600 px-6 py-4 font-[family-name:var(--font-oswald)] text-[2.35rem] leading-tight font-black tracking-wide text-white brutal-border border-white shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+                  СТАБИЛЬНОЕ КАЧЕСТВО И СИЛЬНЫЙ СЕРВИС — БЕЗ ПЕРЕПЛАТЫ ЗА ИМЯ, ТРЕНДЫ И НАВЯЗАННЫЕ «БОНУСЫ».
                 </div>
 
-                <div className="grid flex-1 grid-cols-3 gap-4">
+                <div className="grid min-h-0 flex-1 grid-cols-3 gap-5">
                   {PHILOSOPHY_CARDS.map((card) => {
                     const Icon = card.icon;
 
                     return (
                       <div
                         key={card.title}
-                        className="flex h-full flex-col bg-black px-5 py-4 text-white brutal-border border-white shadow-[5px_5px_0px_0px_rgba(255,255,255,1)]"
+                        className="flex h-full min-h-0 flex-col justify-center bg-black px-7 py-6 text-white brutal-border border-white shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]"
                       >
-                        <Icon className="mb-3 h-9 w-9 text-white" strokeWidth={1.6} />
-                        <h3 className="font-[family-name:var(--font-oswald)] text-[1.65rem] leading-[0.95] font-black tracking-tight">
+                        <Icon className="mb-5 h-12 w-12 text-white" strokeWidth={1.6} />
+                        <h3 className="font-[family-name:var(--font-oswald)] text-[2.25rem] leading-[0.95] font-black tracking-tight">
                           {card.title}
                         </h3>
-                        <p className="mt-3 font-[family-name:var(--font-jetbrains-mono)] text-[0.92rem] leading-relaxed text-neutral-300 normal-case">
+                        <p className="mt-5 font-[family-name:var(--font-jetbrains-mono)] text-[1.18rem] leading-relaxed text-neutral-200 normal-case">
                           {card.desc}
                         </p>
                       </div>
@@ -591,24 +588,24 @@ export default function TvInfoScreen() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -22 }}
                 transition={{ duration: 0.65 }}
-                className="flex h-full flex-col"
+                className="flex h-full min-h-0 flex-col"
               >
-                <div className="mb-6 flex items-end justify-between gap-6">
-                  <div>
-                    <div className="font-[family-name:var(--font-oswald)] text-[5.2rem] leading-none font-black tracking-tighter text-white">
+                <div className="mb-4 flex items-end justify-between gap-10">
+                  <div className="flex min-w-0 flex-1 items-end gap-8">
+                    <div className="shrink-0 font-[family-name:var(--font-oswald)] text-[4.6rem] leading-none font-black tracking-tighter text-white">
                       ПРАЙС
                     </div>
-                    <div className="mt-2 font-[family-name:var(--font-jetbrains-mono)] text-[2rem] text-neutral-300 normal-case">
-                      Точный расчет стоимости перед началом. Вы платите ровно ту сумму, что указана здесь.
+                    <div className="pb-1 font-[family-name:var(--font-jetbrains-mono)] text-[1.35rem] leading-snug text-neutral-300 normal-case">
+                      Точный расчёт перед началом. Вы платите ровно ту сумму, что указана здесь.
                     </div>
                   </div>
                 </div>
 
-                <div className="mb-6 flex gap-4">
+                <div className="mb-4 flex gap-3">
                   {orderedPriceCategories.map((category, index) => (
                     <div
                       key={category.id}
-                      className={`px-5 py-3 font-[family-name:var(--font-oswald)] text-[2.35rem] leading-none font-black tracking-wide brutal-border ${
+                      className={`px-4 py-2.5 font-[family-name:var(--font-oswald)] text-[1.55rem] leading-none font-black tracking-wide brutal-border ${
                         index === activePriceIndex
                           ? "border-white bg-white text-black"
                           : "border-white/35 bg-black/60 text-neutral-400"
@@ -619,30 +616,30 @@ export default function TvInfoScreen() {
                   ))}
                 </div>
 
-                <div className="mb-4 border-b-[6px] border-white pb-3 font-[family-name:var(--font-oswald)] text-[6.2rem] leading-none font-black tracking-tighter text-white">
+                <div className="mb-2 border-b-[5px] border-white pb-2 font-[family-name:var(--font-oswald)] text-[4.65rem] leading-none font-black tracking-tighter text-white">
                   {activeCategory.category}
                 </div>
 
-                <div className="mb-5 font-[family-name:var(--font-jetbrains-mono)] text-[2rem] text-neutral-300 normal-case">
+                <div className="mb-4 font-[family-name:var(--font-jetbrains-mono)] text-[1.25rem] leading-snug text-neutral-300 normal-case">
                   Не забудьте спросить про допуслуги: патчи, воск, пилинг, брови и уходы.
                 </div>
 
-                <div className={`grid flex-1 ${isExtraDenseCategory ? "grid-cols-4 gap-3" : isDenseCategory ? "grid-cols-4 gap-3" : "grid-cols-2 gap-4"}`}>
+                <div className={`grid min-h-0 flex-1 auto-rows-fr ${priceGridColumns} ${isDenseCategory ? "gap-3" : "gap-4"}`}>
                   {activeCategory.items.map((item) => (
                     <div
                       key={item.id}
-                      className={`flex flex-col justify-between bg-black/88 brutal-border border-white ${
+                      className={`flex min-h-0 flex-col justify-between overflow-hidden bg-black/88 brutal-border border-white ${
                         isExtraDenseCategory
                           ? "p-3.5 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
                           : isDenseCategory
                             ? "p-3.5 shadow-[5px_5px_0px_0px_rgba(255,255,255,1)]"
-                            : "p-5 shadow-[7px_7px_0px_0px_rgba(255,255,255,1)]"
+                            : "p-4 shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]"
                       }`}
                     >
                       <div>
                         <div
                           className={`font-[family-name:var(--font-oswald)] leading-tight font-black tracking-tight text-white ${
-                            isExtraDenseCategory ? "text-[1.55rem]" : isDenseCategory ? "text-[1.9rem]" : "text-[3rem]"
+                            isExtraDenseCategory ? "text-[1.5rem]" : isDenseCategory ? "text-[1.75rem]" : "text-[2.35rem]"
                           }`}
                         >
                           {item.name}
@@ -650,7 +647,7 @@ export default function TvInfoScreen() {
                         {item.desc && (
                           <div
                             className={`mt-2 font-[family-name:var(--font-jetbrains-mono)] leading-relaxed text-neutral-300 normal-case ${
-                              isExtraDenseCategory ? "text-[1rem]" : isDenseCategory ? "text-[1.15rem]" : "text-[1.4rem]"
+                              isExtraDenseCategory ? "text-[0.95rem]" : isDenseCategory ? "text-[1.05rem]" : "text-[1.18rem]"
                             }`}
                           >
                             {item.desc}
@@ -658,8 +655,8 @@ export default function TvInfoScreen() {
                         )}
                       </div>
                       <div
-                        className={`mt-4 inline-flex w-fit bg-white px-3 py-[0.35rem] font-[family-name:var(--font-oswald)] font-black tracking-wide text-black brutal-border border-black ${
-                          isExtraDenseCategory ? "text-[1.8rem]" : isDenseCategory ? "text-[2.05rem]" : "text-[2.8rem]"
+                        className={`mt-3 inline-flex w-fit bg-white px-3 py-[0.3rem] font-[family-name:var(--font-oswald)] font-black tracking-wide text-black brutal-border border-black ${
+                          isExtraDenseCategory ? "text-[1.65rem]" : isDenseCategory ? "text-[1.9rem]" : "text-[2.15rem]"
                         }`}
                       >
                         {item.price}
